@@ -65,12 +65,7 @@ Route.group(()=>{
 
   //route masterdata
   Route.group(()=>{
-    Route.resource("category","MasterData/CategoriesController")
-    Route.resource("doctor","MasterData/DoctorsController")
-    Route.resource('kelas-bpjs',"MasterData/BpjsKelasController")
-    Route.resource("problem","MasterData/ProblemsController")
-    Route.resource("diaglist","MasterData/DiaglistsController")
-    Route.resource("proclist","MasterData/ProclistsController")
+    Route.resource("province","MasterData/ProvincesController")
   }).prefix('master-data').middleware(['auth'])
 
   //Route Combo

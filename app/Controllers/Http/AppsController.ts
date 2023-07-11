@@ -62,6 +62,12 @@ export default class AppsController {
               route: "/auth/master-app-info",
               type: "item",
             },
+            {
+              title: "Master Wilayah",
+              icon: "mdi-map",
+              route: "/auth/master-data-province",
+              type: "item",
+            },
           ]
         },
         {
