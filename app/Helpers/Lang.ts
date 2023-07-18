@@ -6,6 +6,8 @@ export const MSG_DELETE_SUCCESS= "Proses hapus data berhasil..!"
 export const MSG_STORE_SUCCESS = "Proses tambah data berhasil..!"
 export const MSG_UPDATE_SUCCESS = "Proses bah data berhasil...!"
 export const MSG_IMPORT_SUCCESS = "Proses import data berhasil..!"
+export const MSG_UPDATEPROFILE_SUCCESS = "Proses ubah profil berhasil..!"
+export const MSG_CHANGEPWD_SUCCESS = "Proses ubah kata sandi berhasil...!"
 export const MSG_FAILED_PROCESS  = "Opps..., terjadi kesalahan"
 
 

@@ -3,7 +3,7 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import {v4 as uuid} from "uuid"
 import {compose} from "@ioc:Adonis/Core/Helpers"
 import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
-import { column, beforeSave,beforeCreate, BaseModel, scope } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave,beforeCreate, BaseModel, scope, computed, beforeUpdate } from '@ioc:Adonis/Lucid/Orm'
 
 export default class User extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
@@ -23,6 +23,9 @@ export default class User extends compose(BaseModel, SoftDeletes) {
 
   @column()
   public tingkat:string
+
+  @column()
+  public regencyCode:string
 
   @column()
   public opdUuid:string
@@ -64,10 +67,37 @@ export default class User extends compose(BaseModel, SoftDeletes) {
     }
   }
 
+
  @beforeCreate()
   public static async createUUID(user:User){
     user.id = uuid()
   }
+
+  @computed()
+  public get datadisplay(){
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      authent: this.authent,
+      status: this.status ? {color: 'green', text: 'Aktif'}:{color: 'red', text:'Tidak Aktif'}
+    }
+  }
+
+  @computed()
+  public get datarecord(){
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      authent: this.authent,
+      regency_code: this.regencyCode,
+      opd_uuid: this.opdUuid,
+      status: this.status,
+      phone: this.phone
+    }
+  }
+
 
   public static filterOn = scope((query, request)=>{
     const {search, sortBy, sortDesc} = request.only(['search','sortBy', 'sortDesc'])

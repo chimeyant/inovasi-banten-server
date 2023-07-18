@@ -4,168 +4,77 @@ import UserValidator from 'App/Validators/MasterData/UserValidator'
 import UpdateProfilValidator from 'App/Validators/Utility/UpdateProfilValidator'
 import Env from "@ioc:Adonis/Core/Env"
 import Drive from "@ioc:Adonis/Core/Drive"
+import UserService from 'App/Controllers/Services/Utility/UserService'
 
 export default class UsersController {
   public async index({request,response}: HttpContextContract) {
-    const {page, itemsPerPage}= request.only(['page','itemsPerPage'])
+    const result = await UserService.lists(request)
 
-    const users = await User.query().withScopes((scopes)=> scopes.filterOn(request)).paginate(page,itemsPerPage)
-
-    return users;
+    return result;
   }
 
   public async create({}: HttpContextContract) {}
 
   public async store({request,response}: HttpContextContract) {
-    const {name, email, authent,status} = request.all()
+    const payload =request.only(['name','email','authent','regency_code','phone','opd_uuid','status','reset'])
 
     await request.validate(UserValidator)
 
-    try {
-      const user = new User()
-      user.name = name
-      user.email = email
-      user.password = "12345678"
-      user.authent = authent
-      user.status = status
-      await user.save()
+    const  result = await UserService.store(payload)
 
-      return response.json({
-        code:200,
-        success:true,
-        message:"Tambah pengguna berhasil",
-        data: user
-      })
-    } catch (error) {
-      return response.status(500).json({
-        code :500,
-        success: false,
-        message:"Opps..., terjadi kesalahan "+ error
-      })
-    }
-
+    return response.status(result.code).send(result)
   }
 
   public async show({params}: HttpContextContract) {
-    const {id}= params
-    const user = await User.query().select('id','name','email','authent','status').where('id',id).first()
+    const result = await UserService.show(params.id)
 
-    return user;
+    return result;
   }
 
   public async edit({}: HttpContextContract) {}
 
   public async update({params, request,response}: HttpContextContract) {
-    const {id}= params
-
-
-    const {name,authent, status, phone, recieve_message, reset}= request.all()
+    const payload = request.only(['name','email','authent','regency_code','phone','opd_uuid', 'status','reset'])
 
     await request.validate(UserValidator)
 
-    try {
-      const user = await User.findOrFail(id)
-      user.name = name
-      user.authent =authent
-      user.status = status
-      user.phone = phone
-      user.recieveMessage = recieve_message
-      if(reset){
-        user.password = "12345678"
-      }
-      await user?.save()
+    const result=  await UserService.update(payload, params.id)
 
-      return response.json({
-        code:200,
-        success:true,
-        message:"Proses ubah data berhasil",
-        data: user
-      })
-    } catch (error) {
-      return response.json({
-        status:false,
-        message:"Opps..., terjadi kesalahan "+ error
-      })
-    }
+    return response.status(result.code).send(result)
   }
 
-  public async destroy({params, request,response}: HttpContextContract) {
-    const {id}= params
-    try {
-      const user = await User.findBy('id',id)
-      await user?.delete()
-      return response.json({
-        code :200,
-        success:true,
-        message:"Proses hapus data berhasil...",
-        data:{
-          id:id
-        }
-      })
-    } catch (error) {
-      return response.status(500).json({
-        code:500,
-        success:false,
-        message:"Opps..., terjadi kesalahan "+ error,
-        data:{}
-      })
-    }
+  public async destroy({params, response}: HttpContextContract) {
+    const result = await UserService.delete(params.id)
+
+    return response.status(result.code).send(result)
   }
 
   public async userInfo({request,response,auth}: HttpContextContract){
     const user = await auth.user;
-    const data ={}
-    data['id']= user?.id
-    data['name']= user?.name
-    data['email']= user?.email
-    data['authent']= user?.authent
-    data['avatar']= user?.avatar
-    data['avatar_path'] = user?.avatar ? Env.get("BASE_URL")+ await Drive.getSignedUrl( "images/avatars/"+ user?.avatar):  Env.get("BASE_URL")+ await Drive.getSignedUrl( "images/avatars/avatar.png")
-    return data;
+    const result = await UserService.info(user?.id)
+    return result;
   }
 
   public async updateProfil({request,response,auth}:HttpContextContract){
-    const user = await auth.user
-    const data = request.only(['name','avatar']);
-
+    const user =  auth.user
+    const payload = request.only(['name','avatar']);
 
     //validasi form
     await request.validate(UpdateProfilValidator)
 
-    try {
-      const profil = await User.findBy("id", user?.id)
-      profil?.merge(data)
-      await profil?.save()
+    const result = await UserService.updateprofil(payload, user?.id)
 
-      return response.json({
-        status:true,
-        message:"Proses ubah profil berhasil..."
-      })
-    } catch (error) {
-      return response.json({
-        status:false,
-        message: "Opps..., terjadi kesalahan "+ error
-      })
-    }
+    return response.status(result.code).send(result)
+
   }
 
   public async changePwd({request,response,auth}:HttpContextContract){
     const authuser = await auth.user
-    const data = request.only(['password']);
-    try {
-      const user = await User.findBy('id', authuser?.id)
-      user?.merge(data)
-      await user?.save()
+    const {password} = request.all()
 
-      return response.json({
-        status:true,
-        message:"Proses ubah kata sandi berhasil..."
-      })
-    } catch (error) {
-      return response.json({
-        status:false,
-        message:"Opps..., terjadi kesalahan "+ error
-      })
-    }
+    const result = await UserService.changepassword(password, authuser.id)
+
+    return response.status(result.code).send(result)
+
   }
 }

@@ -66,13 +66,21 @@ Route.group(()=>{
   //route masterdata
   Route.group(()=>{
     Route.resource("province","MasterData/ProvincesController")
+    Route.resource('regency/:province_code',"MasterData/RegenciesController")
+    Route.resource("district/:regency_code","MasterData/DistrictsController")
+    Route.resource("village/:district_code","MasterData/VillagesController")
+    Route.resource("category","MasterData/CategoriesController")
+    Route.resource("indikator","MasterData/IndikatorsController")
+    Route.resource('opd','MasterData/OpdsController')
+    Route.resource('jenis-inovasi',"MasterData/JenisInovasisController")
+    Route.resource('urusan',"MasterData/UrusansController")
   }).prefix('master-data').middleware(['auth'])
 
   //Route Combo
   Route.group(()=>{
-    Route.get("category", "MasterData/CategoriesController.combo")
-    Route.get("kelas-bpjs","MasterData/BpjsKelasController.combo")
-    Route.get('dokter',"MasterData/DoctorsController.combo")
+    Route.get("regency","MasterData/RegenciesController.combo")
+    Route.get('opd',"MasterData/OpdsController.combo")
+    Route.get('category',"MasterData/CategoriesController.combo")
   }).prefix('combo').middleware(['auth'])
 
   //Route Group Halaman Depan

@@ -2,16 +2,14 @@ import  Axios  from "axios"
 import Env from "@ioc:Adonis/Core/Env"
 
 class Whatsapp {
-  public async sendMessage(phone, message){
+  public async sendMessage(recieveNumber, message){
 
-    const msg = {
+    const data = {
       apiKey: Env.get("WA_API_KEY"),
-      recieveNumber: phone,
-      message:  "*OPENDATA PROV. BANTEN* \r\n\r\n\*PEMBERITAHUAN..!!* \r\n\r\n" + message
-    };
-
-    await Axios.post("http://api.senderwa.com/api/v2/send-message", msg);
-
+      recieveNumber: recieveNumber,
+      message: message
+    }
+    await Axios.post("https://api.senderwa.com/api/v2/send-message", data);
 
     //kirim pesan ke petugas
 

@@ -36,7 +36,8 @@ export default class Province extends compose(BaseModel,SoftDeletes) {
     return {
       id:this.uuid,
       code: this.code,
-      name: this.name
+      name: this.name,
+      aksi: {code: this.code, name: this.name}
     }
   }
 
