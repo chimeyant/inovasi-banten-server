@@ -12,7 +12,12 @@ export default class ProvincesController {
 
   public async store({}: HttpContextContract) {}
 
-  public async show({}: HttpContextContract) {}
+  public async show({params, response}: HttpContextContract) {
+    const result = await ProvinceService.show(params.id)
+
+    return result
+
+  }
 
   public async edit({}: HttpContextContract) {}
 

@@ -15,7 +15,14 @@ class ProvinceService {
     datas.push(element.datadisplay)
   });
 
+
   return datas
+ }
+
+ public async show(id:string){
+   const model = await Province.findBy("uuid", id)
+
+   return model?.datarecord
  }
 }
 
