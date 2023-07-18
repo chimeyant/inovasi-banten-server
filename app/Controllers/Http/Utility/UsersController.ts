@@ -4,7 +4,7 @@ import UserValidator from 'App/Validators/MasterData/UserValidator'
 import UpdateProfilValidator from 'App/Validators/Utility/UpdateProfilValidator'
 import Env from "@ioc:Adonis/Core/Env"
 import Drive from "@ioc:Adonis/Core/Drive"
-import UserService from 'App/Controllers/Services/Utility/UserService'
+import UserService from 'App/Services/Utility/UserService'
 
 export default class UsersController {
   public async index({request,response}: HttpContextContract) {

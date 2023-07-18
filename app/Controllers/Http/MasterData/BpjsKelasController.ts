@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import BpjsKelaService from 'App/Controllers/Services/MasterData/BpjsKelaService'
+import BpjsKelaService from 'App/Services/MasterData/BpjsKelaService'
 
 export default class BpjsKelasController {
   public async index({}: HttpContextContract) {

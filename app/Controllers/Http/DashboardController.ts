@@ -3,7 +3,7 @@ import Catalog from 'App/Models/Catalog'
 
 import GroupDatum from 'App/Models/GroupDatum'
 import Topic from 'App/Models/Topic'
-import DashboardService from '../Services/DashboardService'
+import DashboardService from '../../Services/DashboardService'
 
 export default class DashboardController {
   async index({response}: HttpContextContract){

@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import DistrictService from 'App/Controllers/Services/MasterData/DistrictService'
+import DistrictService from 'App/Services/MasterData/DistrictService'
 
 export default class DistrictsController {
   public async index({params}: HttpContextContract) {

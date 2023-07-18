@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ProblemService from 'App/Controllers/Services/MasterData/ProblemService'
+import ProblemService from 'App/Services/MasterData/ProblemService'
 import ProblemValidator from 'App/Validators/MasterData/ProblemValidator';
 
 export default class ProblemsController {

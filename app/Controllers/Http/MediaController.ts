@@ -3,7 +3,7 @@ import Application from "@ioc:Adonis/Core/Application"
 import Env from "@ioc:Adonis/Core/Env"
 import {v4 as uuid} from "uuid"
 import Drive from '@ioc:Adonis/Core/Drive'
-import FileManagementService from '../Services/Utility/FileManagementService'
+import FileManagementService from '../../Services/Utility/FileManagementService'
 
 const chunk_inpt = "file";
 

@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import InidkatorService from 'App/Controllers/Services/MasterData/InidkatorService'
+import InidkatorService from 'App/Services/MasterData/InidkatorService'
 
 export default class IndikatorsController {
   public async index({}: HttpContextContract) {

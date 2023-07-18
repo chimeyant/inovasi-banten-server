@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ProvinceService from 'App/Controllers/Services/MasterData/ProvinceService'
+import ProvinceService from 'App/Services/MasterData/ProvinceService'
 
 export default class ProvincesController {
   public async index({}: HttpContextContract) {

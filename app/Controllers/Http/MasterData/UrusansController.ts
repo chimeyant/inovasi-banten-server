@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import UrusanService from 'App/Controllers/Services/MasterData/UrusanService'
+import UrusanService from 'App/Services/MasterData/UrusanService'
 
 export default class UrusansController {
   public async index({}: HttpContextContract) {

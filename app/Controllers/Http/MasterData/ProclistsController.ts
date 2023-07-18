@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ProclistService from 'App/Controllers/Services/MasterData/ProclistService'
+import ProclistService from 'App/Services/MasterData/ProclistService'
 
 export default class ProclistsController {
   public async index({request}: HttpContextContract) {

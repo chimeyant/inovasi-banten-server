@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import JenisInovasiService from 'App/Controllers/Services/MasterData/JenisInovasiService'
+import JenisInovasiService from 'App/Services/MasterData/JenisInovasiService'
 
 export default class JenisInovasisController {
   public async index({}: HttpContextContract) {

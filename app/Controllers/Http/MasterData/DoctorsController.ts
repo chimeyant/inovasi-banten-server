@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import DoctorService from 'App/Controllers/Services/MasterData/DoctorService'
+import DoctorService from 'App/Services/MasterData/DoctorService'
 
 export default class DoctorsController {
   public async index({}: HttpContextContract) {

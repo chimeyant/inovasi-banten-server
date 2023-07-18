@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import DiaglistService from 'App/Controllers/Services/MasterData/DiaglistService'
+import DiaglistService from 'App/Services/MasterData/DiaglistService'
 import DiaglistValidator from 'App/Validators/MasterData/DiaglistValidator';
 
 export default class DiaglistsController {

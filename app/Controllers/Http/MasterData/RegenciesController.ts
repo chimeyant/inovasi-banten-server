@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import RegencyService from 'App/Controllers/Services/MasterData/RegencyService';
+import RegencyService from 'App/Services/MasterData/RegencyService';
 
 export default class RegenciesController {
   public async index({params}: HttpContextContract) {

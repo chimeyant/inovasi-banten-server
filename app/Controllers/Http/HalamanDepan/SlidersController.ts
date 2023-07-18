@@ -3,7 +3,7 @@ import Slider from "App/Models/Slider"
 import SliderValidator from 'App/Validators/HalamanDepan/SliderValidator';
 import Env from "@ioc:Adonis/Core/Env"
 import Drive from "@ioc:Adonis/Core/Drive"
-import SliderService from 'App/Controllers/Services/HalamanDepan/SliderService';
+import SliderService from 'App/Services/HalamanDepan/SliderService';
 
 export default class SlidersController {
   public async index({}: HttpContextContract) {

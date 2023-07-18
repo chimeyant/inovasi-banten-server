@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import OpdService from 'App/Controllers/Services/MasterData/OpdService'
+import OpdService from 'App/Services/MasterData/OpdService'
 
 export default class OpdsController {
   public async index({}: HttpContextContract) {
