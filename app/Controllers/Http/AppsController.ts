@@ -222,19 +222,19 @@ export default class AppsController {
         {
           title: "Akun Aplikasi",
           icon: "engineering",
-          route: "/backend/user",
+          route: "/auth/user",
           type: "item",
         },
         {
           title: "Profil Pengguna",
           icon: "accessibility",
-          route: "/backend/profil-akun",
+          route: "/auth/profil-akun",
           type: "item",
         },
         {
           title: "Ganti Kata Sandi",
           icon: "vpn_key",
-          route: "/backend/chngpwd",
+          route: "/auth/chngpwd",
           type: "item",
         },
 
