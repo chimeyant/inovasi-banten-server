@@ -168,13 +168,52 @@ export default class AppsController {
           route: "/",
           type: "subMenu",
           submenus:[
-
             {
-              title: "Kategori",
-              icon: "mdi-widgets",
-              route: "/backend/master-category",
+              title: "Master Wilayah",
+              icon: "mdi-map",
+              route: "/auth/master-data-province",
               type: "item",
             },
+            {
+              title: "Master Kategory",
+              icon: "mdi-notebook-edit",
+              route: "/auth/master-data-category",
+              type: "item",
+            },
+            {
+              title: "Master Indikator",
+              icon: "mdi-firebase",
+              route: "/auth/master-data-indikator",
+              type: "item",
+            },
+            {
+              title: "Master OPD",
+              icon: "mdi-home-account",
+              route: "/auth/master-data-opd",
+              type: "item",
+            },
+            {
+              title: "Master Jenis Inovasi",
+              icon: "mdi-widgets",
+              route: "/auth/master-data-jenis-inovasi",
+              type: "item",
+            },
+            {
+              title: "Master Urusan",
+              icon: "mdi-traffic-cone",
+              route: "/auth/master-data-urusan",
+              type: "item",
+            },
+          ]
+        },
+
+        {
+          title: "PERMOHONAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+
           ]
         },
 
