@@ -194,11 +194,18 @@ export default class AppsController {
               type: "item",
             },
             {
-              title: "Master Indikator",
-              icon: "mdi-firebase",
+              title: "Master Indikator Pemda",
+              icon: "mdi-file-document-multiple-outline",
+              route: "/auth/master-data-indikator-pemda",
+              type: "item",
+            },
+            {
+              title: "Master Indikator Inovasi",
+              icon: "mdi-file-document-multiple",
               route: "/auth/master-data-indikator",
               type: "item",
             },
+
             {
               title: "Master OPD",
               icon: "mdi-home-account",
@@ -215,6 +222,12 @@ export default class AppsController {
               title: "Master Urusan",
               icon: "mdi-traffic-cone",
               route: "/auth/master-data-urusan",
+              type: "item",
+            },
+            {
+              title: "Master Bentuk Inovasi",
+              icon: "mdi-codepen",
+              route: "/auth/master-data-bentuk",
               type: "item",
             },
           ]
