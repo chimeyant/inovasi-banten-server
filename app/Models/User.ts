@@ -115,5 +115,21 @@ export default class User extends compose(BaseModel, SoftDeletes) {
     return query;
   })
 
+  public static filterOnProvinsi = scope((query, request)=>{
+    const {search, sortBy, sortDesc} = request.only(['search','sortBy', 'sortDesc'])
+    //const {search : string ,sortBy, sortDesc}= request.all();
+    const qsortBy = sortBy? sortBy : 'name'
+    const qsortDesc = sortDesc? 'desc': 'asc'
+    query.select('id','name','email','authent', 'status').whereNotIn("authent",['superadmin','administrator','team-pengkaji','provinsi','kabkota'])
+
+    if(search){
+      query.whereRaw('lower(name) like ?',['%'+ search.toLowerCase()+'%'] );
+    }
+
+    query.orderBy(qsortBy,qsortDesc)
+
+    return query;
+  })
+
 
 }

@@ -50,5 +50,13 @@ export default class Province extends compose(BaseModel,SoftDeletes) {
     }
   }
 
+  @computed()
+  public get combo(){
+    return {
+      value:this.code,
+      name:this.name
+    }
+  }
+
 
 }

@@ -1,13 +1,15 @@
-import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang"
-import JenisInovasi from "App/Models/JenisInovasi"
+import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang";
+import Opd from "App/Models/Opd";
 
-export type JenisInovasiType ={
+
+export type OpdType={
+  code:string,
   name:string,
-  status:boolean
 }
-class JenisInovasiService {
+
+class OpdProvinsiService {
   public async lists(){
-    const model = await JenisInovasi.query().orderBy("id",'asc')
+    const model = await Opd.query().whereNull("regency_code").orderBy('name','asc')
 
     const datas:{}[]=[]
 
@@ -18,24 +20,23 @@ class JenisInovasiService {
     return datas;
   }
 
-  public async store(payload:JenisInovasiType){
+  public async store(payload:OpdType){
     try {
-      const model = new JenisInovasi
+      const model = new Opd
+      model.code = payload.code
       model.name = payload.name
-      model.status = payload.status
       await model.save()
 
       return {
         code:200,
         success:true,
-        message: MSG_STORE_SUCCESS,
+        message:MSG_STORE_SUCCESS,
         data: model.datadisplay
       }
-
     } catch (error) {
-      return{
-        code: 500,
-        success: false,
+      return {
+        code:200,
+        success:false,
         message:MSG_FAILED_PROCESS,
         error:error
       }
@@ -43,28 +44,29 @@ class JenisInovasiService {
   }
 
   public async show(id:string){
-    const model = await JenisInovasi.findBy("uuid",id)
+    const model = await Opd.findBy("uuid",id)
+
     return model?.datarecord
   }
 
-  public async update(payload:JenisInovasiType, id:string){
+  public async update(payload:OpdType, id:string){
     try {
-      const model = await JenisInovasi.findBy("uuid",id)
+      const model = await Opd.findBy("uuid",id)
       model?.merge({
-        name: payload.name,
-        status: payload.status,
+        code:payload.code,
+        name:payload.name,
       })
       await model?.save()
 
-      return {
+      return{
         code:200,
         success:true,
         message:MSG_UPDATE_SUCCESS,
-        data: model?.datadisplay
+        data:model?.datadisplay
       }
     } catch (error) {
       return {
-        code: 500,
+        code:500,
         success:false,
         message:MSG_FAILED_PROCESS,
         error:error
@@ -74,7 +76,7 @@ class JenisInovasiService {
 
   public async delete(id:string){
     try {
-      const model = await JenisInovasi.findBy("uuid",id)
+      const model = await Opd.findBy("uuid",id)
       await model?.delete()
 
       return {
@@ -84,7 +86,7 @@ class JenisInovasiService {
         data:{id:id}
       }
     } catch (error) {
-      return{
+      return {
         code:500,
         success:false,
         message:MSG_FAILED_PROCESS,
@@ -94,15 +96,20 @@ class JenisInovasiService {
   }
 
   public async combo(){
-    const model = await JenisInovasi.query().where('status',true).orderBy("id",'asc')
-    const datas:{}[]=[]
+    try {
+      const model = await Opd.query().orderBy("name",'asc')
 
-    model.forEach(element => {
-      datas.push(element.combo)
-    });
+      const datas:{}[]=[]
 
-    return datas;
+      model.forEach(element => {
+        datas.push(element.combo)
+      });
+
+      return datas;
+    } catch (error) {
+
+    }
   }
 }
 
-export default new JenisInovasiService
+export default new OpdProvinsiService

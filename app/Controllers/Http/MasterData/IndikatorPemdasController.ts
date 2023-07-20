@@ -1,25 +1,25 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import JenisInovasiService from 'App/Services/MasterData/JenisInovasiService'
+import IndikatorPemdaService from 'App/Services/MasterData/IndikatorPemdaService'
 
-export default class JenisInovasisController {
+export default class IndikatorPemdasController {
   public async index({}: HttpContextContract) {
-    const result = await JenisInovasiService.lists()
+    const result = await IndikatorPemdaService.lists()
 
-    return result
+    return result;
   }
 
   public async create({}: HttpContextContract) {}
 
   public async store({request, response}: HttpContextContract) {
-    const payload = request.only(['name','status'])
+    const payload = request.only(['category_uuid','name','skor','status'])
 
-    const result = await JenisInovasiService.store(payload)
+    const result = await IndikatorPemdaService.store(payload)
 
     return response.status(result.code).send(result)
   }
 
   public async show({params}: HttpContextContract) {
-    const result = await JenisInovasiService.show(params.id)
+    const result = await IndikatorPemdaService.show(params.id)
 
     return result;
   }
@@ -27,22 +27,16 @@ export default class JenisInovasisController {
   public async edit({}: HttpContextContract) {}
 
   public async update({params, request, response}: HttpContextContract) {
-    const payload = request.only(['name','status'])
+    const payload = request.only(['category_uuid','name','skor','status'])
 
-    const result =await JenisInovasiService.update(payload,params.id)
+    const result = await IndikatorPemdaService.update(payload, params.id)
 
     return response.status(result.code).send(result)
   }
 
   public async destroy({params, response}: HttpContextContract) {
-    const result = await JenisInovasiService.delete(params.id)
+    const result =await IndikatorPemdaService.delete(params.id)
 
     return response.status(result.code).send(result)
-  }
-
-  public async combo({}:HttpContextContract){
-    const result = await JenisInovasiService.combo()
-
-    return result;
   }
 }

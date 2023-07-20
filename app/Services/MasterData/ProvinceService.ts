@@ -24,6 +24,18 @@ class ProvinceService {
 
    return model?.datarecord
  }
+
+ public async combo(){
+  const model = await Province.query().orderBy("name",'asc')
+
+  const datas:{}[]=[]
+
+  model.forEach(element => {
+    datas.push(element.combo)
+  });
+
+  return datas;
+ }
 }
 
 export default new ProvinceService

@@ -52,4 +52,12 @@ export default class Village extends  compose(BaseModel,SoftDeletes) {
       name: this.name
     }
   }
+
+  @computed()
+  public get combo(){
+    return{
+      value:this.code,
+      text:this.name
+    }
+  }
 }

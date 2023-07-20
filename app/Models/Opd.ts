@@ -18,6 +18,9 @@ export default class Opd extends compose(BaseModel,SoftDeletes) {
   public name:string
 
   @column()
+  public regencyCode:string
+
+  @column()
   public status:boolean
 
   @column()

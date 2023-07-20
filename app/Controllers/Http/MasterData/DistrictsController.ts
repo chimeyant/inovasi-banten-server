@@ -21,4 +21,9 @@ export default class DistrictsController {
   public async update({}: HttpContextContract) {}
 
   public async destroy({}: HttpContextContract) {}
+
+  public async combo({params}:HttpContextContract){
+    const result = await DistrictService.combo(params.regency_code)
+    return result;
+  }
 }

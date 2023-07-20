@@ -71,22 +71,46 @@ Route.group(()=>{
     Route.resource("village/:district_code","MasterData/VillagesController")
     Route.resource("category","MasterData/CategoriesController")
     Route.resource("indikator","MasterData/IndikatorsController")
+    Route.resource("indikator-pemda","MasterData/IndikatorPemdasController")
     Route.resource('opd','MasterData/OpdsController')
+    Route.resource('opd-provinsi',"MasterData/OpdProvinsisController")
     Route.resource('jenis-inovasi',"MasterData/JenisInovasisController")
     Route.resource('urusan',"MasterData/UrusansController")
+    Route.resource("bentuk","MasterData/BentuksController")
   }).prefix('master-data').middleware(['auth'])
 
   //Route Combo
   Route.group(()=>{
     Route.get("regency","MasterData/RegenciesController.combo")
+    Route.get("district/:regency_code","MasterData/DistrictsController.combo")
+    Route.get("village/:district_code","MasterData/VillagesController.combo")
     Route.get('opd',"MasterData/OpdsController.combo")
     Route.get('category',"MasterData/CategoriesController.combo")
+    Route.get("jenis-inovasi","MasterData/JenisInovasisController.combo")
+    Route.get("urusan","MasterData/UrusansController.combo")
+    Route.get('bentuk',"MasterData/BentuksController.combo")
   }).prefix('combo').middleware(['auth'])
+
+  //Route Permohonan
+  Route.group(()=>{
+    Route.get("profile","Permohonan/ProfilsController.show")
+    Route.group(()=>{
+      Route.resource("permohonan","Permohonan/InovasisController").as("permohonan-kabkota")
+    }).prefix('admin-kabkota')
+
+    /**
+     * Route Permohonan OPD
+     */
+    Route.group(()=>{
+      Route.resource("inovasi","Permohonan/InovasisController").as("permohonan-opd")
+    }).prefix("opd")
+  }).prefix("permohonan").middleware(['auth'])
 
   //Route Group Halaman Depan
   Route.group(()=>{
     Route.resource("slider","HalamanDepan/SlidersController")
   }).prefix("halaman-depan").middleware(['auth'])
+
 
   /**
    * Route Group Manajemen
@@ -117,6 +141,8 @@ Route.group(()=>{
 
     //Route Update History
     Route.resource("updates","Utility/UpdateHistoriesController")
+
+    Route.resource("users-provinsi","Utility/UserProvinsisController")
 
   }).prefix('utility').middleware(['auth'])
 

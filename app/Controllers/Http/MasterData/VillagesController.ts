@@ -21,4 +21,10 @@ export default class VillagesController {
   public async update({}: HttpContextContract) {}
 
   public async destroy({}: HttpContextContract) {}
+
+  public async combo({params}:HttpContextContract){
+    const result = await VillageService.combo(params.district_code)
+
+    return result
+  }
 }

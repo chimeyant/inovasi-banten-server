@@ -1,13 +1,16 @@
 import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang"
-import JenisInovasi from "App/Models/JenisInovasi"
+import IndikatorPemda from "App/Models/IndikatorPemda"
 
-export type JenisInovasiType ={
+export type IndikatorPemdaType={
+  category_uuid: string,
   name:string,
+  skor:number,
   status:boolean
 }
-class JenisInovasiService {
+
+class IndikatorPemdaService {
   public async lists(){
-    const model = await JenisInovasi.query().orderBy("id",'asc')
+    const model = await IndikatorPemda.query().preload('category').orderBy("id","asc")
 
     const datas:{}[]=[]
 
@@ -18,24 +21,27 @@ class JenisInovasiService {
     return datas;
   }
 
-  public async store(payload:JenisInovasiType){
+  public async store(payload:IndikatorPemdaType){
     try {
-      const model = new JenisInovasi
+      const model = new IndikatorPemda
+      model.categoryUuid = payload.category_uuid
       model.name = payload.name
+      model.skor = payload.skor
       model.status = payload.status
       await model.save()
+
+      await model.preload("category")
 
       return {
         code:200,
         success:true,
-        message: MSG_STORE_SUCCESS,
+        message:MSG_STORE_SUCCESS,
         data: model.datadisplay
       }
-
     } catch (error) {
-      return{
-        code: 500,
-        success: false,
+      return {
+        code:500,
+        success:false,
         message:MSG_FAILED_PROCESS,
         error:error
       }
@@ -43,17 +49,21 @@ class JenisInovasiService {
   }
 
   public async show(id:string){
-    const model = await JenisInovasi.findBy("uuid",id)
+    const model = await IndikatorPemda.findBy("uuid",id)
+
     return model?.datarecord
   }
 
-  public async update(payload:JenisInovasiType, id:string){
+  public async update(payload:IndikatorPemdaType, id:string){
     try {
-      const model = await JenisInovasi.findBy("uuid",id)
+      const model = await IndikatorPemda.findBy("uuid",id)
       model?.merge({
+        categoryUuid: payload.category_uuid,
         name: payload.name,
-        status: payload.status,
+        skor: payload.skor,
+        status: payload.status
       })
+
       await model?.save()
 
       return {
@@ -64,7 +74,7 @@ class JenisInovasiService {
       }
     } catch (error) {
       return {
-        code: 500,
+        code:500,
         success:false,
         message:MSG_FAILED_PROCESS,
         error:error
@@ -74,10 +84,10 @@ class JenisInovasiService {
 
   public async delete(id:string){
     try {
-      const model = await JenisInovasi.findBy("uuid",id)
+      const model = await IndikatorPemda.findBy("uuid",id)
       await model?.delete()
 
-      return {
+      return{
         code:200,
         success:true,
         message:MSG_DELETE_SUCCESS,
@@ -93,16 +103,6 @@ class JenisInovasiService {
     }
   }
 
-  public async combo(){
-    const model = await JenisInovasi.query().where('status',true).orderBy("id",'asc')
-    const datas:{}[]=[]
-
-    model.forEach(element => {
-      datas.push(element.combo)
-    });
-
-    return datas;
-  }
 }
 
-export default new JenisInovasiService
+export default new IndikatorPemdaService

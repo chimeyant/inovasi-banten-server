@@ -1,13 +1,14 @@
 import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang"
-import JenisInovasi from "App/Models/JenisInovasi"
+import Bentuk from "App/Models/Bentuk"
 
-export type JenisInovasiType ={
+export type BentukType={
   name:string,
   status:boolean
 }
-class JenisInovasiService {
+
+class BentukService {
   public async lists(){
-    const model = await JenisInovasi.query().orderBy("id",'asc')
+    const model = await Bentuk.query().orderBy("id",'asc')
 
     const datas:{}[]=[]
 
@@ -18,9 +19,9 @@ class JenisInovasiService {
     return datas;
   }
 
-  public async store(payload:JenisInovasiType){
+  public async store(payload:BentukType){
     try {
-      const model = new JenisInovasi
+      const model  = new Bentuk
       model.name = payload.name
       model.status = payload.status
       await model.save()
@@ -28,39 +29,8 @@ class JenisInovasiService {
       return {
         code:200,
         success:true,
-        message: MSG_STORE_SUCCESS,
+        message:MSG_STORE_SUCCESS,
         data: model.datadisplay
-      }
-
-    } catch (error) {
-      return{
-        code: 500,
-        success: false,
-        message:MSG_FAILED_PROCESS,
-        error:error
-      }
-    }
-  }
-
-  public async show(id:string){
-    const model = await JenisInovasi.findBy("uuid",id)
-    return model?.datarecord
-  }
-
-  public async update(payload:JenisInovasiType, id:string){
-    try {
-      const model = await JenisInovasi.findBy("uuid",id)
-      model?.merge({
-        name: payload.name,
-        status: payload.status,
-      })
-      await model?.save()
-
-      return {
-        code:200,
-        success:true,
-        message:MSG_UPDATE_SUCCESS,
-        data: model?.datadisplay
       }
     } catch (error) {
       return {
@@ -72,9 +42,40 @@ class JenisInovasiService {
     }
   }
 
+  public async show(id:string){
+    const model = await Bentuk.findBy("uuid",id)
+
+    return model?.datarecord
+  }
+
+  public async update(payload:BentukType, id:string){
+    try {
+      const model = await Bentuk.findBy("uuid",id)
+      model?.merge({
+        name:payload.name,
+        status:payload.status
+      })
+      await model?.save()
+
+      return {
+        code:200,
+        success:true,
+        message:MSG_UPDATE_SUCCESS,
+        data:model?.datadisplay
+      }
+    } catch (error) {
+      return {
+        code:500,
+        success:false,
+        message:MSG_FAILED_PROCESS,
+        error:error
+      }
+    }
+  }
+
   public async delete(id:string){
     try {
-      const model = await JenisInovasi.findBy("uuid",id)
+      const model = await Bentuk.findBy("uuid",id)
       await model?.delete()
 
       return {
@@ -85,7 +86,7 @@ class JenisInovasiService {
       }
     } catch (error) {
       return{
-        code:500,
+        code:200,
         success:false,
         message:MSG_FAILED_PROCESS,
         error:error
@@ -94,7 +95,8 @@ class JenisInovasiService {
   }
 
   public async combo(){
-    const model = await JenisInovasi.query().where('status',true).orderBy("id",'asc')
+    const model = await Bentuk.query().where("status",true).orderBy("id",'asc')
+
     const datas:{}[]=[]
 
     model.forEach(element => {
@@ -105,4 +107,4 @@ class JenisInovasiService {
   }
 }
 
-export default new JenisInovasiService
+export default new BentukService

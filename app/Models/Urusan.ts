@@ -54,4 +54,12 @@ export default class Urusan extends compose(BaseModel,SoftDeletes) {
     }
   }
 
+  @computed()
+  public get combo(){
+    return{
+      value:this.uuid,
+      text:this.name
+    }
+  }
+
 }

@@ -48,4 +48,12 @@ export default class JenisInovasi extends compose(BaseModel, SoftDeletes) {
       status: this.status
     }
   }
+
+  @computed()
+  public get combo(){
+    return{
+      value:this.uuid,
+      text:this.name
+    }
+  }
 }

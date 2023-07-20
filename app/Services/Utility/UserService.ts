@@ -4,7 +4,6 @@ import { MSG_CHANGEPWD_SUCCESS, MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STOR
 import Whatsapp from "App/Helpers/Whatsapp"
 import Env from "@ioc:Adonis/Core/Env"
 import Drive from "@ioc:Adonis/Core/Drive"
-import Hash from '@ioc:Adonis/Core/Hash'
 
 export type UserType ={
   name: string,
@@ -53,7 +52,7 @@ class UserService {
       model.name= payload.name
       model.email = payload.email
       model.authent = payload.authent
-      model.regencyCode = payload.regency_code
+      model.regencyCode = payload.regency_code ? payload.regency_code : '36'
       model.opdUuid = payload.opd_uuid
       model.phone = payload.phone
       model.password = password
@@ -96,7 +95,7 @@ class UserService {
         model?.merge({
           name: payload.name,
           authent: payload.auth,
-          regencyCode:payload.regency_code,
+          regencyCode:payload.regency_code ? payload.regency_code:'36',
           opdUuid: payload.opd_uuid,
           phone: payload.phone,
           password: password,

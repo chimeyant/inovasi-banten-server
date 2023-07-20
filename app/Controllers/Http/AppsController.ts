@@ -75,11 +75,18 @@ export default class AppsController {
               type: "item",
             },
             {
-              title: "Master Indikator",
-              icon: "mdi-firebase",
+              title: "Master Indikator Pemda",
+              icon: "mdi-file-document-multiple-outline",
+              route: "/auth/master-data-indikator-pemda",
+              type: "item",
+            },
+            {
+              title: "Master Indikator Inovasi",
+              icon: "mdi-file-document-multiple",
               route: "/auth/master-data-indikator",
               type: "item",
             },
+
             {
               title: "Master OPD",
               icon: "mdi-home-account",
@@ -96,6 +103,12 @@ export default class AppsController {
               title: "Master Urusan",
               icon: "mdi-traffic-cone",
               route: "/auth/master-data-urusan",
+              type: "item",
+            },
+            {
+              title: "Master Bentuk Inovasi",
+              icon: "mdi-codepen",
+              route: "/auth/master-data-bentuk",
               type: "item",
             },
           ]
@@ -248,96 +261,112 @@ export default class AppsController {
       return menus;
     }
 
-    if(authent == 'operator'){
+    if(authent == 'provinsi'){
       menus = [
         {
           title: "Dashboard",
           type: "item",
           icon: "mdi-view-dashboard",
-          route: "/backend/dashboard",
+          route: "/auth/dashboard",
+        },
+        {
+          title: "",
+          type: "divider",
+        },
+        {
+          title: "DATA MASTER",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Master OPD",
+              icon: "mdi-home-account",
+              route: "/auth/master-data-opd-provinsi",
+              type: "item",
+            },
+          ]
+        },
+        {
+          title: "PERMOHONAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Profil Pemda",
+              icon: "mdi-account-box-outline",
+              route: "/auth/provinsi-permohonan-profile",
+              type: "item",
+            },
+          ]
+        },
+        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
+          {
+            title: "Manajemen Pengguna",
+            icon: "engineering",
+            route: "/auth/utility-manajemen-user-provinsi",
+            type: "item",
+          },
+          {
+            title: "Profil Pengguna",
+            icon: "accessibility",
+            route: "/auth/profil-akun",
+            type: "item",
+          },
+          {
+            title: "Ganti Kata Sandi",
+            icon: "vpn_key",
+            route: "/auth/chngpwd",
+            type: "item",
+          },
+        ]},
+      ]
+      return menus;
+    }
+
+    if(authent == 'provinsi-opd'){
+      menus = [
+        {
+          title: "Dashboard",
+          type: "item",
+          icon: "mdi-view-dashboard",
+          route: "/auth/dashboard",
         },
         {
           title: "",
           type: "divider",
         },
 
-        { title: "MANAJEMEN", type: "subMenu", route: "/", submenus:[
-          {
-            title: "Dataset",
-            icon: "mdi-database",
-            route: "/backend/manajemen-dataset",
-            type: "item",
-          },
-          {
-            title: "Visualisasi",
-            icon: "mdi-image-frame",
-            route: "/backend/manajemen-visualization",
-            type: "item",
-          },
-          {
-            title: "Infografis",
-            icon: "mdi-finance",
-            route: "/backend/manajemen-infographic",
-            type: "item",
-          },
-          {
-            title: "Dokumen",
-            icon: "mdi-book-open-variant",
-            route: "/backend/manajemen-document",
-            type: "item",
-          },
-          {
-            title: "Videografis",
-            icon: "mdi-video-box",
-            route: "/backend/manajemen-videographic",
-            type: "item",
-          },
-          {
-            title: "Permohonan Dataset",
-            icon: "mdi-hand-heart",
-            route: "/backend/manajemen-permohonan",
-            type: "item",
-          },
-        ] },
-
-        { title: "BTS", type: "subMenu", route: "/" , submenus:[
-          {
-            title: "PETA Sebaran",
-            icon: "mdi-map-legend",
-            route: "/backend/bts-peta-sebaran",
-            type: "item",
-          },
-          {
-            title: "Daftar Perusahaan",
-            icon: "mdi-office-building-outline",
-            route: "/backend/bts-daftar-perusahaan",
-            type: "item",
-          },
-          {
-            title: "Surviey",
-            icon: "mdi-map-marker-radius",
-            route: "",
-            type: "item",
-          },
-        ]},
+        {
+          title: "PERMOHONAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Inovasi",
+              icon: "mdi-clover",
+              route: "/auth/permohonan-inovasi-opd",
+              type: "item",
+            },
+          ]
+        },
         { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
           {
             title: "Profil Pengguna",
             icon: "accessibility",
-            route: "/backend/profil-akun",
+            route: "/auth/profil-akun",
             type: "item",
           },
           {
             title: "Ganti Kata Sandi",
             icon: "vpn_key",
-            route: "/backend/chngpwd",
+            route: "/auth/chngpwd",
             type: "item",
           },
-
         ]},
-
-      ];
-
+      ]
       return menus;
     }
 

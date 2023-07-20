@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import UrusanService from 'App/Services/MasterData/UrusanService'
+import OpdProvinsiService from 'App/Services/MasterData/OpdProvinsiService'
 
-export default class UrusansController {
+export default class OpdProvinsisController {
   public async index({}: HttpContextContract) {
-    const result = await UrusanService.lists()
+    const result = await OpdProvinsiService.lists()
 
     return result;
   }
@@ -19,10 +19,4 @@ export default class UrusansController {
   public async update({}: HttpContextContract) {}
 
   public async destroy({}: HttpContextContract) {}
-
-  public async combo({}:HttpContextContract){
-    const result = await UrusanService.combo()
-
-    return result
-  }
 }

@@ -1,14 +1,12 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import User from "App//Models/User"
 import UserValidator from 'App/Validators/MasterData/UserValidator'
 import UpdateProfilValidator from 'App/Validators/Utility/UpdateProfilValidator'
-import Env from "@ioc:Adonis/Core/Env"
-import Drive from "@ioc:Adonis/Core/Drive"
 import UserService from 'App/Services/Utility/UserService'
 
 export default class UsersController {
-  public async index({request,response}: HttpContextContract) {
-    const result = await UserService.lists(request)
+  public async index({request,auth}: HttpContextContract) {
+    const user = auth.user
+    const result = await UserService.lists(request, user.id)
 
     return result;
   }

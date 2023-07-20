@@ -17,6 +17,18 @@ class UrusanService {
 
     return datas;
   }
+
+  public async combo(){
+    const model = await Urusan.query().where('status',true).orderBy("id",'asc')
+
+    const datas:{}[]=[]
+
+    model.forEach(element => {
+      datas.push(element.combo)
+    });
+
+    return datas;
+  }
 }
 
 export default new UrusanService
