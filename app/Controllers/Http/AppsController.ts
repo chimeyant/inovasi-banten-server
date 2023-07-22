@@ -119,7 +119,24 @@ export default class AppsController {
           route: "/",
           type: "subMenu",
           submenus:[
-
+            {
+              title: "Seluruh Inovasi Daerah",
+              icon: "mdi-book-open-variant",
+              route: "/auth/permohonan-inovasi-publisher",
+              type: "item",
+            },
+            {
+              title: "Klinik Konsultasi",
+              icon: "mdi-face-agent",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
+            {
+              title: "Sponsor",
+              icon: "mdi-storefront",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
           ]
         },
         {
