@@ -9,7 +9,7 @@ export type OpdType={
 
 class OpdProvinsiService {
   public async lists(){
-    const model = await Opd.query().whereNull("regency_code").orderBy('name','asc')
+    const model = await Opd.query().where("regency_code","36").orderBy('name','asc')
 
     const datas:{}[]=[]
 

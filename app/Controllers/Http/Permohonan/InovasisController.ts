@@ -15,7 +15,7 @@ export default class InovasisController {
   public async store({request, response, auth}: HttpContextContract) {
     const user = auth.user
 
-    const payload = request.only(['name','jenis_uuid','urusan_uuid','bentuk_uuid','inisiator','waktu_uji','waktu_penerapan','tahapan','rancang_bangun','tujuan','manfaat','hasil','file_anggaran','file_profil_bisnis','skor','tahun','inovator_nama','inovator_phone','inovator_instansi','foto','video','youtube','province_code','regency_code','district_code','village_code','alamat','lat','lng'])
+    const payload = request.only(['name','jenis_inovasi_uuid','urusan_uuid','bentuk_uuid','inisiator','waktu_uji','waktu_penerapan','tahapan','tahun','rancang_bangun','tujuan','manfaat','hasil','file_anggaran','file_profil_bisnis','skor','inovator_nama','inovator_phone','inovator_instansi','foto','video','youtube','province_code','regency_code','district_code','village_code','alamat','alamat_dalam_peta','lat','lng'])
 
 
     const payloaduser={
@@ -37,5 +37,29 @@ export default class InovasisController {
 
   public async update({}: HttpContextContract) {}
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({params, response, auth}: HttpContextContract) {
+    const user = auth.user
+
+    const result =await InovasiService.deleted(params.id, user)
+
+    return response.status(result.code).send(result)
+  }
+
+  public async push({request, response,auth}:HttpContextContract){
+    const {id}= request.all()
+    const user = auth.user
+
+    const result = await InovasiService.push(id,user)
+
+    return response.status(result.code).send(result)
+  }
+
+  public async pull({request, response,auth}:HttpContextContract){
+    const user = auth.user
+    const {id}= request.all()
+
+    const result = await InovasiService.pull(id,user)
+
+    return response.status(result.code).send(result)
+  }
 }

@@ -1,17 +1,17 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class InovasiIndikators extends BaseSchema {
-  protected tableName = 'inovasi_indikators'
+export default class InovasiHistories extends BaseSchema {
+  protected tableName = 'inovasi_histories'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.uuid('uuid')
-      table.uuid('inovasi_uuid').nullable()
-      table.uuid('indikator_uuid').nullable()
-      table.boolean('information_completed').defaultTo(false)
-      table.boolean('status').defaultTo(false)
-
+      table.uuid('inovasi_uuid')
+      table.uuid('user_uuid')
+      table.string('title')
+      table.text('content').nullable()
+      table.string('status')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

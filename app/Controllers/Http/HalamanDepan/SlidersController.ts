@@ -15,101 +15,38 @@ export default class SlidersController {
   public async create({}: HttpContextContract) {}
 
   public async store({request,response}: HttpContextContract) {
-    const payload = request.only(['title','subtitle','content','path','status'])
+    const payload = request.only(['title','subtitle','content','path','top_image','bottom_image','priority_status','priority_number','status'])
 
     const result = await SliderService.store(payload)
 
-    return result
+    return response.status(200).send(result)
   }
 
-  public async show({params,request,response}: HttpContextContract) {
-    const {id}= params
-    const slider = await Slider.findBy('uuid',id)
+  public async show({params}: HttpContextContract) {
+    const result = await SliderService.show(params.id)
 
-    const data = {
-      id: slider?.uuid,
-      title: slider?.title,
-      subtitle: slider?.subtitle,
-      content: slider?.content,
-      path:slider?.path,
-      path_url: Env.get("BASE_URL")+ await Drive.getSignedUrl( "images/sliders/"+ slider?.path),
-      status: slider?.status ? true:false,
-    }
-
-    return data;
+    return result
   }
 
   public async edit({}: HttpContextContract) {}
 
   public async update({params, request,response}: HttpContextContract) {
-    const {id} = params
-    const {title, subtitle, content,path, status}= request.all()
+    const payload = request.only(['title','subtitle','content','path','top_image','bottom_image','priority_status','priority_number','status'])
 
-    await request.validate(SliderValidator)
+    const result = await SliderService.update(payload,params.id)
 
-    try {
-      const slider = await Slider.findBy('uuid',id)
-      slider?.merge({title:title, subtitle:subtitle, content:content, path:path, status:status})
-      await slider?.save()
-
-      return response.json({
-        code : 200,
-        success: true,
-        message:"Proses ubah data berhasil...",
-        data: slider?.dataview,
-      })
-
-    } catch (error) {
-      return response.status(500).json({
-        code : 500,
-        status:false,
-        message:"Opps..., terjadi kesalahan "+ error,
-        data:{}
-      })
-    }
-
-
+    return response.status(result.code).send(result)
   }
 
-  public async destroy({params, response, request}: HttpContextContract) {
-    const {id}= params
+  public async destroy({params, response}: HttpContextContract) {
+    const result = await SliderService.deleted(params.id)
 
-    try {
-      const slider = await Slider.findBy('uuid',id)
-      await slider?.delete()
-      return response.status(200).json({
-        code:200,
-        success:true,
-        message:"Proses hapus data berhasil...",
-        data:{
-          id:id
-        }
-      })
-    } catch (error) {
-      return response.status(500).json({
-        status:false,
-        message:"Opps..., terjadi kesalahan "+ error
-      })
-    }
-
+    return response.status(result.code).send(result)
   }
 
   public async publish({}:HttpContextContract){
-    const sliders = await Slider.query().where('status',true).orderBy('id','desc')
+    const result = await SliderService.publish()
 
-    const datas: {}[]=[];
-
-    sliders.forEach(async (item)=>{
-      const row ={}
-      const url = await Drive.getSignedUrl("images/sliders/"+ item.path)
-      row['id']= item.id
-      row['title']= item.title
-      row['subtitle']=item.subtitle
-      row['content']= item.content
-      row['path']= Env.get("BASE_URL")+ url
-      datas.push(row)
-    })
-
-    return datas;
+    return result;
   }
 }

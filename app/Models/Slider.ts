@@ -24,6 +24,18 @@ export default class Slider extends compose(BaseModel, SoftDeletes ){
   public path:string
 
   @column()
+  public topImage:string
+
+  @column()
+  public bottomImage:string
+
+  @column()
+  public priorityStatus:boolean
+
+  @column()
+  public priorityNumber:number
+
+  @column()
   public status:boolean
 
   @column.dateTime({ autoCreate: true })
@@ -43,6 +55,31 @@ export default class Slider extends compose(BaseModel, SoftDeletes ){
       id:this.uuid,
       title: this.title,
       status: this.status ? {color:'green', text:"Aktif"}:{color:"red", text:"Tidak Aktif"}
+    }
+  }
+
+  @computed()
+  public get datarecord(){
+    return{
+      id: this.uuid,
+      title:this.title,
+      subtitle:this.subtitle,
+      content: this.content,
+      top_image:this.topImage,
+      bottom_image:this.bottomImage,
+      priority_status: this.priorityStatus,
+      priority_number:this.priorityNumber,
+      status: this.status,
+    }
+  }
+
+  @computed()
+  public get datapublish(){
+    return{
+      id:this.uuid,
+      title:this.title,
+      subtitle:this.subtitle,
+      content:this.content,
     }
   }
 }

@@ -73,7 +73,9 @@ Route.group(()=>{
     Route.resource("indikator","MasterData/IndikatorsController")
     Route.resource("indikator-pemda","MasterData/IndikatorPemdasController")
     Route.resource('opd','MasterData/OpdsController')
+    Route.post("opd-generate","MasterData/OpdsController.generate")
     Route.resource('opd-provinsi',"MasterData/OpdProvinsisController")
+    Route.resource('opd-kabkota',"MasterData/OpdKabkotasController")
     Route.resource('jenis-inovasi',"MasterData/JenisInovasisController")
     Route.resource('urusan',"MasterData/UrusansController")
     Route.resource("bentuk","MasterData/BentuksController")
@@ -85,6 +87,8 @@ Route.group(()=>{
     Route.get("district/:regency_code","MasterData/DistrictsController.combo")
     Route.get("village/:district_code","MasterData/VillagesController.combo")
     Route.get('opd',"MasterData/OpdsController.combo")
+    Route.get('opd-by-regency/:regency_code',"MasterData/OpdsController.combobyregency")
+    Route.get("opd-kabkota","MasterData/OpdKabkotasController.combo")
     Route.get('category',"MasterData/CategoriesController.combo")
     Route.get("jenis-inovasi","MasterData/JenisInovasisController.combo")
     Route.get("urusan","MasterData/UrusansController.combo")
@@ -93,17 +97,39 @@ Route.group(()=>{
 
   //Route Permohonan
   Route.group(()=>{
-    Route.get("profile","Permohonan/ProfilsController.show")
+    Route.resource("profile","Permohonan/ProfilsController")
+    Route.resource("profile-indikator/:profile_uuid","Permohonan/ProfileIndikatorsController")
+    Route.resource("profile-document/:profile_uuid/:indikator_pemda_uuid/:profile_indikator_uuid","Permohonan/ProfileIndikatorDocumentsController")
+
     Route.group(()=>{
-      Route.resource("permohonan","Permohonan/InovasisController").as("permohonan-kabkota")
-    }).prefix('admin-kabkota')
+      Route.resource("inovasi","Permohonan/InovasiAllsController").as("inovasi-admin")
+    }).prefix("admin")
+
+    Route.group(()=>{
+      Route.resource("inovasi","Permohonan/InovasiAllsController").as("inovasi-verifikator")
+      Route.post("inovasi-set-status","Permohonan/InovasiAllsController.setstatus")
+      Route.get("profile-show/:regency_code","Permohonan/ProfilsController.showbyregency")
+      Route.get("profile-document/:profile_indikator_uuid","Permohonan/ProfileIndikatorDocumentsController.index")
+      Route.get("inovasi-document/:inovasi_indikator_uuid","Permohonan/InovasiDocumentsController.index")
+    }).prefix('verifikator')
+
+    Route.get("inovasi-history/:inovasi_uuid","Permohonan/InovasiHistoriesController.index")
+
 
     /**
      * Route Permohonan OPD
      */
     Route.group(()=>{
       Route.resource("inovasi","Permohonan/InovasisController").as("permohonan-opd")
+      Route.resource('inovasi-indikator/:inovasi_uuid', 'Permohonan/InovasiIndikatorsController')
+      Route.get("inovasi-informasi/:inovasi_indikator_uuid","Permohonan/InovasiInformasisController.show")
+      Route.post("inovasi-informasi/:inovasi_indikator_uuid","Permohonan/InovasiInformasisController.store")
+      Route.resource("inovasi-document/:inovasi_uuid/:indikator_uuid/:inovasi_indikator_uuid","Permohonan/InovasiDocumentsController")
+      Route.post('inovasi-push',"Permohonan/InovasisController.push")
+      Route.post('inovasi-pull',"Permohonan/InovasisController.pull")
     }).prefix("opd")
+
+
   }).prefix("permohonan").middleware(['auth'])
 
   //Route Group Halaman Depan
@@ -143,6 +169,7 @@ Route.group(()=>{
     Route.resource("updates","Utility/UpdateHistoriesController")
 
     Route.resource("users-provinsi","Utility/UserProvinsisController")
+    Route.resource("users-kabkota","Utility/UserKabkotasController")
 
   }).prefix('utility').middleware(['auth'])
 

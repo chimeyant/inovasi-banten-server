@@ -1,7 +1,12 @@
 import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang";
+import IndikatorPemda from "App/Models/IndikatorPemda";
 import Profile from "App/Models/Profile";
+import ProfileIndikator from "App/Models/ProfileIndikator";
+import Env from "@ioc:Adonis/Core/Env"
+import Drive from "@ioc:Adonis/Core/Drive"
 
 export type ProfilType={
+  name:string,
   user_uuid:string,
   province_code:string,
   regency_code:string,
@@ -9,9 +14,11 @@ export type ProfilType={
   opd_name:string,
   email:string,
   phone:string,
+  nama_admin:string,
   jabatan_admin:string,
   file_fakta_integritas:string,
   logo:string,
+  alamat:string,
   status:string
 }
 
@@ -40,14 +47,28 @@ class ProfileService {
       model.fileFaktaIntegritas= payload.file_fakta_integritas
       model.logo = payload.logo
       model.status = payload.status
-
       await model.save()
+
+      //import data indikator
+      const indikators = await IndikatorPemda.query().orderBy("id",'asc')
+
+      const dataindikators:{}[]=[]
+
+      indikators.forEach(element => {
+        const row={}
+        row['profileUuid']= model.uuid
+        row['indikatorPemdaUuid']= element.uuid
+        dataindikators.push(row)
+      });
+
+      await ProfileIndikator.createMany(dataindikators)
 
       return {
         code:200,
         success:true,
         message:MSG_STORE_SUCCESS,
-        data: model.datadisplay
+        data: model.datadisplay,
+        indikator:dataindikators
       }
     } catch (error) {
       return{
@@ -59,11 +80,14 @@ class ProfileService {
     }
   }
 
-  public async show(opd_uuid:string){
-    const model = await Profile.findBy("opd_uuid",opd_uuid)
+  public async show(regency_code:string){
+    const model = await Profile.query().preload("opd").where("regency_code",regency_code).first()
 
     if(model){
-      return model?.datarecord
+      let data = {}
+      data = model.datarecord
+      data['path_logo']= Env.get("BASE_URL")+ await Drive.getSignedUrl("documents/"+  model.logo)
+      return data
     }else{
       return null
     }
@@ -84,28 +108,30 @@ class ProfileService {
 
   public async update(payload:ProfilType, id:string){
     try {
-      const model = await Profile.findBy("uuid",id)
+      const model = await Profile.query().where("uuid",id).first()
       model?.merge({
-        userUuid: payload.user_uuid,
-        provinceCode: payload.province_code,
-        regencyCode: payload.regency_code,
-        opdUuid: payload.opd_uuid,
-        opdName: payload.opd_name,
-        email: payload.email,
-        phone: payload.email,
-        jabatanAdmin: payload.jabatan_admin,
-        fileFaktaIntegritas: payload.file_fakta_integritas,
-        logo: payload.logo,
-        status: payload.status
+        name:payload.name,
+         opdName: payload.opd_name,
+         email: payload.email,
+         phone: payload.phone,
+         namaAdmin:payload.nama_admin,
+         jabatanAdmin: payload.jabatan_admin,
+         fileFaktaIntegritas: payload.file_fakta_integritas,
+         logo: payload.logo,
+         alamat:payload.alamat,
       })
 
       await model?.save()
+
+      await model?.preload("opd")
+
+
 
       return{
         code:200,
         success:true,
         message:MSG_UPDATE_SUCCESS,
-        data:model?.datadisplay
+        data:model?.datarecord
       }
     } catch (error) {
       return{
@@ -137,6 +163,24 @@ class ProfileService {
       }
     }
   }
+
+  public async showByRegency(regency_code:string){
+    const model = await Profile.query().preload('opd').preload('profileindikator',(trxQuery)=>{
+      trxQuery.preload("indikatorpemda").preload("profiledocuments")
+    }).preload('province').preload('regency').where("regency_code",regency_code).first()
+
+    let data = model?.verifikatordatarecord
+
+    data['path_file_fakta_integritas']= Env.get("BASE_URL")+ await Drive.getSignedUrl("documents/"+ model?.fileFaktaIntegritas)
+
+    return data;
+  }
+
+  /**
+   * Area Verifikator
+   */
+
+
 }
 
 export default new ProfileService

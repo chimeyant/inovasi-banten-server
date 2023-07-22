@@ -4,7 +4,7 @@ import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
 import {v4 as uuid} from "uuid"
 import { BaseModel, beforeCreate, column, computed } from '@ioc:Adonis/Lucid/Orm'
 
-export default class InovasiInformasi extends compose(BaseModel,SoftDeletes ){
+export default class InovasiDocument extends compose(BaseModel,SoftDeletes) {
   @column({ isPrimary: true })
   public id: number
 
@@ -21,7 +21,19 @@ export default class InovasiInformasi extends compose(BaseModel,SoftDeletes ){
   public inovasiIndikatorUuid:string
 
   @column()
-  public informasi:string
+  public nomorDokumen:string
+
+  @column()
+  public tanggalDokumen:Date
+
+  @column()
+  public tentang:string
+
+  @column()
+  public typeFile:string
+
+  @column()
+  public fileDokumen:string
 
   @column()
   public deletedAt:DateTime
@@ -33,25 +45,25 @@ export default class InovasiInformasi extends compose(BaseModel,SoftDeletes ){
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static async createUUID(inovasiInformasi:InovasiInformasi){
-    inovasiInformasi.uuid = uuid()
+  public static async createUUID(inovasiDokumen:InovasiDocument){
+    inovasiDokumen.uuid = uuid()
   }
 
   @computed()
   public get datadisplay(){
     return{
       id: this.uuid,
-      inovasi_indikator_uuid:this.inovasiIndikatorUuid,
-      informasi: this.informasi
+      nomor_dokumen: this.nomorDokumen
+      tanggal_dokumen: DateTime.fromJSDate(this.tanggalDokumen).toFormat("dd/MM/yyyy"),
+      tentang: this.tentang,
+      document:""
     }
   }
 
   @computed()
   public get datarecord(){
     return{
-      id: this.uuid,
-      inovasi_indikator_uuid:this.inovasiIndikatorUuid,
-      informasi: this.informasi
+      id: this.uuid
     }
   }
 }

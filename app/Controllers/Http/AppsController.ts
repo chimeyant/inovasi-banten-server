@@ -172,7 +172,7 @@ export default class AppsController {
           title: "Dashboard",
           type: "item",
           icon: "mdi-view-dashboard",
-          route: "/backend/dashboard",
+          route: "/auth/dashboard",
         },
 
         {
@@ -239,7 +239,46 @@ export default class AppsController {
           route: "/",
           type: "subMenu",
           submenus:[
+            {
+              title: "Inovasi",
+              icon: "mdi-clover",
+              route: "/auth/permohonan-inovasi-opd",
+              type: "item",
+            },
+            {
+              title: "Seluruh Inovasi Daerah",
+              icon: "mdi-book-open-variant",
+              route: "/auth/permohonan-inovasi-publisher",
+              type: "item",
+            },
+            {
+              title: "Klinik Konsultasi",
+              icon: "mdi-face-agent",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
 
+          ]
+        },
+
+        {
+          title: "HALAMAN DEPAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Slider",
+              icon: "image",
+              route: "/auth/halaman-depan-slider",
+              type: "item",
+            },
+            {
+              title: "Sponsor",
+              icon: "mdi-storefront",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
           ]
         },
 
@@ -264,13 +303,52 @@ export default class AppsController {
           type: "item",
         },
 
-        {
-          title: "Update History",
-          icon: "mdi-update",
-          route: "/backend/utility-update-history",
-          type: "item",
-        },
       ];
+      return menus;
+    }
+
+    if(authent == 'team-pengkaji'){
+      menus = [
+        {
+          title: "Dashboard",
+          type: "item",
+          icon: "mdi-view-dashboard",
+          route: "/auth/dashboard",
+        },
+        {
+          title: "",
+          type: "divider",
+        },
+        {
+          title: "PERMOHONAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Inovasi Daerah",
+              icon: "mdi-book-open-variant",
+              route: "/auth/permohonan-inovasi-verifikator",
+              type: "item",
+            },
+          ]
+        },
+        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
+
+          {
+            title: "Profil Pengguna",
+            icon: "accessibility",
+            route: "/auth/profil-akun",
+            type: "item",
+          },
+          {
+            title: "Ganti Kata Sandi",
+            icon: "vpn_key",
+            route: "/auth/chngpwd",
+            type: "item",
+          },
+        ]},
+      ]
       return menus;
     }
 
@@ -309,9 +387,22 @@ export default class AppsController {
             {
               title: "Profil Pemda",
               icon: "mdi-account-box-outline",
-              route: "/auth/provinsi-permohonan-profile",
+              route: "/auth/permohonan-profile",
               type: "item",
             },
+            {
+              title: "Inovasi",
+              icon: "mdi-clover",
+              route: "/auth/permohonan-inovasi-opd",
+              type: "item",
+            },
+            {
+              title: "Seluruh Inovasi Daerah",
+              icon: "mdi-book-open-variant",
+              route: "/auth/permohonan-inovasi-admin",
+              type: "item",
+            },
+
           ]
         },
         { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
@@ -383,81 +474,127 @@ export default class AppsController {
       return menus;
     }
 
-    /**
-     * MENU OPD
-     */
-
-    if(authent == 'opd'){
+    if(authent == 'kabkota'){
       menus = [
         {
           title: "Dashboard",
           type: "item",
           icon: "mdi-view-dashboard",
-          route: "/backend/dashboard",
-        },
-        { title: "BID. KESELAMATAN", type: "subheader", route: "/" },
-
-        {
-          title: "RENAKSI",
-          icon: "mdi-floor-plan",
-          route: "/backend/keselamatan-renaksi",
-          type: "item",
-        },
-
-        { title: "Utility", type: "subheader", route: "/" },
-        {
-          title: "Profil Pengguna",
-          icon: "accessibility",
-          route: "/backend/profil-akun",
-          type: "item",
+          route: "/auth/dashboard",
         },
         {
-          title: "Ganti Kata Sandi",
-          icon: "vpn_key",
-          route: "/backend/chngpwd",
-          type: "item",
+          title: "",
+          type: "divider",
         },
+        {
+          title: "DATA MASTER",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Master OPD",
+              icon: "mdi-home-account",
+              route: "/auth/master-data-opd-kabkota",
+              type: "item",
+            },
+          ]
+        },
+        {
+          title: "PERMOHONAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Profil Pemda",
+              icon: "mdi-account-box-outline",
+              route: "/auth/permohonan-profile",
+              type: "item",
+            },
+            {
+              title: "Inovasi",
+              icon: "mdi-clover",
+              route: "/auth/permohonan-inovasi-opd",
+              type: "item",
+            },
+            {
+              title: "Seluruh Inovasi Daerah",
+              icon: "mdi-book-open-variant",
+              route: "/auth/permohonan-inovasi-admin",
+              type: "item",
+            },
 
-      ];
+          ]
+        },
+        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
+          {
+            title: "Manajemen Pengguna",
+            icon: "engineering",
+            route: "/auth/utility-manajemen-user-kabkota",
+            type: "item",
+          },
+          {
+            title: "Profil Pengguna",
+            icon: "accessibility",
+            route: "/auth/profil-akun",
+            type: "item",
+          },
+          {
+            title: "Ganti Kata Sandi",
+            icon: "vpn_key",
+            route: "/auth/chngpwd",
+            type: "item",
+          },
+        ]},
+      ]
       return menus;
     }
 
 
-    /**
-     * Menu User
-     */
-     if(authent == 'user'){
+
+    if(authent == 'kabkota-opd'){
       menus = [
         {
           title: "Dashboard",
           type: "item",
           icon: "mdi-view-dashboard",
-          route: "/backend/dashboard",
+          route: "/auth/dashboard",
         },
         {
-          title: "Lap Prl. Jalan dan Laka",
-          icon: "mdi-bullhorn",
-          route: "/backend/user-pelaporan",
-          type: "item",
+          title: "",
+          type: "divider",
         },
 
-
-        { title: "Utility", type: "subheader", route: "/" },
         {
-          title: "Profil Pengguna",
-          icon: "accessibility",
-          route: "/backend/profil-akun",
-          type: "item",
+          title: "PERMOHONAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "Inovasi",
+              icon: "mdi-clover",
+              route: "/auth/permohonan-inovasi-opd",
+              type: "item",
+            },
+          ]
         },
-        {
-          title: "Ganti Kata Sandi",
-          icon: "vpn_key",
-          route: "/backend/chngpwd",
-          type: "item",
-        },
-
-
-      ];
+        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
+          {
+            title: "Profil Pengguna",
+            icon: "accessibility",
+            route: "/auth/profil-akun",
+            type: "item",
+          },
+          {
+            title: "Ganti Kata Sandi",
+            icon: "vpn_key",
+            route: "/auth/chngpwd",
+            type: "item",
+          },
+        ]},
+      ]
       return menus;
     }
 

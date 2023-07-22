@@ -2,7 +2,8 @@ import { DateTime } from 'luxon'
 import {compose} from "@ioc:Adonis/Core/Helpers"
 import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
 import {v4 as uuid} from "uuid"
-import { BaseModel, beforeCreate, column, computed } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasOne, beforeCreate, column, computed, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import Profile from './Profile'
 
 export default class Opd extends compose(BaseModel,SoftDeletes) {
   @column({ isPrimary: true })
@@ -36,6 +37,9 @@ export default class Opd extends compose(BaseModel,SoftDeletes) {
   public static async createUUID(opd:Opd){
     opd.uuid = uuid()
   }
+
+  @hasOne(()=>Profile,{localKey:"regencyCode",foreignKey:"regencyCode"})
+  public profile:HasOne<typeof Profile>
 
   @computed()
   public get datadisplay(){

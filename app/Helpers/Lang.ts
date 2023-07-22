@@ -9,6 +9,7 @@ export const MSG_IMPORT_SUCCESS = "Proses import data berhasil..!"
 export const MSG_UPDATEPROFILE_SUCCESS = "Proses ubah profil berhasil..!"
 export const MSG_CHANGEPWD_SUCCESS = "Proses ubah kata sandi berhasil...!"
 export const MSG_FAILED_PROCESS  = "Opps..., terjadi kesalahan"
+export const MSG_SUCCESS = "Proses berhasill...!"
 
 
 /**
@@ -16,3 +17,4 @@ export const MSG_FAILED_PROCESS  = "Opps..., terjadi kesalahan"
  */
 export const MSG_CATEGORY_UPDATE_SUCCESS = "Proses ubah kategori berhasil"
 export const MSG_STATUS_UPDATE_SUCCESS ="Proses ubah status berhasil"
+export const MSG_SEND_PERMOHONAN_SUCCESS = "Permohonan berhasil terkirim...!"

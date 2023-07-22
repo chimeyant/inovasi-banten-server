@@ -90,8 +90,9 @@ class UserService {
   public async update(payload,id:string){
     try {
       const model = await User.findBy("id", id)
+      const password = string.generateRandom(8)
+
       if(payload.reset){
-        const password = await string.generateRandom(8)
         model?.merge({
           name: payload.name,
           authent: payload.auth,
@@ -112,7 +113,14 @@ class UserService {
         })
       }
 
+
+
       await model?.save()
+
+      //kirim pesan wa
+      const pesan = "*INOVASI BANTEN* \r\n `Jaringan Inovasi Banten` \r\n\r\nHalo... \r\n"+ model?.name.toUpperCase() + "\r\n\r\nSelamat Anda telah terdaftar sebagai akun pengguna pada sistem kami dengan data akun sebagai berikut :"+ "\r\nNama pengguna :  "+ model?.email + "\r\nKata Sandi :  "+password+" \r\n\r\nSalam Inovasi,\r\nProvinsi Banten"
+
+      await Whatsapp.sendMessage(payload.phone, pesan)
 
       return {
         code:200,

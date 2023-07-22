@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import OpdProvinsiService from 'App/Services/MasterData/OpdProvinsiService'
+import InovasiHistoryService from 'App/Services/Permohonan/InovasiHistoryService'
 
-export default class OpdProvinsisController {
-  public async index({}: HttpContextContract) {
-    const result = await OpdProvinsiService.lists()
+export default class InovasiHistoriesController {
+  public async index({params}: HttpContextContract) {
+    const result = await InovasiHistoryService.lists(params.inovasi_uuid)
 
     return result;
   }
@@ -19,8 +19,4 @@ export default class OpdProvinsisController {
   public async update({}: HttpContextContract) {}
 
   public async destroy({}: HttpContextContract) {}
-
-
-
-
 }
