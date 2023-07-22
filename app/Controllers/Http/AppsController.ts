@@ -131,12 +131,7 @@ export default class AppsController {
               route: "/auth/page-under-construction",
               type: "item",
             },
-            {
-              title: "Sponsor",
-              icon: "mdi-storefront",
-              route: "/auth/page-under-construction",
-              type: "item",
-            },
+
           ]
         },
         {
@@ -149,6 +144,12 @@ export default class AppsController {
               title: "Slider",
               icon: "image",
               route: "/auth/halaman-depan-slider",
+              type: "item",
+            },
+            {
+              title: "Sponsor",
+              icon: "mdi-storefront",
+              route: "/auth/page-under-construction",
               type: "item",
             },
           ]
