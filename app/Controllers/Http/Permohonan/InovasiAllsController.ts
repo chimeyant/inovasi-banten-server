@@ -5,6 +5,17 @@ export default class InovasiAllsController {
   public async index({auth}: HttpContextContract) {
     const user = auth.user
 
+
+    if(user?.authent==='superadmin'){
+      const result = await InovasiService.publisherList()
+
+      return result;
+    }
+    if(user?.authent==='administrator'){
+      const result = await InovasiService.publisherList()
+
+      return result;
+    }
     if(user?.authent==='provinsi'){
       const result = await InovasiService.listall()
 
@@ -12,11 +23,6 @@ export default class InovasiAllsController {
     }
     if(user?.authent==='team-pengkaji'){
       const result = await InovasiService.verifikatorList()
-
-      return result;
-    }
-    if(user?.authent==='administrator'){
-      const result = await InovasiService.publisherList()
 
       return result;
     }
