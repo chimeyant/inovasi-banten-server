@@ -7,7 +7,7 @@ export default class InovasiAllsController {
 
 
     if(user?.authent==='superadmin'){
-      const result = await InovasiService.publisherList()
+      const result = await InovasiService.superadminList()
 
       return result;
     }

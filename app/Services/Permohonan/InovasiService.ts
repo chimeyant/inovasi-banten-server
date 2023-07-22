@@ -375,6 +375,21 @@ class InovasiService {
     return datas;
   }
 
+  /**
+   * Area Superadmin
+   */
+  public async superadminList(){
+    const model = await Inovasi.query().preload('opd').whereIn('status',["0","1","2","4","5","6"]).orderBy("id",'desc')
+
+    const datas:{}[]= []
+
+    model.forEach(element => {
+      datas.push(element.datadisplayverifikator)
+    });
+
+    return datas;
+  }
+
 
 
 
