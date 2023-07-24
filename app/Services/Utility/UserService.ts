@@ -100,6 +100,7 @@ class UserService {
           opdUuid: payload.opd_uuid,
           phone: payload.phone,
           password: password,
+          opdUuid:payload.opd_uuid,
           status: payload.status
         })
       }else{
