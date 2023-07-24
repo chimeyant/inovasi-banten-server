@@ -10,6 +10,7 @@ import Env from "@ioc:Adonis/Core/Env"
 import Drive from "@ioc:Adonis/Core/Drive"
 
 export type InovasiType={
+  category_uuid:string,
   name:string,
   jenis_inovasi_uuid:string,
   urusan_uuid:string,
@@ -91,11 +92,10 @@ class InovasiService {
 
 
 
-
-
   public async store(payload:InovasiType, user:UserType){
     try {
       const model = new Inovasi
+      model.categoryUuid = payload.category_uuid
       model.name = payload.name
       model.opdUuid = user.opdUuid
       model.jenisInovasiUuid = payload.jenis_inovasi_uuid

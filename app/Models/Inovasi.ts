@@ -12,6 +12,7 @@ import District from './District'
 import Village from './Village'
 import InovasiIndikator from './InovasiIndikator'
 import User from './User'
+import Category from './Category'
 
 export default class Inovasi extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
@@ -19,6 +20,9 @@ export default class Inovasi extends compose(BaseModel, SoftDeletes) {
 
   @column()
   public uuid:string
+
+  @column()
+  public categoryUuid:string
 
   @column()
   public name:string
@@ -187,6 +191,9 @@ export default class Inovasi extends compose(BaseModel, SoftDeletes) {
     inovasi.uuid = uuid()
   }
 
+  @belongsTo(()=> Category, {foreignKey:"categoryUuid", localKey:'uuid'})
+  public category:BelongsTo<typeof Category>
+
   @belongsTo(()=>User,{foreignKey:"createdUserUuid",localKey:"id"})
   public user:BelongsTo<typeof User>
 
@@ -213,6 +220,8 @@ export default class Inovasi extends compose(BaseModel, SoftDeletes) {
 
   @hasMany(()=> InovasiIndikator,{foreignKey:"inovasiUuid",localKey:"uuid"})
   public inovasiindikators:HasMany<typeof InovasiIndikator>
+
+
 
 
 
