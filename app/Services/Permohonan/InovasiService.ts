@@ -320,6 +320,7 @@ class InovasiService {
       await model?.save()
 
       await model?.preload("opd")
+      await model?.preload("user")
 
       await InovasiHistoryService.store({
         inovasi_uuid: model?.uuid,
@@ -328,6 +329,32 @@ class InovasiService {
         content: content,
         status: status
       })
+
+      //send message
+      //kirim pesan wa
+      if(status=='2'){
+        const pesan = "*INOVASI BANTEN* \r\n `Jaringan Inovasi Banten` \r\n\r\nHalo... \r\n"+ model?.user?.name.toUpperCase() + "\r\n\r\nMohon maaf permohonan anda dengan nomor registrasi : "+ model?.nomorRegister +" ditolak, silahkan perbaiki terlebih dahulu \r\n\r\nSalam Inovasi,\r\nProvinsi Banten"
+
+        await Whatsapp.sendMessage(model?.user?.phone, pesan)
+      }
+      if(status=='4'){
+        const pesan = "*INOVASI BANTEN* \r\n `Jaringan Inovasi Banten` \r\n\r\nHalo... \r\n"+ model?.user?.name.toUpperCase() + "\r\n\r\nSelamat permohonan anda dengan nomor registrasi : "+ model?.nomorRegister +" telah berhasil terverifikasi pada tahapan verifikasi dokumen dan akan memasuki proses tahapan verifikasi substansi \r\n\r\nSalam Inovasi,\r\nProvinsi Banten"
+
+        await Whatsapp.sendMessage(model?.user?.phone, pesan)
+      }
+
+      if(status=='5'){
+        const pesan = "*INOVASI BANTEN* \r\n `Jaringan Inovasi Banten` \r\n\r\nHalo... \r\n"+ model?.user?.name.toUpperCase() + "\r\n\r\nSelamat permohonan anda dengan nomor registrasi : "+ model?.nomorRegister +" telah berhasil terverifikasi pada tahapan verifikasi Substansi dan akan memasuki proses tahapan publikasi \r\n\r\nSalam Inovasi,\r\nProvinsi Banten"
+
+        await Whatsapp.sendMessage(model?.user?.phone, pesan)
+      }
+
+      if(status=='6'){
+        const pesan = "*INOVASI BANTEN* \r\n `Jaringan Inovasi Banten` \r\n\r\nHalo... \r\n"+ model?.user?.name.toUpperCase() + "\r\n\r\nSelamat permohonan anda dengan nomor registrasi : "+ model?.nomorRegister +" telah terpublikasi \r\n\r\nSalam Inovasi,\r\nProvinsi Banten"
+
+        await Whatsapp.sendMessage(model?.user?.phone, pesan)
+      }
+
 
       return {
         code:200,
