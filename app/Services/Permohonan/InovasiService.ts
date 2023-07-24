@@ -321,6 +321,7 @@ class InovasiService {
 
       await model?.preload("opd")
       await model?.preload("user")
+      await model?.preload('category')
 
       await InovasiHistoryService.store({
         inovasi_uuid: model?.uuid,
@@ -374,7 +375,7 @@ class InovasiService {
   }
 
   public async verifikatorshow(id:string){
-    const model = await Inovasi.query().preload('opd').preload('jenisinovasi').preload('urusan').preload("bentuk").preload('regency').preload('district').preload('village').preload('inovasiindikators',(trxQuery)=> {
+    const model = await Inovasi.query().preload('opd').preload('category').preload('jenisinovasi').preload('urusan').preload("bentuk").preload('regency').preload('district').preload('village').preload('inovasiindikators',(trxQuery)=> {
       trxQuery.preload('indikator').preload('inovasidocuments').preload("inovasiinformasi")
     }).where("uuid",id).first()
 

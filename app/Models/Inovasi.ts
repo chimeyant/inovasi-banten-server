@@ -267,6 +267,7 @@ export default class Inovasi extends compose(BaseModel, SoftDeletes) {
       opd_uuid:this.opdUuid,
       regency_code:this.opd.regencyCode,
       nomor_register:this.nomorRegister,
+      category: this.category ? this.category.name :'NA',
       name: this.name,
       jenisinovasi:this.jenisinovasi.name,
       urusan: this.urusan.name,
