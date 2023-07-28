@@ -55,7 +55,7 @@ export default class FileManagement extends compose(BaseModel, SoftDeletes) {
       name: this.name,
       ext: this.ext,
       size: this.size,
-      date: DateTime.fromISO(this.createdAt).toFormat("dd/mm/yy HH:M:s"),
+      date: DateTime.fromISO(this.createdAt).toFormat("dd/MM/yyyy HH:m:s"),
       status: this.ext == 'pdf' ? {color:'green', text:'Trusted'} : this.ext == 'png' ? {color:'green', text:'Trusted'} : this.ext == 'jpg' ? {color:'green', text: 'Trusted'} : this.ext == 'jpeg' ? {color: 'green', text:'Trusted'} : this.ext == 'svg' ? {color:'green', text:'Trusted'} : this.ext == 'doc' ? {color:'green', text:'Trusted'} : this.ext=='docx' ? {color:'green',text:'Trusted' } : this.ext=='xls' ? {color:'green',text:'Trusted'} : this.ext == 'xlsx' ? {color:'green',text:'Trusted'}:{color:'red',text: 'UnTursted'}
     }
   }
