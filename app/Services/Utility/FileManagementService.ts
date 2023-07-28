@@ -13,6 +13,15 @@ export type FileManagementType ={
 
 class FileManagementService {
   public async list(){
+    const model = await FileManagement.query().orderBy('created_at','desc')
+
+    const datas:{}[]=[]
+
+    model.forEach(element => {
+      datas.push(element.datadisplay)
+    });
+
+    return datas;
 
   }
 

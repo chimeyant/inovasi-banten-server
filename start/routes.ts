@@ -61,6 +61,9 @@ Route.group(()=>{
     Route.group(()=>{
       Route.resource("app-info","MasterData/AppInfosController")
     }).prefix("master-data")
+    Route.group(()=>{
+      Route.resource("file-management","Utility/FileManagementsController")
+    }).prefix('utility')
   }).prefix("superadmin").middleware(['auth','superadmin'])
 
   //route masterdata

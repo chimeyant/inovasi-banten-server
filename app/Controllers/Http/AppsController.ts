@@ -176,6 +176,12 @@ export default class AppsController {
             route: "/auth/chngpwd",
             type: "item",
           },
+          {
+            title: "File Management",
+            icon: "mdi-file",
+            route: "/auth/utility-file-management",
+            type: "item",
+          },
 
         ]},
 
