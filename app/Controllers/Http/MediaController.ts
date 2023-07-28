@@ -21,47 +21,44 @@ export default class MediaController {
 
     try {
 
-
-
-
       const name = `${uuid()}.${file?.extname}`
       let url;
 
       if(Env.get('NODE_ENV')=='development'){
         if(doctype === 'sliders'){
           await file?.move(Application.tmpPath("../storage/images/sliders"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("images/sliders/"+ name, {expiresIn:'5s'})
+          url = await Drive.getSignedUrl("images/sliders/"+ name, {expiresIn:'1m'})
         }
         else if(doctype==='avatars'){
           await file?.move(Application.tmpPath("../storage/images/avatars"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("images/avatars/"+ name, {expiresIn:'5s'})
+          url = await Drive.getSignedUrl("images/avatars/"+ name, {expiresIn:'1m'})
         }
         else if(doctype==='documents'){
           await file?.move(Application.tmpPath("../storage/documents"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("documents/"+ name,{expiresIn:'5s'})
+          url = await Drive.getSignedUrl("documents/"+ name,{expiresIn:'1m'})
         }
         else{
           await file?.move(Application.tmpPath("../storage/images/apps"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("images/apps/"+ name, {expiresIn:'5s'})
+          url = await Drive.getSignedUrl("images/apps/"+ name, {expiresIn:'1m'})
         }
       }
 
       else{
         if(doctype === 'sliders'){
           await file?.move(Application.tmpPath("../../storage/images/sliders"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("images/sliders/"+ name,{expiresIn:'5s'})
+          url = await Drive.getSignedUrl("images/sliders/"+ name,{expiresIn:'1m'})
         }
         else if(doctype==='avatars'){
           await file?.move(Application.tmpPath("../../storage/images/avatars"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("images/avatars/"+ name, {expiresIn:'5s'})
+          url = await Drive.getSignedUrl("images/avatars/"+ name, {expiresIn:'1m'})
         }
         else if(doctype==='documents'){
           await file?.move(Application.tmpPath("../../storage/documents"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("documents/"+ name,{expiresIn:'5s'})
+          url = await Drive.getSignedUrl("documents/"+ name,{expiresIn:'1m'})
         }
         else{
           await file?.move(Application.tmpPath("../../storage/images/apps"),{name:name, overwrite:true})
-          url = await Drive.getSignedUrl("images/apps/"+ name, {expiresIn:'5s'})
+          url = await Drive.getSignedUrl("images/apps/"+ name, {expiresIn:'1m'})
         }
       }
 
