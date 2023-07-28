@@ -27,6 +27,12 @@ export default class FileManagement extends compose(BaseModel, SoftDeletes) {
   public mime:string
 
   @column()
+  public ip:string
+
+  @column()
+  public userUuid:string
+
+  @column()
   public used:boolean
 
   @column()

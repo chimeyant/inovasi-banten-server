@@ -9,7 +9,7 @@ const chunk_inpt = "file";
 
 export default class MediaController {
 
-  public async store({request, response}: HttpContextContract){
+  public async store({request, response, auth}: HttpContextContract){
     const {doctype}= request.only(['doctype'])
 
 
@@ -71,6 +71,8 @@ export default class MediaController {
         type: file?.type,
         mime: file?.subtype,
         used: false,
+        ip: request.ip(),
+        user_uuid: auth.user?.id
       }
 
       await FileManagementService.store(payload)

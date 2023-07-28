@@ -6,7 +6,9 @@ export type FileManagementType ={
   size:number,
   type:string,
   mime:string,
-  used:boolean
+  used:boolean,
+  ip:string,
+  user_uuid:string,
 }
 
 class FileManagementService {
@@ -23,6 +25,8 @@ class FileManagementService {
       model.type = payload.type
       model.mime = payload.mime
       model.used = payload.used
+      model.ip = payload.ip
+      model.userUuid = payload.user_uuid
       await model.save()
 
       return true
