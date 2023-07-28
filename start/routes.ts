@@ -21,7 +21,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
-  return "API SERVICE V2 SIMPEKA"
+  return "API SERVICE V2 INOVASI"
 })
 
 
@@ -60,8 +60,8 @@ Route.group(()=>{
   Route.group(()=>{
     Route.group(()=>{
       Route.resource("app-info","MasterData/AppInfosController")
-    }).prefix("master-data").middleware(['auth'])
-  }).prefix("superadmin")
+    }).prefix("master-data")
+  }).prefix("superadmin").middleware(['auth','superadmin'])
 
   //route masterdata
   Route.group(()=>{
@@ -79,7 +79,7 @@ Route.group(()=>{
     Route.resource('jenis-inovasi',"MasterData/JenisInovasisController")
     Route.resource('urusan',"MasterData/UrusansController")
     Route.resource("bentuk","MasterData/BentuksController")
-  }).prefix('master-data').middleware(['auth'])
+  }).prefix('master-data').middleware(['auth','administrator'])
 
   //Route Combo
   Route.group(()=>{
@@ -128,8 +128,6 @@ Route.group(()=>{
       Route.post('inovasi-push',"Permohonan/InovasisController.push")
       Route.post('inovasi-pull',"Permohonan/InovasisController.pull")
     }).prefix("opd")
-
-
   }).prefix("permohonan").middleware(['auth'])
 
   //Route Group Halaman Depan
@@ -176,11 +174,6 @@ Route.group(()=>{
   Route.group(()=>{
     Route.resource("sliders","HalamanDepan/SlidersController")
   }).prefix("halaman-depan").middleware(['auth'])
-
-
-  Route.group(()=>{
-    Route.get("data.json",'SDI/CatalogsController.index')
-  }).prefix('sdi')
 
 }).prefix("api/v2")
 

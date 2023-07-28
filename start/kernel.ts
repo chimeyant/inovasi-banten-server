@@ -45,6 +45,5 @@ Server.middleware.registerNamed({
   auth: ()=> import("App/Middleware/Auth"),
   superadmin: ()=> import("App/Middleware/Superadmin"),
   administrator:()=> import("App/Middleware/Administrator"),
-  perusahaan:()=>import("App/Middleware/Perusahaan"),
   user:()=> import("App/Middleware/User"),
 })
