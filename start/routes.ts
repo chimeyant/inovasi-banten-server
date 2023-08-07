@@ -27,6 +27,7 @@ Route.get('/', async () => {
 
 Route.get("home","HalamanDepan/HomeController.index")
 Route.get("sliders","HalamanDepan/SlidersController.publish")
+Route.get('sponsors',"HalamanDepan/SponsorsController.publicshow")
 
 
 Route.group(()=>{
@@ -136,19 +137,8 @@ Route.group(()=>{
   //Route Group Halaman Depan
   Route.group(()=>{
     Route.resource("slider","HalamanDepan/SlidersController")
+    Route.resource('sponsor',"HalamanDepan/SponsorsController")
   }).prefix("halaman-depan").middleware(['auth'])
-
-
-  /**
-   * Route Group Manajemen
-   */
-  Route.group(()=>{
-    Route.resource("klaim","Manajemen/TransactionsController")
-    Route.post("klaim-import","Manajemen/TransactionsController.import")
-    Route.post("klaim-update-category","Manajemen/TransactionsController.updatecategory")
-    Route.post("klaim-update-status","Manajemen/TransactionsController.updatestatus")
-  }).prefix("manajemen").middleware(['auth'])
-
 
 
   //route utility

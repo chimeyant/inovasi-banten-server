@@ -147,9 +147,9 @@ export default class AppsController {
               type: "item",
             },
             {
-              title: "Sponsor",
+              title: "Instansi Pendukung",
               icon: "mdi-storefront",
-              route: "/auth/page-under-construction",
+              route: "/auth/halaman-depan-sponsor",
               type: "item",
             },
           ]
