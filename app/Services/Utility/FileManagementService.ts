@@ -9,6 +9,7 @@ export type FileManagementType ={
   used:boolean,
   ip:string,
   user_uuid:string,
+  real_name:string
 }
 
 class FileManagementService {
@@ -36,6 +37,7 @@ class FileManagementService {
       model.used = payload.used
       model.ip = payload.ip
       model.userUuid = payload.user_uuid
+      model.realName= payload.real_name
       await model.save()
 
       return true

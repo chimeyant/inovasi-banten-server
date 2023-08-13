@@ -132,6 +132,11 @@ Route.group(()=>{
       Route.post('inovasi-push',"Permohonan/InovasisController.push")
       Route.post('inovasi-pull',"Permohonan/InovasisController.pull")
     }).prefix("opd")
+
+    /**
+     * Route Coaching Klinik
+     */
+    Route.resource("message","Permohonan/MessagesController")
   }).prefix("permohonan").middleware(['auth'])
 
   //Route Group Halaman Depan

@@ -15,6 +15,9 @@ export default class FileManagement extends compose(BaseModel, SoftDeletes) {
   public name: string
 
   @column()
+  public realName:string
+
+  @column()
   public ext: string
 
   @column()

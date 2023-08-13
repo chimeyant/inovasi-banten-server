@@ -128,10 +128,9 @@ export default class AppsController {
             {
               title: "Klinik Konsultasi",
               icon: "mdi-face-agent",
-              route: "/auth/page-under-construction",
+              route: "/auth/permohonan-message-admin",
               type: "item",
             },
-
           ]
         },
         {
@@ -478,6 +477,12 @@ export default class AppsController {
               route: "/auth/permohonan-inovasi-opd",
               type: "item",
             },
+            {
+              title: "Klinik Konsultasi",
+              icon: "mdi-face-agent",
+              route: "/auth/permohonan-message",
+              type: "item",
+            },
           ]
         },
         { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
@@ -548,6 +553,12 @@ export default class AppsController {
               route: "/auth/permohonan-inovasi-admin",
               type: "item",
             },
+            {
+              title: "Klinik Konsultasi",
+              icon: "mdi-face-agent",
+              route: "/auth/permohonan-message",
+              type: "item",
+            },
 
           ]
         },
@@ -600,6 +611,12 @@ export default class AppsController {
               title: "Inovasi",
               icon: "mdi-clover",
               route: "/auth/permohonan-inovasi-opd",
+              type: "item",
+            },
+            {
+              title: "Klinik Konsultasi",
+              icon: "mdi-face-agent",
+              route: "/auth/permohonan-message",
               type: "item",
             },
           ]

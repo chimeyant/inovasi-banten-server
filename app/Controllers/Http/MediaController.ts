@@ -72,7 +72,8 @@ export default class MediaController {
         mime: file?.subtype,
         used: false,
         ip: request.ip(),
-        user_uuid: auth.user?.id
+        user_uuid: auth.user?.id,
+        real_name: file.clientName
       }
 
       await FileManagementService.store(payload)
@@ -85,6 +86,7 @@ export default class MediaController {
         type: file?.type,
         mime: file?.subtype,
         extn: file?.extname,
+        clientname: file.clientName,
         path: Env.get("BASE_URL") + url
       })
     } catch (error) {
