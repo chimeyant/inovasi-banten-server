@@ -215,6 +215,11 @@ class UserService {
       }
     }
   }
+
+  public async getPhomeByOPD(id:string){
+    const model = await User.findBy("opd_uuid",id)
+    return model?.datarecord
+  }
 }
 
 export default new UserService

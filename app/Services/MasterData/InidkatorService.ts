@@ -2,14 +2,15 @@ import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_S
 import Indikator from "App/Models/Indikator"
 
 export type IndikatorType ={
-  category_uuid: string,
   name:string,
   skor:number,
+  optional:boolean,
   status:boolean
+
 }
 class IndikatorService {
-  public async lists(){
-    const model = await Indikator.query().preload("category").orderBy("id",'asc')
+  public async lists(category_uuid:string){
+    const model = await Indikator.query().preload("category").where('category_uuid',category_uuid).orderBy("id",'asc')
 
     const datas:{}[]=[]
 
@@ -20,12 +21,13 @@ class IndikatorService {
     return datas;
   }
 
-  public async store(payload:IndikatorType){
+  public async store(payload:IndikatorType, category_uuid:string){
     try {
       const model = new Indikator
-      model.categoryUuid =payload.category_uuid
+      model.categoryUuid =category_uuid
       model.name = payload.name
       model.skor = payload.skor
+      model.optional = payload.optional
       model.status = payload.status
       await model.save()
 
@@ -58,9 +60,9 @@ class IndikatorService {
     try {
       const model = await Indikator.findBy("uuid",id)
       model?.merge({
-        categoryUuid: payload.category_uuid,
         name:payload.name,
         skor:payload.skor,
+        optional: payload.optional,
         status:payload.status
       })
       await model?.save()

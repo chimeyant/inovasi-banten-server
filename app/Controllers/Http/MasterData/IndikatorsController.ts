@@ -2,18 +2,18 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import InidkatorService from 'App/Services/MasterData/InidkatorService'
 
 export default class IndikatorsController {
-  public async index({}: HttpContextContract) {
-    const result = await InidkatorService.lists()
+  public async index({params}: HttpContextContract) {
+    const result = await InidkatorService.lists(params.category_uuid)
 
     return result
   }
 
   public async create({}: HttpContextContract) {}
 
-  public async store({request, response}: HttpContextContract) {
-    const payload = request.only(['category_uuid','name','skor','status'])
+  public async store({params,request, response}: HttpContextContract) {
+    const payload = request.only(['name','skor','optional','status'])
 
-    const result = await InidkatorService.store(payload)
+    const result = await InidkatorService.store(payload, params.category_uuid)
 
     return response.status(result.code).send(result)
   }
@@ -27,7 +27,7 @@ export default class IndikatorsController {
   public async edit({}: HttpContextContract) {}
 
   public async update({params,request, response}: HttpContextContract) {
-    const payload = request.only(['category_uuid','name','skor','status'])
+    const payload = request.only(['name','skor','optional','status'])
 
     const result = await InidkatorService.update(payload, params.id)
 

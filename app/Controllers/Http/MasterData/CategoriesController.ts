@@ -12,7 +12,7 @@ export default class CategoriesController {
   public async create({}: HttpContextContract) {}
 
   public async store({request, response}: HttpContextContract) {
-    const payload = request.only(['name','status'])
+    const payload = request.only(['name','icon','code','status'])
 
     await request.validate(CategoryValidator)
 
@@ -27,10 +27,16 @@ export default class CategoriesController {
     return result;
   }
 
+  public async showByCode({params}:HttpContextContract){
+    const result = await CategoryService.showByCode(params.code)
+
+    return result;
+  }
+
   public async edit({}: HttpContextContract) {}
 
   public async update({params, request, response}: HttpContextContract) {
-    const payload = request.only(['name','status'])
+    const payload = request.only(['name','icon','code','status'])
 
     await request.validate(CategoryValidator)
 
@@ -51,4 +57,6 @@ export default class CategoriesController {
 
     return result
   }
+
+
 }

@@ -22,6 +22,9 @@ export default class Indikator extends compose(BaseModel, SoftDeletes) {
   public skor:number
 
   @column()
+  public optional:boolean
+
+  @column()
   public status:boolean
 
   @column()
@@ -48,7 +51,9 @@ export default class Indikator extends compose(BaseModel, SoftDeletes) {
       category: this.category ? this.category.name:'NA',
       name: this.name,
       skor: this.skor,
+      optional: this.optional ?  {color:'green', text:"Tidak Wajib"}:{color:'red', text:"Wajib"},
       status: this.status? {color:'green', text:'Aktif'}:{color:'red',text:'Tidak Aktif'}
+
     }
   }
 

@@ -1,17 +1,21 @@
 import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang";
-import Urusan from "App/Models/Urusan"
+import Kompetisi from "App/Models/Kompetisi";
 
-export type UrusanType={
+export type KompetisiType ={
+  category_uuid:string,
   name:string,
-  img:string,
-  status: boolean,
+  description:string,
+  start_date:string,
+  end_date:string,
+  status:boolean
 }
-class UrusanService {
-  protected Model = Urusan;
-  public async lists(){
-    const model = await Urusan.query().orderBy("id",'asc')
+class KompetisiService {
+  protected Model = Kompetisi
 
-    const datas:{}[]= []
+  public async lists(){
+    const model = await this.Model.query().preload('category').orderBy('start_date','desc')
+
+    const datas:{}[]=[]
 
     model.forEach(element => {
       datas.push(element.datadisplay)
@@ -20,19 +24,25 @@ class UrusanService {
     return datas;
   }
 
-  public async store(payload:UrusanType){
+  public async store(payload:KompetisiType){
     try {
       const model = new this.Model
+      model.categoryUuid = payload.category_uuid,
       model.name = payload.name
-      model.img = payload.img
+      model.description  = payload.description
+      model.startDate = payload.start_date
+      model.endDate  = payload.end_date
       model.status = payload.status
       await model.save()
+
+      const data = await this.Model.find(model.id)
+      await data?.preload('category')
 
       return{
         code:200,
         success:true,
         message:MSG_STORE_SUCCESS,
-        data: model.datadisplay
+        data: data?.datadisplay
       }
     } catch (error) {
       return{
@@ -50,23 +60,27 @@ class UrusanService {
     return model?.datarecord
   }
 
-  public async update(payload:UrusanType, id:string){
+  public async update(payload:KompetisiType, id:string){
     try {
-      const model = await this.Model.findBy('uuid',id)
+      const model = await this.Model.findBy("uuid",id)
       model?.merge({
+        categoryUuid:payload.category_uuid,
         name:payload.name,
-        img:payload.img,
+        description: payload.description,
+        startDate: payload.start_date,
+        endDate: payload.end_date,
         status:payload.status
       })
+      await model?.save()
 
       return{
         code:200,
         success:true,
         message:MSG_UPDATE_SUCCESS,
-        data: model?.datadisplay
+        data:model?.datadisplay
       }
     } catch (error) {
-      return {
+      return{
         code:500,
         success:false,
         message:MSG_FAILED_PROCESS,
@@ -80,7 +94,7 @@ class UrusanService {
       const model = await this.Model.findBy("uuid",id)
       await model?.delete()
 
-      return {
+      return{
         code:200,
         success:true,
         message:MSG_DELETE_SUCCESS,
@@ -88,7 +102,7 @@ class UrusanService {
       }
     } catch (error) {
       return{
-        code:200,
+        code:500,
         success:false,
         message:MSG_FAILED_PROCESS,
         error:error
@@ -96,8 +110,8 @@ class UrusanService {
     }
   }
 
-  public async combo(){
-    const model = await Urusan.query().where('status',true).orderBy("id",'asc')
+  public async combo(category_uuid:any){
+    const model = await this.Model.query().where("category_uuid", category_uuid).where('status',true).orderBy("name",'asc')
 
     const datas:{}[]=[]
 
@@ -109,4 +123,4 @@ class UrusanService {
   }
 }
 
-export default new UrusanService
+export default new KompetisiService

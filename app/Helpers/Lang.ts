@@ -18,6 +18,7 @@ export const MSG_SUCCESS = "Proses berhasill...!"
 export const MSG_CATEGORY_UPDATE_SUCCESS = "Proses ubah kategori berhasil"
 export const MSG_STATUS_UPDATE_SUCCESS ="Proses ubah status berhasil"
 export const MSG_SEND_PERMOHONAN_SUCCESS = "Permohonan berhasil terkirim...!"
+export const MSG_UNSEND_PERMOHONAN_SUCCESS ="Permohona berhasil dibatalkan...!"
 
 export const MSG_SENDED = "Pesan terkirim...!"
 export const MSG_RECIEVED = "Pesan diterima..!"

@@ -2,7 +2,9 @@ import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_S
 import Category from "App/Models/Category"
 
 export type CategoryType={
+  code:string,
   name:string,
+  icon:string,
   status:boolean
 }
 
@@ -22,7 +24,9 @@ class CategoryService {
   public async store(payload:CategoryType){
     try {
       const model = new Category
+      model.code = payload.code
       model.name = payload.name
+      model.icon = payload.icon
       model.status = payload.status
       await model.save()
 
@@ -47,15 +51,21 @@ class CategoryService {
     return model?.datarecord
   }
 
+  public async showByCode(code:string){
+    const model = await Category.findBy('code',code)
+    return model?.datarecord
+  }
+
   public async update(payload:CategoryType, id:string){
     try {
       const model = await Category.findBy("uuid",id)
       model?.merge({
+        code:payload.code,
         name:payload.name,
+        icon:payload.icon,
         status:payload.status
       })
       await model?.save()
-
 
       return {
         code:200,

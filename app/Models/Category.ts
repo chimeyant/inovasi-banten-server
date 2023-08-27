@@ -12,7 +12,13 @@ export default class Category extends compose(BaseModel,SoftDeletes) {
   public uuid:string
 
   @column()
+  public code:string
+
+  @column()
   public name:string
+
+  @column()
+  public icon:string
 
   @column()
   public status:boolean
@@ -35,8 +41,14 @@ export default class Category extends compose(BaseModel,SoftDeletes) {
   public get datadisplay(){
     return {
       id:this.uuid,
+      code: this.code,
       name:this.name,
-      status: this.status ? {color:'green', text:"Aktif"}: {color:'red', text: "Tidak Aktif"}
+      icon: this.icon,
+      status: this.status ? {color:'green', text:"Aktif"}: {color:'red', text: "Tidak Aktif"},
+      aksi: {
+        id: this.uuid,
+        name: this.name
+      }
     }
   }
 
@@ -44,7 +56,9 @@ export default class Category extends compose(BaseModel,SoftDeletes) {
   public get datarecord(){
     return {
       id: this.uuid,
+      code: this.code,
       name: this.name,
+      icon: this.icon,
       status:this.status
     }
   }
@@ -56,4 +70,7 @@ export default class Category extends compose(BaseModel,SoftDeletes) {
       text:this.name
     }
   }
+
+
+
 }

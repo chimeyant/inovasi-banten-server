@@ -41,6 +41,7 @@ export default class Opd extends compose(BaseModel,SoftDeletes) {
   @hasOne(()=>Profile,{localKey:"regencyCode",foreignKey:"regencyCode"})
   public profile:HasOne<typeof Profile>
 
+
   @computed()
   public get datadisplay(){
     return{

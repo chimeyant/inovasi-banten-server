@@ -2,7 +2,6 @@ import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_STORE_SUCCESS, MSG_UPDATE_S
 import IndikatorPemda from "App/Models/IndikatorPemda"
 
 export type IndikatorPemdaType={
-  category_uuid: string,
   name:string,
   skor:number,
   status:boolean
@@ -24,7 +23,6 @@ class IndikatorPemdaService {
   public async store(payload:IndikatorPemdaType){
     try {
       const model = new IndikatorPemda
-      model.categoryUuid = payload.category_uuid
       model.name = payload.name
       model.skor = payload.skor
       model.status = payload.status
@@ -58,7 +56,6 @@ class IndikatorPemdaService {
     try {
       const model = await IndikatorPemda.findBy("uuid",id)
       model?.merge({
-        categoryUuid: payload.category_uuid,
         name: payload.name,
         skor: payload.skor,
         status: payload.status
