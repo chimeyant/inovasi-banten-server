@@ -3,6 +3,7 @@ import Indikator from "App/Models/Indikator"
 
 export type IndikatorType ={
   name:string,
+  description:string,
   skor:number,
   optional:boolean,
   status:boolean
@@ -26,6 +27,7 @@ class IndikatorService {
       const model = new Indikator
       model.categoryUuid =category_uuid
       model.name = payload.name
+      model.description  = payload.description,
       model.skor = payload.skor
       model.optional = payload.optional
       model.status = payload.status
@@ -61,6 +63,7 @@ class IndikatorService {
       const model = await Indikator.findBy("uuid",id)
       model?.merge({
         name:payload.name,
+        description: payload.description,
         skor:payload.skor,
         optional: payload.optional,
         status:payload.status

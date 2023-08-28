@@ -1,4 +1,4 @@
-import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_SENDED, MSG_SEND_PERMOHONAN_SUCCESS, MSG_STORE_SUCCESS, MSG_UNSEND_PERMOHONAN_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang";
+import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_PUBLISH_SUCCESS, MSG_SENDED, MSG_SEND_PERMOHONAN_SUCCESS, MSG_STORE_SUCCESS, MSG_UNPUBLISH_SUCCESS, MSG_UNSEND_PERMOHONAN_SUCCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang";
 import Sinovic from "App/Models/Sinovic";
 import { DateTime } from "luxon";
 import {string} from "@ioc:Adonis/Core/Helpers"
@@ -56,6 +56,7 @@ export type SinovicType ={
   lng:string,
   temp_score:number,
   finnaly_score:number,
+  user_uuid:string,
   status: string,
 }
 class SinovicService {
@@ -66,8 +67,52 @@ class SinovicService {
     if(user.authent == 'administartor'){
 
     }
+
+    if(user.authent == 'team-pengkaji'){
+      const model = await this.Model.query().preload('kompetisi').preload('opd').whereIn('status',['4','5','6']).orderBy("created_at",'desc')
+
+      const datas:{}[]=[]
+
+      model.forEach(element => {
+        const row = {}
+        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{opd:element.opd.name})
+        datas.push(row)
+      });
+
+      return datas;
+    }
+
+    if(user.authent == 'provinsi'){
+      const model = await this.Model.query().preload('kompetisi').preload('opd').whereIn('status',['1','3','4','5','6']).orderBy("created_at",'desc')
+
+      const datas:{}[]=[]
+
+      model.forEach(element => {
+        const row = {}
+        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{opd:element.opd.name})
+        datas.push(row)
+      });
+
+      return datas;
+    }
+
+    if(user.authent == 'provinsi-opd'){
+      const model = await this.Model.query().preload('kompetisi').where('opd_uuid', user.opdUuid).orderBy("created_at",'desc')
+
+      const datas:{}[]=[]
+
+      model.forEach(element => {
+        const row = {}
+        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name })
+        datas.push(row)
+      });
+
+      return datas;
+    }
+
+
     if(user.authent == 'kabkota'){
-      const model = await this.Model.query().preload('kompetisi').preload('opd').where('regency_code', user.regencyCode).orderBy("created_at",'desc')
+      const model = await this.Model.query().preload('kompetisi').preload('opd').where('regency_code', user.regencyCode).whereIn('status',['1','3','4','5','6']).orderBy("created_at",'desc')
 
       const datas:{}[]=[]
 
@@ -147,6 +192,7 @@ class SinovicService {
       model.lng = payload.lng
       model.tempScore = payload.temp_score
       model.finnalyScore = payload.finnaly_score
+      model.userUuid = payload.user_uuid
       model.status = payload.status
 
       await model.save()
@@ -241,6 +287,7 @@ class SinovicService {
         lng:payload.lng,
         tempScore: payload.temp_score,
         finnalyScore: payload.finnaly_score,
+        userUuid: payload.user_uuid,
         status: payload.status
       })
 
@@ -413,6 +460,52 @@ class SinovicService {
         code:500,
         success:false,
         message:MSG_FAILED_PROCESS
+      }
+    }
+  }
+
+  public async publish(id:string){
+    try {
+      const model = await this.Model.findBy("uuid",id)
+      model?.merge({
+        status: '5'
+      })
+      await model?.save()
+
+      return{
+        code:200,
+        success:true,
+        message:MSG_PUBLISH_SUCCESS,
+      }
+    } catch (error) {
+      return {
+        code: 500,
+        success:false,
+        message:MSG_FAILED_PROCESS,
+        error:error
+      }
+    }
+  }
+
+  public async unpublish(id:string){
+    try {
+      const model = await this.Model.findBy("uuid",id)
+      model?.merge({
+        status: '4',
+      })
+      await model?.save()
+
+      return{
+        code:200,
+        success:true,
+        message:MSG_UNPUBLISH_SUCCESS
+      }
+    } catch (error) {
+      return{
+        code:500,
+        success:false,
+        message:MSG_FAILED_PROCESS,
+        error:error
       }
     }
   }

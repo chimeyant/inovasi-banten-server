@@ -112,7 +112,6 @@ Route.group(()=>{
     Route.group(()=>{
       Route.resource('kompetisi',"Permohonan/KompetensisController")
       Route.resource("inovasi","Permohonan/InovasiAllsController").as("inovasi-admin")
-
     }).prefix("admin")
 
     Route.group(()=>{
@@ -124,6 +123,9 @@ Route.group(()=>{
 
       //Sinovic
       Route.post('sinovic-verifdoc',"Permohonan/Opd/SinovicsController.verifdoc")
+      Route.post('sinovic-publish/:id', "Permohonan/Opd/SinovicsController.publish")
+      Route.post('sinovic-unpublish/:id', "Permohonan/Opd/SinovicsController.unpublish")
+      Route.resource('sinovic-indikator-penilaian/:sinovic_uuid',"Permohonan/SinovicIndikatorsController")
     }).prefix('verifikator')
 
     Route.get("inovasi-history/:inovasi_uuid","Permohonan/InovasiHistoriesController.index")

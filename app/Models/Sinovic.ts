@@ -19,6 +19,7 @@ export default class Sinovic extends compose(BaseModel,SoftDeletes) {
   @column()
   public tingkat:string
 
+
   @column()
   public opdUuid:string
 
@@ -158,7 +159,12 @@ export default class Sinovic extends compose(BaseModel,SoftDeletes) {
   public finnalyScore:number
 
   @column()
+  public userUuid:string
+
+  @column()
   public status:string
+
+
 
   @column()
   public deletedAt:DateTime
@@ -188,7 +194,8 @@ export default class Sinovic extends compose(BaseModel,SoftDeletes) {
       noreg: this.noreg,
       name: this.name,
       opd: "",
-      status:this.status == '0' ? {color:'grey', text:'DRAFT'}:this.status=='1'? {color:'orange', text:'Pengajuan'}: this.status=='2'? {color:'red', text:'Ditolak'}: this.status=='4'? {color:'green', text:'terverfikasi'}: {color:'red', text:'NA'}
+      score: this.finnalyScore ? this.finnalyScore : 0,
+      status:this.status == '0' ? {color:'grey', text:'DRAFT'}:this.status=='1'? {color:'orange', text:'Pengajuan'}: this.status=='2'? {color:'red', text:'Ditolak'}: this.status=='3'? {color:'orange', text:'Pengajuan Ulang'}: this.status=='4'? {color:'green', text:'Terverifikasi'} :this.status=='5'? {color:'blue', text:'Publish'} :{color:'red', text:'NA'}
     }
   }
 
@@ -222,7 +229,7 @@ export default class Sinovic extends compose(BaseModel,SoftDeletes) {
       kebaruan_att: this.kebaruanAtt,
       implementasi: this.implementasi,
       implementasi_att: this.implementasiAtt,
-      siginifikansi: this.signifikansi,
+      signifikansi: this.signifikansi,
       signifikansi_att: this.signifikansiAtt,
       adaptabilitas:  this.adaptabilitas,
       adaptabilitas_att: this.adaptabilitasAtt,

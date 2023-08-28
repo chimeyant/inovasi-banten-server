@@ -11,7 +11,7 @@ export default class IndikatorsController {
   public async create({}: HttpContextContract) {}
 
   public async store({params,request, response}: HttpContextContract) {
-    const payload = request.only(['name','skor','optional','status'])
+    const payload = request.only(['name','description','skor','optional','status'])
 
     const result = await InidkatorService.store(payload, params.category_uuid)
 
@@ -27,7 +27,7 @@ export default class IndikatorsController {
   public async edit({}: HttpContextContract) {}
 
   public async update({params,request, response}: HttpContextContract) {
-    const payload = request.only(['name','skor','optional','status'])
+    const payload = request.only(['name','description','skor','optional','status'])
 
     const result = await InidkatorService.update(payload, params.id)
 

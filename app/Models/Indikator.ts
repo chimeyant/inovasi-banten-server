@@ -19,6 +19,9 @@ export default class Indikator extends compose(BaseModel, SoftDeletes) {
   public name:string
 
   @column()
+  public description:string
+
+  @column()
   public skor:number
 
   @column()
@@ -50,10 +53,10 @@ export default class Indikator extends compose(BaseModel, SoftDeletes) {
       id: this.uuid,
       category: this.category ? this.category.name:'NA',
       name: this.name,
+      description: this.description,
       skor: this.skor,
       optional: this.optional ?  {color:'green', text:"Tidak Wajib"}:{color:'red', text:"Wajib"},
       status: this.status? {color:'green', text:'Aktif'}:{color:'red',text:'Tidak Aktif'}
-
     }
   }
 
@@ -62,6 +65,7 @@ export default class Indikator extends compose(BaseModel, SoftDeletes) {
     return{
       id: this.uuid,
       name: this.name,
+      description: this.description,
       skor: this.skor,
       status: this.status,
       category_uuid: this.categoryUuid

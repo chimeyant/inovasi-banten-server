@@ -10,12 +10,14 @@ export type CategoryType={
 
 class CategoryService {
   public async lists(){
-    const model = await Category.query().orderBy("name",'asc')
+    const model = await Category.query().preload('indikators').orderBy("name",'asc')
 
     const datas:{}[]=[]
 
     model.forEach(element => {
-      datas.push(element.datadisplay)
+      const row ={}
+      Object.assign(row, element.datadisplay, {jml: element.indikators.length})
+      datas.push(row)
     });
 
     return datas

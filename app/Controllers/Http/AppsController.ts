@@ -360,21 +360,21 @@ export default class AppsController {
           type: "divider",
         },
         {
-          title: "PERMOHONAN",
+          title: "PENILAIAN",
           icon: "settings",
           route: "/",
           type: "subMenu",
           submenus:[
             {
-              title: "IGA | Inovasi Index Daerah",
-              icon: "mdi-book-open-variant",
-              route: "/auth/permohonan-inovasi-verifikator",
+              title: "IGA",
+              icon: "mdi-clover",
+              route: "/auth/page-under-construction",
               type: "item",
             },
             {
-              title: "Sinovic",
-              icon: "mdi-book-open-variant",
-              route: "/auth/permohonan-inovasi-verifikator",
+              title: "SINOVIC",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/verifikator-sinovic",
               type: "item",
             },
           ]
@@ -437,26 +437,40 @@ export default class AppsController {
               type: "item",
             },
             {
-              title: "IGA ",
+              title: "IGA | IID",
               icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
+              route: "/auth/permohonan-opd-iga",
               type: "item",
             },
             {
               title: "SINOVIC",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/permohonan-opd-sinovic",
+              type: "item",
+            },
+          ]
+        },
+        {
+          title: "VERIFIKASI",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "IGA",
               icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
+              route: "/auth/page-under-construction",
               type: "item",
             },
             {
-              title: "Seluruh Inovasi Daerah",
-              icon: "mdi-book-open-variant",
-              route: "/auth/permohonan-inovasi-admin",
+              title: "SINOVIC",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/verifikasi-provinsi-sinovic",
               type: "item",
             },
-
           ]
         },
+
         { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
           {
             title: "Manajemen Pengguna",
@@ -501,15 +515,15 @@ export default class AppsController {
           type: "subMenu",
           submenus:[
             {
-              title: "IGA",
+              title: "IGA | IID",
               icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
+              route: "/auth/permohonan-opd-iga",
               type: "item",
             },
             {
               title: "SINOVIC",
-              icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/permohonan-opd-sinovic",
               type: "item",
             },
             {

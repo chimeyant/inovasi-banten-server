@@ -41,6 +41,7 @@ class UserProvinsiService {
       model.opdUuid = payload.opd_uuid
       model.rootUuid = user_uuid
       model.parentUuid= user_uuid
+      model.tingkat = '1'
       model.status = payload.status
       await model.save()
 
