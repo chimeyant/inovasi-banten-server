@@ -524,6 +524,21 @@ class SinovicService {
     return datas;
   }
 
+  public async toplists(){
+    const model = await this.Model.query().preload('kompetisi').preload('opd').whereIn('status',['5','6']).orderBy("created_at",'desc').limit(10)
+
+    const datas:{}[]=[]
+
+    model.forEach(async element => {
+      const row = {}
+      const  foto = Env.get("BASE_URL")+ await Drive.getSignedUrl("documents/"+ element?.foto)
+      Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{opd:element.opd.name},{foto:foto})
+      datas.push(row)
+    });
+
+    return datas;
+  }
+
 }
 
 export default new SinovicService

@@ -8,7 +8,11 @@ export default class InovasisController {
 
   public async index({}: HttpContextContract) {
     const sinovics = await SinovicService.publicLists()
+    return sinovics;
+  }
 
+  public async top({}:HttpContextContract){
+    const sinovics = await SinovicService.toplists()
 
     return sinovics;
   }
