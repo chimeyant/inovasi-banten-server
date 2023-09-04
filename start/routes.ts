@@ -28,6 +28,8 @@ Route.get('/', async () => {
 Route.get("home","HalamanDepan/HomeController.index")
 Route.get("sliders","HalamanDepan/SlidersController.publish")
 Route.get('sponsors',"HalamanDepan/SponsorsController.publicshow")
+Route.get('inovasi', "HalamanDepan/InovasisController.index")
+Route.get("kompetisi","HalamanDepan/KompetisisController.index")
 
 
 Route.group(()=>{

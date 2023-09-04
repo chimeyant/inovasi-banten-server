@@ -76,7 +76,17 @@ class InovasiService {
     return datas;
   }
 
+  public async publicLists(){
+    const model = await Inovasi.query().preload('opd').whereIn('status',["5"]).orderBy("id",'desc')
 
+    const datas:{}[]= []
+
+    model.forEach(element => {
+      datas.push(element.datadisplay)
+    });
+
+    return datas;
+  }
 
   public async kabkotaList(regency_code:string){
     const model = await Inovasi.query().preload('opd').where('regency_code',regency_code).whereIn('status',["1","3","4","5"]).orderBy("id",'desc')

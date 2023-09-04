@@ -510,6 +510,20 @@ class SinovicService {
     }
   }
 
+  public async publicLists(){
+    const model = await this.Model.query().preload('kompetisi').preload('opd').whereIn('status',['5','6']).orderBy("created_at",'desc')
+
+    const datas:{}[]=[]
+
+    model.forEach(element => {
+      const row = {}
+      Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{opd:element.opd.name})
+      datas.push(row)
+    });
+
+    return datas;
+  }
+
 }
 
 export default new SinovicService

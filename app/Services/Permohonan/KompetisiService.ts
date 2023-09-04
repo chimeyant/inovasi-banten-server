@@ -24,6 +24,7 @@ class KompetisiService {
     return datas;
   }
 
+
   public async store(payload:KompetisiType){
     try {
       const model = new this.Model
