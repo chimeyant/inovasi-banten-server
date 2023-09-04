@@ -1,9 +1,12 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import MessageService from 'App/Services/Permohonan/MessageService'
+import MessageService from 'App/Services/Permohonan/MessageService';
+
 
 export default class MessagesController {
+  protected Service = MessageService
   public async index({auth}: HttpContextContract) {
-    const result = await MessageService.litst(auth.user)
+    const user = await auth.user
+    const result = await this.Service.litst(user)
 
     return result;
   }
@@ -13,11 +16,18 @@ export default class MessagesController {
   public async store({request, response, auth}: HttpContextContract) {
     const user = auth.user
 
-    let payload = request.only(['to_user_uuid', 'title','body'])
-    payload['from_user_uuid']= user?.id
+    const {title, body} = request.all()
 
-    return payload;
+    const payload={
+      from_user_uuid: user?.id,
+      to_user_uuid: null,
+      title: title,
+      body: body
+    }
 
+    const result = await this.Service.store(payload)
+
+    return response.status(result.code).send(result)
   }
 
   public async show({}: HttpContextContract) {}
@@ -26,5 +36,9 @@ export default class MessagesController {
 
   public async update({}: HttpContextContract) {}
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({params, response}: HttpContextContract) {
+    const result = await this.Service.delete(params.id)
+
+    return response.status(result.code).send(result)
+  }
 }

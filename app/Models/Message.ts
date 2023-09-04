@@ -24,10 +24,10 @@ export default class Message extends compose(BaseModel,SoftDeletes) {
   public body:string
 
   @column()
-  public sendedDate:DateTime
+  public sendedAt:DateTime
 
   @column()
-  public recieveDate:DateTime
+  public recieveAt:DateTime
 
   @column()
   public deletedAt:DateTime
@@ -50,9 +50,9 @@ export default class Message extends compose(BaseModel,SoftDeletes) {
       id: this.uuid,
       title: this.title,
       body: this.body,
-      sended_at: this.sendedDate ? DateTime.fromISO(this.sendedDate).toFormat("dd/MM/yyyy h:m:s"): "",
-      recieve_at: this.recieveDate ? DateTime.fromFormat(this.recieveDate).toFormat("dd/MM/yyy h:m:s"):"",
-      status: this.recieveDate? {color:'green',text:'Diterima'} : {color:'red', text:'Belum Diterima'}
+      sended_at: this.sendedAt ? DateTime.fromJSDate(this.sendedAt).toFormat("dd/MM/yyyy h:m:s"): "",
+      recieve_at: this.recieveAt ? DateTime.fromISO(this.recieveAt).toFormat("dd/MM/yyy h:m:s"):"",
+      status: this.recieveAt? {color:'green',text:'Diterima'} : {color:'red', text:'Belum Diterima'}
     }
   }
 

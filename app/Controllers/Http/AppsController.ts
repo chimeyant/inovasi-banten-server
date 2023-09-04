@@ -448,6 +448,12 @@ export default class AppsController {
               route: "/auth/permohonan-opd-sinovic",
               type: "item",
             },
+            {
+              title: "Klinik Konsultasi",
+              icon: "mdi-face-agent",
+              route: "/auth/permohonan-message",
+              type: "item",
+            },
           ]
         },
         {
@@ -468,6 +474,7 @@ export default class AppsController {
               route: "/auth/verifikasi-provinsi-sinovic",
               type: "item",
             },
+
           ]
         },
 

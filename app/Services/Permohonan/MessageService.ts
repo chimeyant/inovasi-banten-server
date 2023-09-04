@@ -1,5 +1,6 @@
 import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_SENDED } from "App/Helpers/Lang"
 import Message from "App/Models/Message"
+import { DateTime } from "luxon"
 
 export type MessageType={
   parent_uuid:string,
@@ -56,12 +57,13 @@ class MessageService {
 
   public async store(payload:MessageType){
      try {
+      const curdate = new Date
       const model = new Message
       model.fromUserUuid = payload.from_user_uuid
       model.toUserUuid = payload.to_user_uuid
       model.title = payload.title
       model.body = payload.body
-      model.sendedDate = new Date
+      model.sendedAt = curdate
       await model.save()
 
       return {
