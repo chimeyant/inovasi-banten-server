@@ -143,7 +143,11 @@ export default class SinovicsController {
     return response.status(result.code).send(result)
   }
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({params, response}: HttpContextContract) {
+    const result = await this.Service.delete(params.id)
+
+    return response.status(result.code).send(result)
+  }
 
   public async send({params,auth,response}:HttpContextContract){
     const user = auth.user
