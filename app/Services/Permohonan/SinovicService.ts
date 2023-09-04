@@ -97,7 +97,7 @@ class SinovicService {
     }
 
     if(user.authent == 'provinsi-opd'){
-      const model = await this.Model.query().preload('kompetisi').where('opd_uuid', user.opdUuid).orderBy("created_at",'desc')
+      const model = await this.Model.query().preload('kompetisi').preload('opd').where('opd_uuid', user.opdUuid).orderBy("created_at",'desc')
 
       const datas:{}[]=[]
 
