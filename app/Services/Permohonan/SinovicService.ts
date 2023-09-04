@@ -103,7 +103,7 @@ class SinovicService {
 
       model.forEach(element => {
         const row = {}
-        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name })
+        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi ? element.kompetisi.name :"NA" })
         datas.push(row)
       });
 
