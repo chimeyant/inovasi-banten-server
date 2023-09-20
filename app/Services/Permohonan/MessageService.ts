@@ -1,6 +1,5 @@
 import { MSG_DELETE_SUCCESS, MSG_FAILED_PROCESS, MSG_SENDED } from "App/Helpers/Lang"
 import Message from "App/Models/Message"
-import { DateTime } from "luxon"
 
 export type MessageType={
   parent_uuid:string,
@@ -42,12 +41,16 @@ class MessageService {
 
       return datas;
     }else{
-      const model = await Message.query().where('from_user_uuid',user.id).orderBy("created_at",'desc')
+      const model = await Message.query().preload('fromuser').preload('touser').where('from_user_uuid',user.id).orderBy("created_at",'desc')
 
       const datas:{}[]= []
 
       model.forEach(element => {
-        datas.push(element.datadisplay)
+        const row ={}
+        const fromuser = element.fromuser ? element.fromuser.name:''
+        const touser = element.touser ? element.touser.name :""
+        Object.assign(row, element.datadisplay, {fromuser: fromuser}, {touser: touser})
+        datas.push(row)
       });
 
       return datas;
@@ -136,6 +139,8 @@ class MessageService {
       }
     }
   }
+
+
 }
 
 export default new MessageService()

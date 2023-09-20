@@ -25,7 +25,8 @@
     "@adonisjs/redis",
     "@adonisjs/i18n",
     "adonis-lucid-soft-deletes",
-    "@adonisjs/shield"
+    "@adonisjs/shield",
+    "@adonisjs/ally"
   ],
   "aceProviders": [
     "@adonisjs/repl"

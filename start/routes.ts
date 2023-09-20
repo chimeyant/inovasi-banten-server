@@ -36,6 +36,8 @@ Route.get("kompetisi","HalamanDepan/KompetisisController.index")
 Route.group(()=>{
   Route.group(()=>{
     Route.post("token","Auth/LoginController.login")
+    Route.get("login-with-google","Auth/LoginController.loginWithGoogle")
+    Route.get("google/callback","Auth/LoginController.googleCallback")
   }).prefix("auth")
 
   Route.get("info","AppsController.index")
@@ -103,6 +105,7 @@ Route.group(()=>{
     Route.get('bentuk',"MasterData/BentuksController.combo")
     Route.get('kompetisi-sinovic',"Permohonan/KompetensisController.comboSinovic")
     Route.get('kompetisi-iga',"Permohonan/KompetensisController.comboIga")
+    Route.get("jadwal/:code","Permohonan/KompetensisController.combo")
   }).prefix('combo').middleware(['auth'])
 
   //Route Permohonan
@@ -118,6 +121,10 @@ Route.group(()=>{
     }).prefix("admin")
 
     Route.group(()=>{
+      Route.resource("inovasi","Permohonan/Admin/InovasisController").as("administrator.inovasi")
+    }).prefix("administrator")
+
+    Route.group(()=>{
       Route.resource("inovasi","Permohonan/InovasiAllsController").as("inovasi-verifikator")
       Route.post("inovasi-set-status","Permohonan/InovasiAllsController.setstatus")
       Route.get("profile-show/:regency_code","Permohonan/ProfilsController.showbyregency")
@@ -129,6 +136,17 @@ Route.group(()=>{
       Route.post('sinovic-publish/:id', "Permohonan/Opd/SinovicsController.publish")
       Route.post('sinovic-unpublish/:id', "Permohonan/Opd/SinovicsController.unpublish")
       Route.resource('sinovic-indikator-penilaian/:sinovic_uuid',"Permohonan/SinovicIndikatorsController")
+
+      //Kompetisi
+      Route.resource("kompetisi", "Permohonan/Admin/KompetisisController").as("verifikator.kompetisi")
+      Route.post("kompetisi-verifdoc","Permohonan/Admin/KompetisisController.verifdoc")
+      Route.post("kompetisi-publish/:id","Permohonan/Admin/KompetisisController.publish")
+      Route.post("kompetisi-unpublish/:id","Permohonan/Admin/KompetisisController.unpublish")
+
+
+      Route.resource("penilaian-kompetisi","Permohonan/Verifikator/KompetisisController")
+      Route.resource("penilaian-kompetisi-indikator/:inovation_uuid","Permohonan/Verifikator/InovationIndicatorsController")
+
     }).prefix('verifikator')
 
     Route.get("inovasi-history/:inovasi_uuid","Permohonan/InovasiHistoriesController.index")
@@ -158,6 +176,15 @@ Route.group(()=>{
       Route.post('sinovic-send/:id',"Permohonan/Opd/SinovicsController.send")
       Route.post('sinovic-unsend/:id',"Permohonan/Opd/SinovicsController.unsend")
     }).prefix("opd")
+
+    /**
+     * Routet Kompetisi Public
+     */
+    Route.group(()=>{
+      Route.resource("kompetisi","Permohonan/Public/InovationsController").as("public-competion")
+      Route.post('kompetisi-send/:id',"Permohonan/Public/InovationsController.send")
+      Route.post('kompetisi-unsend/:id',"Permohonan/Public/InovationsController.unsend")
+    }).prefix('public')
 
     /**
      * Route Coaching Klinik

@@ -2,7 +2,8 @@ import { DateTime } from 'luxon'
 import {compose} from "@ioc:Adonis/Core/Helpers"
 import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
 import {v4 as uuid} from "uuid"
-import { BaseModel, beforeCreate, column, computed } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, beforeCreate, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm'
+import User from './User'
 
 export default class Message extends compose(BaseModel,SoftDeletes) {
   @column({ isPrimary: true })
@@ -43,6 +44,13 @@ export default class Message extends compose(BaseModel,SoftDeletes) {
   public static async createUUID(message:Message){
     message.uuid = uuid()
   }
+
+  @belongsTo(()=> User, {foreignKey:"fromUserUuid", localKey:"id"})
+  public fromuser: BelongsTo<typeof User>
+
+  @belongsTo(()=> User, {foreignKey:'toUserUuid', localKey:"id"})
+  public touser:BelongsTo<typeof User>
+
 
   @computed()
   public get datadisplay(){

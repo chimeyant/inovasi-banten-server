@@ -220,6 +220,39 @@ class UserService {
     const model = await User.findBy("opd_uuid",id)
     return model?.datarecord
   }
+
+  public async showByEmail(email:any){
+    const model = await User.findBy("email",email)
+
+    return model;
+  }
+
+  public async registerByGoogle(payload:any){
+    try {
+      const password = string.generateRandom(8);
+      const model = new User
+      model.name = payload.name
+      model.email = payload.email
+      model.authent = payload.authent
+      model.password = password
+      model.socialmedia= true
+      model.status = true
+      await model.save()
+
+      return {
+        success:true,
+        user: model
+      }
+
+    } catch (error) {
+      return {
+        success:false,
+        user:{}
+      }
+    }
+  }
+
+
 }
 
 export default new UserService

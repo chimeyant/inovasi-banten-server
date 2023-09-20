@@ -119,8 +119,8 @@ export default class AppsController {
           type: "subMenu",
           submenus:[
             {
-              title: "Daftar Kompetisi",
-              icon: "mdi-trophy",
+              title: "Jadwal Kegiatan",
+              icon: "mdi-calendar",
               route: "/auth/permohonan-admin-kompetisi",
               type: "item",
             },
@@ -268,21 +268,9 @@ export default class AppsController {
           type: "subMenu",
           submenus:[
             {
-              title: "Daftar Kompetisi",
-              icon: "mdi-trophy",
+              title: "Jadwal Kegiatan",
+              icon: "mdi-calendar",
               route: "/auth/permohonan-admin-kompetisi",
-              type: "item",
-            },
-            {
-              title: "IGA | IID",
-              icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
-              type: "item",
-            },
-            {
-              title: "SINOVIC",
-              icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
               type: "item",
             },
             {
@@ -297,7 +285,6 @@ export default class AppsController {
               route: "/auth/page-under-construction",
               type: "item",
             },
-
           ]
         },
 
@@ -375,6 +362,12 @@ export default class AppsController {
               title: "SINOVIC",
               icon: "mdi-gamepad-circle",
               route: "/auth/verifikator-sinovic",
+              type: "item",
+            },
+            {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikator-kompetisi",
               type: "item",
             },
           ]
@@ -472,6 +465,12 @@ export default class AppsController {
               title: "SINOVIC",
               icon: "mdi-gamepad-circle",
               route: "/auth/verifikasi-provinsi-sinovic",
+              type: "item",
+            },
+            {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikasi-provinsi-kompetisi",
               type: "item",
             },
 
@@ -729,6 +728,52 @@ export default class AppsController {
             route: "/auth/chngpwd",
             type: "item",
           },
+        ]},
+      ]
+      return menus;
+    }
+
+    if(authent == 'kompetisi'){
+      menus = [
+        {
+          title: "Dashboard",
+          type: "item",
+          icon: "mdi-view-dashboard",
+          route: "/auth/dashboard",
+        },
+        {
+          title: "",
+          type: "divider",
+        },
+
+        {
+          title: "PERMOHONAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus:[
+            {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/permohonan-public-kompetisi",
+              type: "item",
+            },
+            {
+              title: "Klinik Konsultasi",
+              icon: "mdi-face-agent",
+              route: "/auth/permohonan-message",
+              type: "item",
+            },
+          ]
+        },
+        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
+          {
+            title: "Profil Pengguna",
+            icon: "accessibility",
+            route: "/auth/profil-akun",
+            type: "item",
+          },
+
         ]},
       ]
       return menus;

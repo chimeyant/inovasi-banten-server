@@ -59,4 +59,14 @@ export default class KompetensisController {
 
     return result
   }
+
+  public async combo({params}:HttpContextContract){
+    const {code}= params
+
+    const category = await this.CategorySvc.showByCode(code)
+
+    const result = await this.Service.combo(category?.id)
+
+    return result
+  }
 }
