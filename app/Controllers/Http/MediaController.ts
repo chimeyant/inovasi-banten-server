@@ -13,7 +13,7 @@ export default class MediaController {
     const {doctype}= request.only(['doctype'])
 
 
-    const file = request.file(chunk_inpt, {size:'2mb', extnames:['jpeg','jpg','png','pdf','svg','doc','xls','xlsx','docx']})
+    const file = request.file(chunk_inpt, {size:'2mb', extnames:['jpeg','jpg','png','pdf','svg','doc','xls','xlsx','docx','JPEG','JPG','PNG']})
 
     if(!file?.isValid){
       return response.forbidden();
