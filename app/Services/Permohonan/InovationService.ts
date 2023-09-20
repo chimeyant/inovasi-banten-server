@@ -65,6 +65,20 @@ class InovationService {
 
   public async lists(payload:any){
 
+    if(payload.user.authent == 'superadmin'){
+      const model = await this.Model.query().preload('kompetisi').preload('regency').whereIn('status',['1','3','4','5','6']).orderBy("created_at",'desc')
+
+      const datas:{}[]=[]
+
+      model.forEach(element => {
+        const row = {}
+        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{kabupaten:element.regency ? element.regency.name:""})
+        datas.push(row)
+      });
+
+      return datas;
+    }
+
     if(payload.user.authent == 'administrator'){
       const model = await this.Model.query().preload('kompetisi').preload('regency').whereIn('status',['1','3','4','5','6']).orderBy("created_at",'desc')
 
