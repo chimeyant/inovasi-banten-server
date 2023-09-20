@@ -95,7 +95,7 @@ class UserService {
       if(payload.reset){
         model?.merge({
           name: payload.name,
-          authent: payload.auth,
+          authent: payload.authent,
           regencyCode:payload.regency_code ? payload.regency_code:'36',
           opdUuid: payload.opd_uuid,
           phone: payload.phone,
@@ -105,15 +105,13 @@ class UserService {
       }else{
         model?.merge({
           name: payload.name,
-          authent: payload.auth,
+          authent: payload.authent,
           regencyCode:payload.regency_code,
           opdUuid: payload.opd_uuid,
           phone: payload.phone,
           status: payload.status
         })
       }
-
-
 
       await model?.save()
 
