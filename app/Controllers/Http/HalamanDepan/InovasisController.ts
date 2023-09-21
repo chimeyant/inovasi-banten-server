@@ -1,14 +1,17 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import RepositoryInovationService from 'App/Services/HalamanDepan/RepositoryInovationService'
 import InovasiService from 'App/Services/Permohonan/InovasiService'
 import SinovicService from 'App/Services/Permohonan/SinovicService'
 
 export default class InovasisController {
+  protected Service = RepositoryInovationService
   protected SinovicSvc= SinovicService
   protected IgaSvc = InovasiService
 
   public async index({}: HttpContextContract) {
-    const sinovics = await SinovicService.publicLists()
-    return sinovics;
+    const result = await this.Service.lists()
+
+    return result
   }
 
   public async top({}:HttpContextContract){
