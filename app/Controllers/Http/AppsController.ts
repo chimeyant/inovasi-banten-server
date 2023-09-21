@@ -753,7 +753,7 @@ export default class AppsController {
           type: "subMenu",
           submenus:[
             {
-              title: "KOMPETISI",
+              title: "Kompetisi",
               icon: "mdi-trophy",
               route: "/auth/permohonan-public-kompetisi",
               type: "item",
