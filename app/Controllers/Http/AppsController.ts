@@ -739,7 +739,7 @@ export default class AppsController {
           title: "Dashboard",
           type: "item",
           icon: "mdi-view-dashboard",
-          route: "/auth/dashboard",
+          route: "/auth/permohonan-public-dashboard",
         },
         {
           title: "",
