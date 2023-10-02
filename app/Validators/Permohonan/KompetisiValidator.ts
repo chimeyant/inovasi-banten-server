@@ -31,7 +31,7 @@ export default class KompetisiValidator {
     inisiator: schema.string(),
     bentuk_uuid:schema.string(),
     tahapan:schema.string(),
-    ringkasan:schema.string({},[rules.maxLength(300)]),
+    ringkasan:schema.string({},[rules.maxLength(500),]),
     latar_belakang: schema.string({},[rules.maxLength(300)]),
     kebaruan:schema.string({},[rules.maxLength(300)]),
     implementasi:schema.string({},[rules.maxLength(300)]),
@@ -59,7 +59,7 @@ export default class KompetisiValidator {
    *
    */
   public messages = {
-    'kompetisi.required': "Kompetisi wajib dipilih...!",
+    'kompetisi_uuid.required': "Kompetisi wajib dipilih...!",
     "name.required":"Judul inovasi wajib diisi..!",
     "kelompok.required":"Kelompok wajib dipilih..!",
     "jenis_uuid.required":"Jenis Inovasi wajib dipilih",

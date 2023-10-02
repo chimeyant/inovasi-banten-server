@@ -108,7 +108,7 @@ class InovationService {
     }
 
     if(payload.user.authent == 'team-pengkaji'){
-      const model = await this.Model.query().preload('kompetisi').preload('regency').where('category_uuid',payload.category.id).whereIn('status',['4','5','6']).orderBy("created_at",'desc')
+      const model = await this.Model.query().preload('kompetisi').preload('regency').where('category_uuid',payload.category.id).whereIn('status',['1','3','4','5','6']).orderBy("created_at",'desc')
 
       const datas:{}[]=[]
 

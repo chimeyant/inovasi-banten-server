@@ -347,7 +347,7 @@ export default class AppsController {
           type: "divider",
         },
         {
-          title: "PENILAIAN",
+          title: "VERIFIKASI & PENILAIAN",
           icon: "settings",
           route: "/",
           type: "subMenu",
