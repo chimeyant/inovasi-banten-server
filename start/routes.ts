@@ -31,7 +31,7 @@ Route.get('sponsors',"HalamanDepan/SponsorsController.publicshow")
 Route.get("top-inovasi","HalamanDepan/InovasisController.top")
 Route.get('inovasi', "HalamanDepan/InovasisController.index")
 Route.get("kompetisi","HalamanDepan/KompetisisController.index")
-
+Route.get('peta-inovasi',"DashboardController.datamaps")
 
 Route.group(()=>{
   Route.group(()=>{
