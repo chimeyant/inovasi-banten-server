@@ -578,6 +578,28 @@ class InovationService {
     return datas;
   }
 
+  public async dashboardPublic(user:any){
+    try {
+      //data jumlah permohonan
+      const jmlpermohonan = await this.Model.query().where('user_uuid', user.id).getCount()
+
+      const jmldraftpermohonan = await this.Model.query().where("user_uuid", user.id).whereIn('status',["0","1","3"]).getCount()
+
+      const jmlpermohonanproses = await this.Model.query().where("user_uuid", user.id).whereIn('status',["4"]).getCount()
+
+      const jmlpermohonanpublish =await this.Model.query().where("user_uuid", user.id).whereIn('status',["5"]).getCount()
+
+      return {
+        jmlpermohonan: jmlpermohonan,
+        jmldraftpermohonan: jmldraftpermohonan,
+        jmlpermohonanproses: jmlpermohonanproses,
+        jmlpermohonanpublish: jmlpermohonanpublish
+      };
+    } catch (error) {
+
+    }
+  }
+
 
 }
 

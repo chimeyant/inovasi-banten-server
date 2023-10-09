@@ -181,6 +181,7 @@ Route.group(()=>{
      * Routet Kompetisi Public
      */
     Route.group(()=>{
+      Route.get("dashboard","DashboardPublicsController.index").as("public-dashboard")
       Route.resource("kompetisi","Permohonan/Public/InovationsController").as("public-competion")
       Route.post('kompetisi-send/:id',"Permohonan/Public/InovationsController.send")
       Route.post('kompetisi-unsend/:id',"Permohonan/Public/InovationsController.unsend")
