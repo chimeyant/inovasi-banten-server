@@ -600,7 +600,84 @@ class InovationService {
     }
   }
 
+  public async datachartperbulan(){
+    try {
+      const statistikperbulan:number[]  =[]
 
+      const januari = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-01%']).getCount()
+      const pebruari = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-02%']).getCount()
+      const maret = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-03%']).getCount()
+      const april = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-04%']).getCount()
+      const mei = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-05%']).getCount()
+      const juni = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-06%']).getCount()
+      const juli = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-07%']).getCount()
+      const agustus = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-08%']).getCount()
+      const september = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-09%']).getCount()
+      const oktober = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-10%']).getCount()
+      const nopember = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-11%']).getCount()
+      const desember = await this.Model.query().whereIn('status',['1','2','3','4','5']).whereRaw('created_at::text like ?',['2023-12%']).getCount()
+
+      statistikperbulan.push(Number(januari))
+      statistikperbulan.push(Number(pebruari))
+      statistikperbulan.push(Number(maret))
+      statistikperbulan.push(Number(april))
+      statistikperbulan.push(Number(mei))
+      statistikperbulan.push(Number(juni))
+      statistikperbulan.push(Number(juli))
+      statistikperbulan.push(Number(agustus))
+      statistikperbulan.push(Number(september))
+      statistikperbulan.push(Number(oktober))
+      statistikperbulan.push(Number(nopember))
+      statistikperbulan.push(Number(desember))
+
+      return statistikperbulan
+    } catch (error) {
+
+    }
+  }
+
+  public async datachartperproses(){
+
+    const datas:number[]= []
+
+    const pengajuan = await this.Model.query().whereIn('status',[1,3]).getCount()
+    const perbaikan = await this.Model.query().where('status',[2]).getCount()
+    const verifikasi = await this.Model.query().where('status',[4]).getCount()
+    const publish = await this.Model.query().where('status',[5]).getCount()
+
+
+    datas.push(Number(pengajuan))
+    datas.push(Number(perbaikan))
+    datas.push(Number(verifikasi))
+    datas.push(Number(publish))
+
+    return datas;
+  }
+
+  public async datamaps(){
+    try {
+      const model = await this.Model.query().whereIn("status",[1,2,3,4,5]).orderBy("id","asc")
+
+      const datas:{}[]=[]
+
+      model.forEach(element => {
+        const row ={}
+        row['id']= element.id
+        row['position']= {lat: element.lat, lng: element.lng}
+        row['tooltip']= "<div><h4>"+ element.name +"</div><div>Inovator :  "+ element.inovatorNama + "</div><div><span> Alamat :"+ element.address+"</span><div>"
+        row['icon']=  element.status== '1' ? "/images/riple-3.gif" : "/images/icon-marker-merah.png"
+        row['draggable']= false
+        row['visible']= true
+        row['size']= element.status == '1' ? [52,52]: [32,32]
+        datas.push(row)
+      });
+
+      return datas;
+
+    } catch (error) {
+
+    }
+  }
 }
 
 export default new InovationService

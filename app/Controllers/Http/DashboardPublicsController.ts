@@ -8,6 +8,6 @@ export default class DashboardPublicsController {
 
   const result = await this.Service.dashboardPublic(user)
 
-    return result;
+    return result
   }
 }

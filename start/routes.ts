@@ -56,10 +56,9 @@ Route.group(()=>{
    * Route Dashboard
    */
   Route.group(()=>{
-    Route.get("recap-per-tahun","DashboardController.recapPerTahun")
-    Route.get("tarif-rs-per-tahun","DashboardController.tarifRsPerTahun")
-    Route.get("recap-monthly","DashboardController.recapMonthly")
-    Route.get("per-jenis-pengobatan","DashboardController.perJenisPengobatan")
+    Route.get("statistik-perbulan", "DashboardController.index")
+    Route.get("datachart-perproses","DashboardController.datacharperproses")
+    Route.get("data-maps", "DashboardController.datamaps")
   }).prefix("dashboard").middleware(['auth'])
 
   //route superadmin
