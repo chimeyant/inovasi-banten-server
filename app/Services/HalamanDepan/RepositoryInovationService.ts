@@ -1,4 +1,5 @@
 import Inovation from "App/Models/Inovation"
+import Sinovic from "App/Models/Sinovic"
 
 class RevositoryInovationService {
   protected Model = Inovation
@@ -13,6 +14,9 @@ class RevositoryInovationService {
       Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name })
       datas.push(row)
     });
+
+    //load data sinovic
+
 
     return datas;
 

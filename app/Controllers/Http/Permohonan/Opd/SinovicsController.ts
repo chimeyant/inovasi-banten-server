@@ -134,7 +134,6 @@ export default class SinovicsController {
       lat:lat,
       lng:lng,
       user_uuid: user?.id,
-      status:'0'
     }
 
 
