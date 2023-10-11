@@ -72,7 +72,12 @@ class InovationService {
 
       model.forEach(element => {
         const row = {}
-        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{kabupaten:element.regency ? element.regency.name:""})
+        row['id']= element.uuid
+        row['name']= element.name
+        row['inovator']= element.inovatorNama
+        row['kabupaten']= element.regency? element.regency.name:"-"
+        row['jenis']="Kompetisi"
+        row['status']= element.status == '0' ? {color:'grey', text:'DRAFT'}:element.status=='1'? {color:'orange', text:'Pengajuan'}: element.status=='2'? {color:'red', text:'Ditolak'}: element.status=='3'? {color:'orange', text:'Pengajuan Ulang'}: element.status=='4'? {color:'green', text:'Terverifikasi'} :element.status=='5'? {color:'blue', text:'Publish'} :{color:'red', text:'NA'}
         datas.push(row)
       });
 
@@ -86,7 +91,12 @@ class InovationService {
 
       model.forEach(element => {
         const row = {}
-        Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{kabupaten:element.regency ? element.regency.name:""})
+        row['id']= element.uuid
+        row['name']= element.name
+        row['inovator']= element.inovatorNama
+        row['kabupaten']= element.regency? element.regency.name:"-"
+        row['jenis']="Kompetisi"
+        row['status']= element.status == '0' ? {color:'grey', text:'DRAFT'}:element.status=='1'? {color:'orange', text:'Pengajuan'}: element.status=='2'? {color:'red', text:'Ditolak'}: element.status=='3'? {color:'orange', text:'Pengajuan Ulang'}: element.status=='4'? {color:'green', text:'Terverifikasi'} :element.status=='5'? {color:'blue', text:'Publish'} :{color:'red', text:'NA'}
         datas.push(row)
       });
 

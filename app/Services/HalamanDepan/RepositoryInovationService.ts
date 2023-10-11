@@ -5,18 +5,28 @@ class RevositoryInovationService {
   protected Model = Inovation
 
   public async lists(){
-    const model = await this.Model.query().preload('kompetisi').whereIn("status",[5,6]).orderBy("id",'desc')
+    const kompetisi = await this.Model.query().preload('kompetisi').whereIn("status",[5,6]).orderBy("id",'desc')
 
     const datas:{}[]=[]
 
-    model.forEach(element => {
+    kompetisi.forEach(element => {
       const row = {}
-      Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name })
+      row['id']= element.uuid
+      row['name']= element.name
+      row['inovator'] = element.inovatorNama
       datas.push(row)
     });
 
     //load data sinovic
+    const sinovic = await Sinovic.query().preload('kompetisi').whereIn("status",[5,6]).orderBy("id",'desc')
 
+    sinovic.forEach(element => {
+      const row = {}
+      row['id']= element.uuid
+      row['name']= element.name
+      row['inovator'] = element.inovatorNama
+      datas.push(row)
+    });
 
     return datas;
 

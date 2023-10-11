@@ -64,8 +64,42 @@ class SinovicService {
 
   public async lists(user:any){
 
-    if(user.authent == 'administartor'){
+    if(user.authent == 'superadmin'){
+      const model = await this.Model.query().preload('kompetisi').preload('regency').preload('opd').whereIn('status',['1','3','4','5','6']).orderBy("created_at",'desc')
 
+      const datas:{}[]=[]
+
+      model.forEach(element => {
+        const row = {}
+        row['id']= element.uuid
+        row['name']= element.name
+        row['inovator']= element.inovatorNama
+        row['kabupaten']= element.regency ? element.regency.name :"-"
+        row['jenis']="Sinovic"
+        row['status']= element.status == '0' ? {color:'grey', text:'DRAFT'}:element.status=='1'? {color:'orange', text:'Pengajuan'}: element.status=='2'? {color:'red', text:'Ditolak'}: element.status=='3'? {color:'orange', text:'Pengajuan Ulang'}: element.status=='4'? {color:'green', text:'Terverifikasi'} :element.status=='5'? {color:'blue', text:'Publish'} :{color:'red', text:'NA'}
+        datas.push(row)
+      });
+
+      return datas;
+    }
+
+    if(user.authent == 'administrator'){
+      const model = await this.Model.query().preload('kompetisi').preload('regency').preload('opd').whereIn('status',['1','3','4','5','6']).orderBy("created_at",'desc')
+
+      const datas:{}[]=[]
+
+      model.forEach(element => {
+        const row = {}
+        row['id']= element.uuid
+        row['name']= element.name
+        row['inovator']= element.inovatorNama
+        row['kabupaten']= element.regency ? element.regency.name :"-"
+        row['jenis']="Sinovic"
+        row['status']= element.status == '0' ? {color:'grey', text:'DRAFT'}:element.status=='1'? {color:'orange', text:'Pengajuan'}: element.status=='2'? {color:'red', text:'Ditolak'}: element.status=='3'? {color:'orange', text:'Pengajuan Ulang'}: element.status=='4'? {color:'green', text:'Terverifikasi'} :element.status=='5'? {color:'blue', text:'Publish'} :{color:'red', text:'NA'}
+        datas.push(row)
+      });
+
+      return datas;
     }
 
     if(user.authent == 'team-pengkaji'){

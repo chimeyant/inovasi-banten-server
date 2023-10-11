@@ -1,11 +1,15 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import InovationService from 'App/Services/Permohonan/InovationService'
+import SinovicService from 'App/Services/Permohonan/SinovicService'
 
 export default class InovasisController {
   protected Service = InovationService
+  protected SinovicSvc = SinovicService
 
   public async index({auth}: HttpContextContract) {
     const user = auth.user
+
+    const datas =[]
 
     const payload ={
       user:user,
@@ -14,9 +18,11 @@ export default class InovasisController {
 
     const result = await this.Service.lists(payload)
 
-    return result
+    const result2 = await this.SinovicSvc.lists(user)
 
+    const final_result = result?.concat(result2)
 
+    return final_result
   }
 
   public async create({}: HttpContextContract) {}

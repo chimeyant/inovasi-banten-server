@@ -5,6 +5,7 @@ import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
 import { BaseModel, beforeCreate, column,belongsTo,BelongsTo, computed } from '@ioc:Adonis/Lucid/Orm'
 import Kompetisi from './Kompetisi'
 import Opd from './Opd'
+import Regency from './Regency'
 
 export default class Sinovic extends compose(BaseModel,SoftDeletes) {
   @column({ isPrimary: true })
@@ -186,6 +187,9 @@ export default class Sinovic extends compose(BaseModel,SoftDeletes) {
 
   @belongsTo(()=> Opd, {localKey:"uuid", foreignKey:"opdUuid"})
   public opd:BelongsTo<typeof Opd>
+
+  @belongsTo(()=> Regency, {foreignKey:"regencyCode",localKey:"code"})
+  public regency: BelongsTo<typeof Regency>
 
   @computed()
   public get datadisplay(){
