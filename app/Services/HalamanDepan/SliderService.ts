@@ -146,7 +146,7 @@ class SliderService {
 
     model2.forEach(async element => {
       const row = element.datapublish
-      const url = await Drive.getSignedUrl("images/sliders/"+ element.path)
+      const url =  await Drive.getSignedUrl("images/sliders/"+ element.path)
       row['path']= Env.get("BASE_URL")+ url
       row['top_image_status'] =element.topImage ? true:false
       row['top_image_path']= element.topImage ? Env.get("BASE_URL")+ await Drive.getSignedUrl("images/sliders/"+ element.topImage):""

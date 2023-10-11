@@ -531,7 +531,7 @@ class SinovicService {
 
     model.forEach(async element => {
       const row = {}
-      const  foto = Env.get("BASE_URL")+ await Drive.getSignedUrl("documents/"+ element?.foto)
+      const  foto = element.foto ? Env.get("BASE_URL")+ await Drive.getSignedUrl("documents/"+ element?.foto) : "/images/logo.png"
       Object.assign(row, element.datadisplay,{kompetisi: element.kompetisi.name },{opd:element.opd.name},{foto:foto})
       datas.push(row)
     });
