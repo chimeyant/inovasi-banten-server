@@ -9,9 +9,11 @@ class RevositoryInovationService {
 
     const datas:{}[]=[]
 
+    let i = 0
     kompetisi.forEach(element => {
       const row = {}
       row['id']= element.uuid
+      row['num']= i++
       row['name']= element.name
       row['inovator'] = element.inovatorNama
       datas.push(row)
@@ -23,6 +25,7 @@ class RevositoryInovationService {
     sinovic.forEach(element => {
       const row = {}
       row['id']= element.uuid
+      row['num']=i++
       row['name']= element.name
       row['inovator'] = element.inovatorNama
       datas.push(row)
