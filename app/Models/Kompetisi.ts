@@ -62,7 +62,7 @@ export default class Kompetisi extends compose(BaseModel,SoftDeletes ){
   @computed()
   public get datarecord(){
     return{
-      id:this.id,
+      id:this.uuid,
       category_uuid: this.categoryUuid,
       name: this.name,
       description:this.description,
