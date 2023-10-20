@@ -36,8 +36,7 @@ export default class KompetensisController {
 
     const result = await this.Service.update(payload, params.id)
 
-    return result;
-    //return response.status(result.code).send(result)
+    return response.status(result.code).send(result)
   }
 
   public async destroy({params, response}: HttpContextContract) {

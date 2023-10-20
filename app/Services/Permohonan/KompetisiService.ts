@@ -62,14 +62,14 @@ class KompetisiService {
   }
 
   public async update(payload:KompetisiType, id:string){
-    // try {
+    try {
 
-      return payload;
+
       const model = await this.Model.findBy("uuid",id)
 
       model?.merge({
         categoryUuid:payload.category_uuid,
-        name:payload.name,
+        name: payload.name,
         description: payload.description,
         startDate: payload.start_date,
         endDate: payload.end_date,
@@ -77,20 +77,22 @@ class KompetisiService {
       })
       await model?.save()
 
+      await model?.preload("category")
+
       return{
         code:200,
         success:true,
         message:MSG_UPDATE_SUCCESS,
         data:model?.datadisplay
       }
-    // } catch (error) {
-    //   return{
-    //     code:500,
-    //     success:false,
-    //     message:MSG_FAILED_PROCESS,
-    //     error:error
-    //   }
-    // }
+    } catch (error) {
+      return{
+        code:500,
+        success:false,
+        message:MSG_FAILED_PROCESS,
+        error:error
+      }
+    }
   }
 
   public async delete(id:string){
