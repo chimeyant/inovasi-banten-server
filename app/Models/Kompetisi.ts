@@ -4,7 +4,6 @@ import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
 import {v4 as uuid} from "uuid"
 import { BaseModel, BelongsTo, beforeCreate, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm'
 import Category from './Category'
-import Opd from './Opd'
 
 export default class Kompetisi extends compose(BaseModel,SoftDeletes ){
   @column({ isPrimary: true })
