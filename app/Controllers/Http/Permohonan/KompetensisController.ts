@@ -33,6 +33,8 @@ export default class KompetensisController {
   public async update({params,request, response}: HttpContextContract) {
     const payload = request.only(['category_uuid','name','description','start_date','end_date','status'])
 
+    return payload;
+
     const result = await this.Service.update(payload, params.id)
 
     return response.status(result.code).send(result)

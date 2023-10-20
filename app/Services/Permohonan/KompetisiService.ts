@@ -64,6 +64,7 @@ class KompetisiService {
   public async update(payload:KompetisiType, id:string){
     // try {
       const model = await this.Model.findBy("uuid",id)
+
       model?.merge({
         categoryUuid:payload.category_uuid,
         name:payload.name,
