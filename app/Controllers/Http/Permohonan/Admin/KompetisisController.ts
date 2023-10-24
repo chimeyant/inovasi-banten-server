@@ -18,7 +18,6 @@ export default class KompetisisController {
 
     const result = await this.Service.lists(payload)
 
-
     return result
 
   }
