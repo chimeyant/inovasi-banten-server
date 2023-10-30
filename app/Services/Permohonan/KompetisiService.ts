@@ -13,7 +13,7 @@ class KompetisiService {
   protected Model = Kompetisi
 
   public async lists(){
-    const model = await this.Model.query().preload('category').orderBy('start_date','desc')
+    const model = await this.Model.query().preload('category').where('status', true).orderBy('start_date','desc')
 
     const datas:{}[]=[]
 
