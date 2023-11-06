@@ -43,6 +43,9 @@ export default class Inovation extends compose(BaseModel,SoftDeletes) {
   public urusanUuid:string
 
   @column()
+  public urusans:string
+
+  @column()
   public kelompok:string
 
   @column()
@@ -215,6 +218,7 @@ export default class Inovation extends compose(BaseModel,SoftDeletes) {
       jenis_uuid:this.jenisUuid,
       kompetisi_uuid: this.kompetisiUuid,
       urusan_uuid:this.urusanUuid,
+      urusans: this.urusans,
       kelompok:this.kelompok,
       inisiator: this.inisiator,
       bentuk_uuid:this.bentukUuid,

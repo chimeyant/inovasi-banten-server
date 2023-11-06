@@ -145,7 +145,7 @@ Route.group(()=>{
 
       Route.resource("penilaian-kompetisi","Permohonan/Verifikator/KompetisisController")
       Route.resource("penilaian-kompetisi-indikator/:inovation_uuid","Permohonan/Verifikator/InovationIndicatorsController")
-
+      Route.get("cetak-penilaian","Permohonan/Verifikator/KompetisisController.cetakpenilaian")
     }).prefix('verifikator')
 
     Route.get("inovasi-history/:inovasi_uuid","Permohonan/InovasiHistoriesController.index")

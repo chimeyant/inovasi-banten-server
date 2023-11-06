@@ -26,7 +26,8 @@
     "@adonisjs/i18n",
     "adonis-lucid-soft-deletes",
     "@adonisjs/shield",
-    "@adonisjs/ally"
+    "@adonisjs/ally",
+    "@adonisjs/view"
   ],
   "aceProviders": [
     "@adonisjs/repl"
@@ -36,6 +37,10 @@
     ".env",
     {
       "pattern": "public/**",
+      "reloadServer": false
+    },
+    {
+      "pattern": "resources/views/**/*.edge",
       "reloadServer": false
     }
   ]

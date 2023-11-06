@@ -33,7 +33,7 @@ export default class InovationsController {
     const user = auth.user
     const category = await this.CategorySvc.showByCode("KMP")
 
-    const {kompetisi_uuid, name, jenis_uuid, urusan_uuid, kelompok, inisiator, bentuk_uuid, waktu_uji, waktu_penerapan, tahapan, youtube, surat_pernyataan_implementasi, surat_pernyataan_identitas, surat_pernyataan_ketersediaan_replikasi, ringkasan, ringkasan_att, latar_belakang, latar_belakang_att, kebaruan, kebaruan_att, implementasi, implementasi_att, signifikansi, signifikansi_att, adaptabilitas, adaptabilitas_att, sumber_daya, sumber_daya_att, strategi_keberlanjutan, strategi_keberlanjutan_att, inovator_nama, inovator_telp, inovator_instansi,inovator_regency_code, foto, province_code, regency_code, district_code, village_code, address, lat,lng} = request.all()
+    const {kompetisi_uuid, name, jenis_uuid, urusan_uuid,urusans, kelompok, inisiator, bentuk_uuid, waktu_uji, waktu_penerapan, tahapan, youtube, surat_pernyataan_implementasi, surat_pernyataan_identitas, surat_pernyataan_ketersediaan_replikasi, ringkasan, ringkasan_att, latar_belakang, latar_belakang_att, kebaruan, kebaruan_att, implementasi, implementasi_att, signifikansi, signifikansi_att, adaptabilitas, adaptabilitas_att, sumber_daya, sumber_daya_att, strategi_keberlanjutan, strategi_keberlanjutan_att, inovator_nama, inovator_telp, inovator_instansi,inovator_regency_code, foto, province_code, regency_code, district_code, village_code, address, lat,lng} = request.all()
 
 
 
@@ -46,6 +46,7 @@ export default class InovationsController {
       name: name,
       jenis_uuid: jenis_uuid,
       urusan_uuid: urusan_uuid,
+      urusans: urusans,
       kelompok: kelompok,
       inisiator:inisiator,
       bentuk_uuid:bentuk_uuid,
@@ -109,7 +110,7 @@ export default class InovationsController {
     const category = await this.CategorySvc.showByCode("KMP")
 
 
-    const {kompetisi_uuid, name, jenis_uuid, urusan_uuid, kelompok, inisiator, bentuk_uuid, waktu_uji, waktu_penerapan, tahapan, youtube, surat_pernyataan_implementasi, surat_pernyataan_identitas, surat_pernyataan_ketersediaan_replikasi, ringkasan, ringkasan_att, latar_belakang, latar_belakang_att, kebaruan, kebaruan_att, implementasi, implementasi_att, signifikansi, signifikansi_att, adaptabilitas, adaptabilitas_att, sumber_daya, sumber_daya_att, strategi_keberlanjutan, strategi_keberlanjutan_att, inovator_nama, inovator_telp, inovator_instansi, inovator_regency_code, foto, province_code, regency_code, district_code, village_code, address, lat,lng} = request.all()
+    const {kompetisi_uuid, name, jenis_uuid, urusan_uuid, urusans, kelompok, inisiator, bentuk_uuid, waktu_uji, waktu_penerapan, tahapan, youtube, surat_pernyataan_implementasi, surat_pernyataan_identitas, surat_pernyataan_ketersediaan_replikasi, ringkasan, ringkasan_att, latar_belakang, latar_belakang_att, kebaruan, kebaruan_att, implementasi, implementasi_att, signifikansi, signifikansi_att, adaptabilitas, adaptabilitas_att, sumber_daya, sumber_daya_att, strategi_keberlanjutan, strategi_keberlanjutan_att, inovator_nama, inovator_telp, inovator_instansi, inovator_regency_code, foto, province_code, regency_code, district_code, village_code, address, lat,lng} = request.all()
 
     const payload={
       category_uuid: category?.id,
@@ -119,6 +120,7 @@ export default class InovationsController {
       name: name,
       jenis_uuid: jenis_uuid,
       urusan_uuid: urusan_uuid,
+      urusans: urusans,
       kelompok: kelompok,
       inisiator:inisiator,
       bentuk_uuid:bentuk_uuid,

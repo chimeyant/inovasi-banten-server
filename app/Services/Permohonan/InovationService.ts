@@ -16,6 +16,7 @@ export type SinovicType ={
   jenis_uuid:string,
   kompetisi_uuid:string,
   urusan_uuid:string,
+  urusans:string,
   kelompok:string,
   inisiator: string,
   bentuk_uuid:string,
@@ -202,6 +203,7 @@ class InovationService {
       model.jenisUuid = payload.jenis_uuid
       model.kompetisiUuid = payload.kompetisi_uuid
       model.urusanUuid = payload.urusan_uuid
+      model.urusans = JSON.stringify(payload.urusans),
       model.kelompok = payload.kelompok
       model.inisiator = payload.inisiator
       model.bentukUuid = payload.bentuk_uuid
@@ -300,6 +302,7 @@ class InovationService {
         jenisUuid: payload.jenis_uuid,
         kompetisiUuid: payload.kompetisi_uuid,
         urusanUuid: payload.urusan_uuid,
+        urusans : JSON.stringify(payload.urusans),
         kelompok: payload.kelompok,
         inisiator: payload.inisiator,
         bentukUuid: payload.bentuk_uuid,
@@ -687,6 +690,26 @@ class InovationService {
     } catch (error) {
 
     }
+  }
+
+  public async printPenilaian(){
+    const model = await this.Model.query().whereIn('status',[1,2,3,4,5]).orderBy("finnaly_score", "asc")
+
+    const datas:{}[]=[]
+
+    let num = 1
+
+    model.forEach(element => {
+      const row ={}
+      row['num']= num++
+      row['noreg']= element.noreg
+      row['name']= element.name
+      row['inovator']= element.inovatorNama
+      row['skor']= element.finnalyScore ? element.finnalyScore : "-"
+      datas.push(row)
+    });
+
+    return datas;
   }
 }
 

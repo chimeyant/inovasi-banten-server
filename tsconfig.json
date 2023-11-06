@@ -35,7 +35,8 @@
       "@adonisjs/i18n",
       "adonis-lucid-soft-deletes",
       "@adonisjs/shield",
-      "@adonisjs/ally"
+      "@adonisjs/ally",
+      "@adonisjs/view"
     ]
   }
 }
