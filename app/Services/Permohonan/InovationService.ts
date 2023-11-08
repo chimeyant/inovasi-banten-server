@@ -290,7 +290,7 @@ class InovationService {
   }
 
   public async update(payload:SinovicType, id:string){
-    try {
+    // try {
       const model = await this.Model.findBy("uuid",id)
 
       model?.merge({
@@ -353,14 +353,14 @@ class InovationService {
         message:MSG_UPDATE_SUCCESS,
         data: model?.datadisplay
       }
-    } catch (error) {
-      return{
-        code:500,
-        success:false,
-        message:MSG_FAILED_PROCESS,
-        error:error
-      }
-    }
+    // } catch (error) {
+    //   return{
+    //     code:500,
+    //     success:false,
+    //     message:MSG_FAILED_PROCESS,
+    //     error:error
+    //   }
+    // }
   }
 
   public async delete(id:string){
