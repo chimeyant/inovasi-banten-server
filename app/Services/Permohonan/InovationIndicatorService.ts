@@ -2,7 +2,7 @@ import InovationIndicator from "App/Models/InovationIndicator"
 import CategoryService from "../MasterData/CategoryService"
 import InidkatorService from "../MasterData/InidkatorService"
 import Inovation from "App/Models/Inovation"
-import { MSG_FAILED_PROCESS, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang"
+import { MSG_FAILED_PROCESS, MSG_UPDATE_NILAI, MSG_UPDATE_SUCCESS } from "App/Helpers/Lang"
 
 export type InovationIndicatorType={
   inovation_uuid:string,
@@ -79,6 +79,54 @@ class InovationIndicatorService {
         code:200,
         success:true,
         message:MSG_UPDATE_SUCCESS,
+        data: model?.datadisplay
+      }
+    } catch (error) {
+      return{
+        code:500,
+        success:false,
+        message:MSG_FAILED_PROCESS,
+        error
+      }
+    }
+  }
+
+  public async updateScore1(id:any, nilai:any){
+    try {
+      const model = await this.Model.findBy("uuid",id)
+      model?.merge({
+        score1: nilai
+      })
+      await model?.save()
+
+      return {
+        code:200,
+        success:true,
+        message:MSG_UPDATE_NILAI,
+        data: model?.datadisplay
+      }
+    } catch (error) {
+      return{
+        code:500,
+        success:false,
+        message:MSG_FAILED_PROCESS,
+        error
+      }
+    }
+  }
+
+  public async updateScore2(id:any, nilai:any){
+    try {
+      const model = await this.Model.findBy("uuid",id)
+      model?.merge({
+        score2: nilai
+      })
+      await model?.save()
+
+      return {
+        code:200,
+        success:true,
+        message:MSG_UPDATE_NILAI,
         data: model?.datadisplay
       }
     } catch (error) {

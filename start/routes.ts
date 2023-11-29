@@ -145,6 +145,8 @@ Route.group(()=>{
 
       Route.resource("penilaian-kompetisi","Permohonan/Verifikator/KompetisisController")
       Route.resource("penilaian-kompetisi-indikator/:inovation_uuid","Permohonan/Verifikator/InovationIndicatorsController")
+      Route.post("penilaian-kompetisi-score1/:id", "Permohonan/Verifikator/InovationIndicatorsController.updatescore1")
+      Route.post("penilaian-kompetisi-score2/:id", "Permohonan/Verifikator/InovationIndicatorsController.updatescore2")
       Route.get("cetak-penilaian","Permohonan/Verifikator/KompetisisController.cetakpenilaian")
     }).prefix('verifikator')
 

@@ -39,5 +39,23 @@ export default class InovationIndicatorsController {
     return response.send(result)
   }
 
+  public async updatescore1({params, request,response}:HttpContextContract){
+    const {id}= params
+    const {nilai}= request.all()
+
+    const result = await this.Service.updateScore1(id, nilai)
+
+    return response.status(result.code).send(result)
+  }
+
+  public async updatescore2({params, request,response}:HttpContextContract){
+    const {id}= params
+    const {nilai}= request.all()
+
+    const result = await this.Service.updateScore2(id, nilai)
+
+    return response.status(result.code).send(result)
+  }
+
   public async destroy({}: HttpContextContract) {}
 }
