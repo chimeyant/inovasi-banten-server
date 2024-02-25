@@ -1,44 +1,49 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import AppInfo from 'App/Models/AppInfo'
-import Env from "@ioc:Adonis/Core/Env"
-import Drive from "@ioc:Adonis/Core/Drive"
-
+import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import AppInfo from "App/Models/AppInfo";
+import Env from "@ioc:Adonis/Core/Env";
+import Drive from "@ioc:Adonis/Core/Drive";
 
 export default class AppsController {
-  async index({}:HttpContextContract){
-    const appinfo = await AppInfo.query().first()
+  async index({}: HttpContextContract) {
+    const appinfo = await AppInfo.query().first();
 
-    const logourl = await Drive.getSignedUrl("images/apps/"+ appinfo?.app_logo)
+    const logourl = await Drive.getSignedUrl(
+      "images/apps/" + appinfo?.app_logo
+    );
 
-   const data = {
-    app_name: appinfo?.app_name,
-    app_ver: appinfo?.app_ver,
-    app_desc: appinfo?.app_desc,
-    app_logo: appinfo?.app_logo == 'logo-opendata.png'? Env.get("BASE_URL")+  "/images/apps/"+ appinfo?.app_logo :Env.get("BASE_URL")+ logourl  ,
-    app_theme: {
-      mode:appinfo?.app_theme,
-      color:appinfo?.app_color
-    },
-    app_background: Env.get("BASE_URL")+ "/images/apps/"+   appinfo?.app_background,
-    app_nav : Env.get("BASE_URL")+ "/images/apps/"+   appinfo?.app_nav,
-    app_url: appinfo?.app_url,
-    app_company: appinfo?.app_company,
-    app_slogan: appinfo?.app_slogan,
-    app_address: appinfo?.app_address,
-    app_wa: appinfo?.app_wa
-   }
+    const data = {
+      app_name: appinfo?.app_name,
+      app_ver: appinfo?.app_ver,
+      app_desc: appinfo?.app_desc,
+      app_logo:
+        appinfo?.app_logo == "logo-opendata.png"
+          ? Env.get("BASE_URL") + "/images/apps/" + appinfo?.app_logo
+          : Env.get("BASE_URL") + logourl,
+      app_theme: {
+        mode: appinfo?.app_theme,
+        color: appinfo?.app_color,
+      },
+      app_background:
+        Env.get("BASE_URL") + "/images/apps/" + appinfo?.app_background,
+      app_nav: Env.get("BASE_URL") + "/images/apps/" + appinfo?.app_nav,
+      app_url: appinfo?.app_url,
+      app_company: appinfo?.app_company,
+      app_slogan: appinfo?.app_slogan,
+      app_address: appinfo?.app_address,
+      app_wa: appinfo?.app_wa,
+    };
 
-   return data;
+    return data;
   }
 
-  async menus({auth}: HttpContextContract){
-    const user = await auth.user
+  async menus({ auth }: HttpContextContract) {
+    const user = await auth.user;
 
-    const authent = await user?.authent
+    const authent = await user?.authent;
 
-    let menus :{} = [];
+    let menus: {} = [];
 
-    if(authent == 'superadmin'){
+    if (authent == "superadmin") {
       menus = [
         {
           title: "Dashboard",
@@ -55,7 +60,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Informasi Aplikasi",
               icon: "mdi-desktop-mac-dashboard",
@@ -110,14 +115,14 @@ export default class AppsController {
               route: "/auth/master-data-bentuk",
               type: "item",
             },
-          ]
+          ],
         },
         {
           title: "PERMOHONAN",
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Jadwal Kegiatan",
               icon: "mdi-calendar",
@@ -136,14 +141,14 @@ export default class AppsController {
               route: "/auth/permohonan-message-admin",
               type: "item",
             },
-          ]
+          ],
         },
         {
           title: "HALAMAN DEPAN",
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Slider",
               icon: "image",
@@ -156,45 +161,46 @@ export default class AppsController {
               route: "/auth/halaman-depan-sponsor",
               type: "item",
             },
-          ]
+          ],
         },
 
-
-
-        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
-          {
-            title: "Manajemen Pengguna",
-            icon: "engineering",
-            route: "/auth/user",
-            type: "item",
-          },
-          {
-            title: "Profil Pengguna",
-            icon: "accessibility",
-            route: "/auth/profil-akun",
-            type: "item",
-          },
-          {
-            title: "Ganti Kata Sandi",
-            icon: "vpn_key",
-            route: "/auth/chngpwd",
-            type: "item",
-          },
-          {
-            title: "File Management",
-            icon: "mdi-file",
-            route: "/auth/utility-file-management",
-            type: "item",
-          },
-
-        ]},
-
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Manajemen Pengguna",
+              icon: "engineering",
+              route: "/auth/user",
+              type: "item",
+            },
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+            {
+              title: "File Management",
+              icon: "mdi-file",
+              route: "/auth/utility-file-management",
+              type: "item",
+            },
+          ],
+        },
       ];
 
       return menus;
     }
 
-    if(authent == 'administrator'){
+    if (authent == "administrator") {
       menus = [
         {
           title: "Dashboard",
@@ -208,7 +214,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Master Wilayah",
               icon: "mdi-map",
@@ -258,7 +264,7 @@ export default class AppsController {
               route: "/auth/master-data-bentuk",
               type: "item",
             },
-          ]
+          ],
         },
 
         {
@@ -266,7 +272,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Jadwal Kegiatan",
               icon: "mdi-calendar",
@@ -285,7 +291,7 @@ export default class AppsController {
               route: "/auth/page-under-construction",
               type: "item",
             },
-          ]
+          ],
         },
 
         {
@@ -293,7 +299,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Slider",
               icon: "image",
@@ -306,7 +312,7 @@ export default class AppsController {
               route: "/auth/page-under-construction",
               type: "item",
             },
-          ]
+          ],
         },
 
         { title: "Utility", type: "subheader", route: "/" },
@@ -329,12 +335,11 @@ export default class AppsController {
           route: "/auth/chngpwd",
           type: "item",
         },
-
       ];
       return menus;
     }
 
-    if(authent == 'team-pengkaji'){
+    if (authent == "team-pengkaji") {
       menus = [
         {
           title: "Dashboard",
@@ -351,7 +356,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "IGA",
               icon: "mdi-clover",
@@ -370,28 +375,32 @@ export default class AppsController {
               route: "/auth/verifikator-kompetisi",
               type: "item",
             },
-          ]
+          ],
         },
-        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
-
-          {
-            title: "Profil Pengguna",
-            icon: "accessibility",
-            route: "/auth/profil-akun",
-            type: "item",
-          },
-          {
-            title: "Ganti Kata Sandi",
-            icon: "vpn_key",
-            route: "/auth/chngpwd",
-            type: "item",
-          },
-        ]},
-      ]
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
       return menus;
     }
 
-    if(authent == 'provinsi'){
+    if (authent == "provinsi") {
       menus = [
         {
           title: "Dashboard",
@@ -408,21 +417,21 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Master OPD",
               icon: "mdi-home-account",
               route: "/auth/master-data-opd-provinsi",
               type: "item",
             },
-          ]
+          ],
         },
         {
           title: "PERMOHONAN",
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Profil Pemda",
               icon: "mdi-account-box-outline",
@@ -447,14 +456,14 @@ export default class AppsController {
               route: "/auth/permohonan-message",
               type: "item",
             },
-          ]
+          ],
         },
         {
           title: "VERIFIKASI",
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "IGA",
               icon: "mdi-clover",
@@ -473,35 +482,39 @@ export default class AppsController {
               route: "/auth/verifikasi-provinsi-kompetisi",
               type: "item",
             },
-
-          ]
+          ],
         },
 
-        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
-          {
-            title: "Manajemen Pengguna",
-            icon: "engineering",
-            route: "/auth/utility-manajemen-user-provinsi",
-            type: "item",
-          },
-          {
-            title: "Profil Pengguna",
-            icon: "accessibility",
-            route: "/auth/profil-akun",
-            type: "item",
-          },
-          {
-            title: "Ganti Kata Sandi",
-            icon: "vpn_key",
-            route: "/auth/chngpwd",
-            type: "item",
-          },
-        ]},
-      ]
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Manajemen Pengguna",
+              icon: "engineering",
+              route: "/auth/utility-manajemen-user-provinsi",
+              type: "item",
+            },
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
       return menus;
     }
 
-    if(authent == 'provinsi-opd'){
+    if (authent == "provinsi-opd") {
       menus = [
         {
           title: "Dashboard",
@@ -519,7 +532,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "IGA | IID",
               icon: "mdi-clover",
@@ -527,7 +540,7 @@ export default class AppsController {
               type: "item",
             },
             {
-              title: "SINOVIC",
+              title: "KIPP | SINOVIC",
               icon: "mdi-gamepad-circle",
               route: "/auth/permohonan-opd-sinovic",
               type: "item",
@@ -538,27 +551,32 @@ export default class AppsController {
               route: "/auth/permohonan-message",
               type: "item",
             },
-          ]
+          ],
         },
-        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
-          {
-            title: "Profil Pengguna",
-            icon: "accessibility",
-            route: "/auth/profil-akun",
-            type: "item",
-          },
-          {
-            title: "Ganti Kata Sandi",
-            icon: "vpn_key",
-            route: "/auth/chngpwd",
-            type: "item",
-          },
-        ]},
-      ]
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
       return menus;
     }
 
-    if(authent == 'kabkota'){
+    if (authent == "kabkota") {
       menus = [
         {
           title: "Dashboard",
@@ -575,21 +593,21 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Master OPD",
               icon: "mdi-home-account",
               route: "/auth/master-data-opd-kabkota",
               type: "item",
             },
-          ]
+          ],
         },
         {
           title: "PERMOHONAN",
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Profil Pemda",
               icon: "mdi-account-box-outline",
@@ -614,8 +632,7 @@ export default class AppsController {
               route: "/auth/permohonan-message",
               type: "item",
             },
-
-          ]
+          ],
         },
 
         {
@@ -623,7 +640,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "IGA",
               icon: "mdi-clover",
@@ -648,35 +665,38 @@ export default class AppsController {
               route: "/auth/permohonan-message",
               type: "item",
             },
-          ]
+          ],
         },
-        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
-          {
-            title: "Manajemen Pengguna",
-            icon: "engineering",
-            route: "/auth/utility-manajemen-user-kabkota",
-            type: "item",
-          },
-          {
-            title: "Profil Pengguna",
-            icon: "accessibility",
-            route: "/auth/profil-akun",
-            type: "item",
-          },
-          {
-            title: "Ganti Kata Sandi",
-            icon: "vpn_key",
-            route: "/auth/chngpwd",
-            type: "item",
-          },
-        ]},
-      ]
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Manajemen Pengguna",
+              icon: "engineering",
+              route: "/auth/utility-manajemen-user-kabkota",
+              type: "item",
+            },
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
       return menus;
     }
 
-
-
-    if(authent == 'kabkota-opd'){
+    if (authent == "kabkota-opd") {
       menus = [
         {
           title: "Dashboard",
@@ -694,7 +714,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "IGA | IID",
               icon: "mdi-clover",
@@ -713,27 +733,32 @@ export default class AppsController {
               route: "/auth/permohonan-message",
               type: "item",
             },
-          ]
+          ],
         },
-        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
-          {
-            title: "Profil Pengguna",
-            icon: "accessibility",
-            route: "/auth/profil-akun",
-            type: "item",
-          },
-          {
-            title: "Ganti Kata Sandi",
-            icon: "vpn_key",
-            route: "/auth/chngpwd",
-            type: "item",
-          },
-        ]},
-      ]
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
       return menus;
     }
 
-    if(authent == 'kompetisi'){
+    if (authent == "kompetisi") {
       menus = [
         {
           title: "Dashboard",
@@ -751,7 +776,7 @@ export default class AppsController {
           icon: "settings",
           route: "/",
           type: "subMenu",
-          submenus:[
+          submenus: [
             {
               title: "Kompetisi",
               icon: "mdi-trophy",
@@ -764,21 +789,23 @@ export default class AppsController {
               route: "/auth/permohonan-message",
               type: "item",
             },
-          ]
+          ],
         },
-        { title: "UTILITAS", type: "subMenu", route: "/" , submenus:[
-          {
-            title: "Profil Pengguna",
-            icon: "accessibility",
-            route: "/auth/profil-akun",
-            type: "item",
-          },
-
-        ]},
-      ]
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+          ],
+        },
+      ];
       return menus;
     }
-
-
   }
 }

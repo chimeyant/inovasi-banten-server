@@ -63,7 +63,12 @@ export default class InovasiDocument extends compose(BaseModel,SoftDeletes) {
   @computed()
   public get datarecord(){
     return{
-      id: this.uuid
+      id: this.uuid,
+      nomor_dokumen: this.nomorDokumen,
+      tanggal_dokumen: DateTime.fromJSDate(this.tanggalDokumen).toFormat("yyyy-MM-dd"),
+      tentang:   this.tentang,
+      type_file: this.typeFile,
+      document: this.fileDokumen
     }
   }
 }
