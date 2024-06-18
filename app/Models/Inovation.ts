@@ -1,234 +1,260 @@
-import { DateTime } from 'luxon'
-import {compose} from "@ioc:Adonis/Core/Helpers"
-import { SoftDeletes } from '@ioc:Adonis/Addons/LucidSoftDeletes'
-import {v4 as uuid} from "uuid"
-import { BaseModel, beforeCreate, column, computed, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import Kompetisi from './Kompetisi'
-import Opd from './Opd'
-import Regency from './Regency'
+import { DateTime } from "luxon";
+import { compose } from "@ioc:Adonis/Core/Helpers";
+import { SoftDeletes } from "@ioc:Adonis/Addons/LucidSoftDeletes";
+import { v4 as uuid } from "uuid";
+import {
+  BaseModel,
+  beforeCreate,
+  column,
+  computed,
+  belongsTo,
+  BelongsTo,
+} from "@ioc:Adonis/Lucid/Orm";
+import Kompetisi from "./Kompetisi";
+import Opd from "./Opd";
+import Regency from "./Regency";
 
-
-export default class Inovation extends compose(BaseModel,SoftDeletes) {
+export default class Inovation extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public uuid:string
+  public uuid: string;
 
   @column()
-  public noreg:string
+  public noreg: string;
 
   @column()
-  public categoryUuid:string
+  public categoryUuid: string;
 
   @column()
-  public tingkat:string
+  public tingkat: string;
 
   @column()
-  public userUuid:string
+  public userUuid: string;
 
   @column()
-  public opdUuid:string
+  public opdUuid: string;
 
   @column()
-  public name:string
+  public name: string;
 
   @column()
-  public jenisUuid:string
+  public jenisUuid: string;
 
   @column()
-  public kompetisiUuid:string
+  public kompetisiUuid: string;
 
   @column()
-  public urusanUuid:string
+  public urusanUuid: string;
 
   @column()
-  public urusans:string
+  public urusans: string;
 
   @column()
-  public kelompok:string
+  public kelompok: string;
 
   @column()
-  public inisiator:string
+  public inisiator: string;
 
   @column()
-  public bentukUuid:string
+  public bentukUuid: string;
 
   @column()
-  public waktuUji:string
+  public waktuUji: string;
 
   @column()
-  public waktuPenerapan:string
+  public waktuPenerapan: string;
 
   @column()
-  public tahapan:string
+  public tahapan: string;
 
   @column()
-  public youtube:string
+  public youtube: string;
 
   @column()
-  public suratPernyataanImplementasi:string
+  public suratPernyataanImplementasi: string;
 
   @column()
-  public suratPernyataanIdentitas:string
+  public suratPernyataanIdentitas: string;
 
   @column()
-  public suratPernyataanKetersediaanReplikasi:string
+  public tipe: string;
 
   @column()
-  public ringkasan:string
+  public suratPernyataanKetersediaanReplikasi: string;
 
   @column()
-  public ringkasanAtt:string
+  public ringkasan: string;
 
   @column()
-  public latarBelakang:string
+  public ringkasanAtt: string;
 
   @column()
-  public latarBelakangAtt:string
+  public latarBelakang: string;
 
   @column()
-  public kebaruan:string
+  public latarBelakangAtt: string;
 
   @column()
-  public kebaruanAtt:string
+  public kebaruan: string;
 
   @column()
-  public implementasi:string
+  public kebaruanAtt: string;
 
   @column()
-  public implementasiAtt: string
+  public implementasi: string;
 
   @column()
-  public signifikansi:string
+  public implementasiAtt: string;
 
   @column()
-  public signifikansiAtt:string
+  public signifikansi: string;
 
   @column()
-  public adaptabilitas:string
+  public signifikansiAtt: string;
 
   @column()
-  public adaptabilitasAtt:string
+  public adaptabilitas: string;
 
   @column()
-  public sumberDaya:string
+  public adaptabilitasAtt: string;
 
   @column()
-  public sumberDayaAtt:string
+  public sumberDaya: string;
 
   @column()
-  public strategiKeberlanjutan:string
+  public sumberDayaAtt: string;
 
   @column()
-  public strategiKeberlanjutanAtt:string
+  public strategiKeberlanjutan: string;
 
   @column()
-  public inovatorNama:string
+  public strategiKeberlanjutanAtt: string;
 
   @column()
-  public inovatorTelp:string
+  public inovatorNama: string;
 
   @column()
-  public inovatorInstansi:string
+  public inovatorTelp: string;
 
   @column()
-  public inovatorProvinceCode:string
+  public inovatorInstansi: string;
 
   @column()
-  public inovatorRegencyCode:string
+  public inovatorProvinceCode: string;
 
   @column()
-  public foto:string
+  public inovatorRegencyCode: string;
 
   @column()
-  public provinceCode:string
+  public foto: string;
 
   @column()
-  public regencyCode:string
+  public provinceCode: string;
 
   @column()
-  public districtCode:string
+  public regencyCode: string;
 
   @column()
-  public villageCode:string
+  public districtCode: string;
 
   @column()
-  public address:string
+  public villageCode: string;
 
   @column()
-  public lat:string
+  public address: string;
 
   @column()
-  public lng:string
+  public lat: string;
 
   @column()
-  public tempScore:number
+  public lng: string;
 
   @column()
-  public finnalyScore:number
+  public tempScore: number;
 
   @column()
-  public status:string
-
+  public finnalyScore: number;
 
   @column()
-  public deletedAt:DateTime
+  public status: string;
+
+  @column()
+  public deletedAt: DateTime;
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updatedAt: DateTime;
 
   @beforeCreate()
-  public static async createUUID(inovation:Inovation){
-    inovation.uuid = uuid()
+  public static async createUUID(inovation: Inovation) {
+    inovation.uuid = uuid();
   }
 
-  @belongsTo(()=>Kompetisi,{localKey:"uuid", foreignKey:"kompetisiUuid"})
-  public kompetisi: BelongsTo<typeof Kompetisi>
+  @belongsTo(() => Kompetisi, { localKey: "uuid", foreignKey: "kompetisiUuid" })
+  public kompetisi: BelongsTo<typeof Kompetisi>;
 
-  @belongsTo(()=> Opd, {localKey:"uuid", foreignKey:"opdUuid"})
-  public opd:BelongsTo<typeof Opd>
+  @belongsTo(() => Opd, { localKey: "uuid", foreignKey: "opdUuid" })
+  public opd: BelongsTo<typeof Opd>;
 
-  @belongsTo(()=> Regency,{foreignKey:"regencyCode",localKey:"code"})
-  public regency: BelongsTo<typeof Regency>
+  @belongsTo(() => Regency, { foreignKey: "regencyCode", localKey: "code" })
+  public regency: BelongsTo<typeof Regency>;
 
   @computed()
-  public get datadisplay(){
-    return{
-      id:this.uuid,
+  public get datadisplay() {
+    return {
+      id: this.uuid,
       noreg: this.noreg,
       name: this.name,
       inovator: this.inovatorNama,
       opd: "",
+      tipe: this.tipe,
       score: this.finnalyScore ? this.finnalyScore : 0,
-      status:this.status == '0' ? {color:'grey', text:'DRAFT'}:this.status=='1'? {color:'orange', text:'Pengajuan'}: this.status=='2'? {color:'red', text:'Ditolak'}: this.status=='3'? {color:'orange', text:'Pengajuan Ulang'}: this.status=='4'? {color:'green', text:'Terverifikasi'} :this.status=='5'? {color:'blue', text:'Publish'} :{color:'red', text:'NA'}
-    }
+      status:
+        this.status == "0"
+          ? { color: "grey", text: "DRAFT" }
+          : this.status == "1"
+          ? { color: "orange", text: "Pengajuan" }
+          : this.status == "2"
+          ? { color: "red", text: "Ditolak" }
+          : this.status == "3"
+          ? { color: "orange", text: "Pengajuan Ulang" }
+          : this.status == "4"
+          ? { color: "green", text: "Terverifikasi" }
+          : this.status == "5"
+          ? { color: "blue", text: "Publish" }
+          : { color: "red", text: "NA" },
+    };
   }
 
   @computed()
-  public get datarecord(){
-    return{
-      id:this.uuid,
+  public get datarecord() {
+    return {
+      id: this.uuid,
       tingkat: this.tingkat,
       opd_uuid: this.opdUuid,
       name: this.name,
-      jenis_uuid:this.jenisUuid,
+      jenis_uuid: this.jenisUuid,
       kompetisi_uuid: this.kompetisiUuid,
-      urusan_uuid:this.urusanUuid,
+      urusan_uuid: this.urusanUuid,
       urusans: this.urusans,
-      kelompok:this.kelompok,
+      kelompok: this.kelompok,
       inisiator: this.inisiator,
-      bentuk_uuid:this.bentukUuid,
-      waktu_uji:DateTime.fromJSDate(this.waktuUji).toFormat('yyyy-MM-dd'),
-      waktu_penerapan: DateTime.fromJSDate(this.waktuPenerapan).toFormat("yyyy-MM-dd"),
+      bentuk_uuid: this.bentukUuid,
+      waktu_uji: DateTime.fromJSDate(this.waktuUji).toFormat("yyyy-MM-dd"),
+      waktu_penerapan: DateTime.fromJSDate(this.waktuPenerapan).toFormat(
+        "yyyy-MM-dd"
+      ),
       tahapan: this.tahapan,
       youtube: this.youtube,
       surat_pernyataan_implementasi: this.suratPernyataanImplementasi,
       surat_pernyataan_identitas: this.suratPernyataanIdentitas,
-      surat_pernyataan_ketersediaan_replikasi: this.suratPernyataanKetersediaanReplikasi,
+      tipe: this.tipe,
+      surat_pernyataan_ketersediaan_replikasi:
+        this.suratPernyataanKetersediaanReplikasi,
       ringkasan: this.ringkasan,
       ringkasan_att: this.ringkasanAtt,
       latar_belakang: this.latarBelakang,
@@ -239,7 +265,7 @@ export default class Inovation extends compose(BaseModel,SoftDeletes) {
       implementasi_att: this.implementasiAtt,
       signifikansi: this.signifikansi,
       signifikansi_att: this.signifikansiAtt,
-      adaptabilitas:  this.adaptabilitas,
+      adaptabilitas: this.adaptabilitas,
       adaptabilitas_att: this.adaptabilitasAtt,
       sumber_daya: this.sumberDaya,
       sumber_daya_att: this.sumberDayaAtt,
@@ -259,10 +285,8 @@ export default class Inovation extends compose(BaseModel,SoftDeletes) {
       lat: this.lat,
       lng: this.lng,
       temp_score: this.tempScore,
-      finnaly_score:this.finnalyScore,
+      finnaly_score: this.finnalyScore,
       status: this.status,
-    }
+    };
   }
-
-
 }
