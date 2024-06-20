@@ -38,7 +38,55 @@ class InovationIndicatorService {
           datas.push(row);
         });
         break;
-
+			case "team-pengkaji-2":
+				model.forEach((element) => {
+          const row = {};
+          Object.assign(row, element.datadisplay, {
+            score: {
+              nilai: element.score2,
+              id: element.uuid,
+            },
+          });
+          datas.push(row);
+        });
+        break;
+			case "team-pengkaji-3":
+				model.forEach((element) => {
+          const row = {};
+          Object.assign(row, element.datadisplay, {
+            score: {
+              nilai: element.score3,
+              id: element.uuid,
+            },
+          });
+          datas.push(row);
+        });
+				break;
+			case "team-pengkaji-4":
+				model.forEach((element) => {
+          const row = {};
+          Object.assign(row, element.datadisplay, {
+            score: {
+              nilai: element.score4,
+              id: element.uuid,
+            },
+          });
+          datas.push(row);
+        });
+        break;
+			case "team-pengkaji-5":
+				model.forEach((element) => {
+          const row = {};
+          Object.assign(row, element.datadisplay, {
+            score: {
+              nilai: element.score5,
+              id: element.uuid,
+            },
+          });
+          datas.push(row);
+        });
+        break;
+      
       default:
         break;
     }
