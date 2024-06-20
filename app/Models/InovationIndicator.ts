@@ -71,9 +71,6 @@ export default class InovationIndicator extends compose(
     return {
       id: this.uuid,
       name: this.indikatorName,
-      score: this.score,
-      score1: { nilai: this.score1, id: this.uuid },
-      score2: { nilai: this.score2, id: this.uuid },
     };
   }
 
@@ -84,9 +81,6 @@ export default class InovationIndicator extends compose(
       inovation_uuid: this.inovationUuid,
       indikator_uuid: this.indikatorUuid,
       indikator_name: this.indikatorName,
-      score: this.score,
-      score1: this.score1,
-      score2: this.score2,
     };
   }
 }

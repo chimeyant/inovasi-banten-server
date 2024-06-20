@@ -4,13 +4,20 @@ import InovationIndicatorService from "App/Services/Permohonan/InovationIndicato
 export default class InovationIndicatorsController {
   protected Service = InovationIndicatorService;
 
-  public async index({ params }: HttpContextContract) {
-    const result = await this.Service.lists(params.inovation_uuid);
+  public async index({ params, auth }: HttpContextContract) {
+    const user = auth.user;
+    const result = await this.Service.lists(
+      params.inovation_uuid,
+      user?.authent
+    );
 
     if (result.length < 1) {
       await this.Service.store(params.inovation_uuid);
 
-      const resulstore = await this.Service.lists(params.inovation_uuid);
+      const resulstore = await this.Service.lists(
+        params.inovation_uuid,
+        user?.authent
+      );
 
       return resulstore;
     } else {

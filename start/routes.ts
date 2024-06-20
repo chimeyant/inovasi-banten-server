@@ -219,12 +219,8 @@ Route.group(() => {
         "Permohonan/Verifikator/InovationIndicatorsController"
       );
       Route.post(
-        "penilaian-kompetisi-score1/:id",
-        "Permohonan/Verifikator/InovationIndicatorsController.updatescore1"
-      );
-      Route.post(
-        "penilaian-kompetisi-score2/:id",
-        "Permohonan/Verifikator/InovationIndicatorsController.updatescore2"
+        "penilaian-kompetisi-score/:id",
+        "Permohonan/Verifikator/InovationIndicatorsController.updatescore"
       );
       Route.get(
         "cetak-penilaian",

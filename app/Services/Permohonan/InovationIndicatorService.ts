@@ -18,16 +18,30 @@ export type InovationIndicatorType = {
 class InovationIndicatorService {
   protected Model = InovationIndicator;
 
-  public async lists(inovation_uuid: string) {
+  public async lists(inovation_uuid: string, authent: any) {
     const model = await this.Model.query()
       .where("inovation_uuid", inovation_uuid)
       .orderBy("id", "asc");
 
     const datas: {}[] = [];
 
-    model.forEach((element) => {
-      datas.push(element.datadisplay);
-    });
+    switch (authent) {
+      case "team-pengkaji":
+        model.forEach((element) => {
+          const row = {};
+          Object.assign(row, element.datadisplay, {
+            score: {
+              nilai: element.score1,
+              id: element.uuid,
+            },
+          });
+          datas.push(row);
+        });
+        break;
+
+      default:
+        break;
+    }
 
     return datas;
   }
@@ -106,6 +120,7 @@ class InovationIndicatorService {
   public async updateScore(id: any, nilai: any, user: any) {
     try {
       const model = await this.Model.findBy("uuid", id);
+
       switch (user.authent) {
         case "team-pengkaji-2":
           model?.merge({
@@ -128,9 +143,7 @@ class InovationIndicatorService {
           });
           break;
         default:
-          model?.merge({
-            score1: nilai,
-          });
+          model?.merge({ score1: nilai });
           break;
       }
 
