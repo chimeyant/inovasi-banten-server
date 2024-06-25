@@ -9,10 +9,13 @@ import {
   computed,
   belongsTo,
   BelongsTo,
+  hasMany,
+  HasMany,
 } from "@ioc:Adonis/Lucid/Orm";
 import Kompetisi from "./Kompetisi";
 import Opd from "./Opd";
 import Regency from "./Regency";
+import InovationIndicator from "./InovationIndicator";
 
 export default class Inovation extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
@@ -203,6 +206,12 @@ export default class Inovation extends compose(BaseModel, SoftDeletes) {
   @belongsTo(() => Regency, { foreignKey: "regencyCode", localKey: "code" })
   public regency: BelongsTo<typeof Regency>;
 
+  @hasMany(() => InovationIndicator, {
+    foreignKey: "inovationUuid",
+    localKey: "uuid",
+  })
+  public indicators: HasMany<typeof InovationIndicator>;
+
   @computed()
   public get datadisplay() {
     return {
@@ -212,7 +221,6 @@ export default class Inovation extends compose(BaseModel, SoftDeletes) {
       inovator: this.inovatorNama,
       opd: "",
       tipe: this.tipe,
-      score: this.finnalyScore ? this.finnalyScore : 0,
       status:
         this.status == "0"
           ? { color: "grey", text: "DRAFT" }

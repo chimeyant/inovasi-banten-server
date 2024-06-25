@@ -115,6 +115,7 @@ class InovationService {
       const model = await this.Model.query()
         .preload("kompetisi")
         .preload("regency")
+        .preload("indicators")
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
 
@@ -127,6 +128,7 @@ class InovationService {
         row["inovator"] = element.inovatorNama;
         row["kabupaten"] = element.regency ? element.regency.name : "-";
         row["jenis"] = "Kompetisi";
+        row["indicator"] = element.indicators;
         row["status"] =
           element.status == "0"
             ? { color: "grey", text: "DRAFT" }
@@ -150,6 +152,33 @@ class InovationService {
     if (payload.user.authent == "provinsi") {
       const model = await this.Model.query()
         .preload("kompetisi")
+        .preload("indicators")
+        .preload("regency")
+        .where("category_uuid", payload.category.id)
+        .whereIn("status", ["1", "3", "4", "5", "6"])
+        .orderBy("created_at", "desc");
+
+      const datas: {}[] = [];
+
+
+      model.forEach((element) => {
+        const row = {};
+        Object.assign(
+          row,
+          element.datadisplay,
+          { kompetisi: element.kompetisi.name },
+          { kabupaten: element.regency ? element.regency.name : "" }
+          { indicators: element.indicators ? element.indicators:[]}
+        );
+        datas.push(row);
+      });
+
+      return datas;
+    }
+
+    if (payload.user.authent == "team-pengkaji") {
+      const model = await this.Model.query()
+        .preload("kompetisi")
         .preload("regency")
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
@@ -171,7 +200,79 @@ class InovationService {
       return datas;
     }
 
-    if (payload.user.authent == "team-pengkaji") {
+    if (payload.user.authent == "team-pengkaji-2") {
+      const model = await this.Model.query()
+        .preload("kompetisi")
+        .preload("regency")
+        .where("category_uuid", payload.category.id)
+        .whereIn("status", ["1", "3", "4", "5", "6"])
+        .orderBy("created_at", "desc");
+
+      const datas: {}[] = [];
+
+      model.forEach((element) => {
+        const row = {};
+        Object.assign(
+          row,
+          element.datadisplay,
+          { kompetisi: element.kompetisi.name },
+          { kabupaten: element.regency ? element.regency.name : "" }
+        );
+        datas.push(row);
+      });
+
+      return datas;
+    }
+
+    if (payload.user.authent == "team-pengkaji-3") {
+      const model = await this.Model.query()
+        .preload("kompetisi")
+        .preload("regency")
+        .where("category_uuid", payload.category.id)
+        .whereIn("status", ["1", "3", "4", "5", "6"])
+        .orderBy("created_at", "desc");
+
+      const datas: {}[] = [];
+
+      model.forEach((element) => {
+        const row = {};
+        Object.assign(
+          row,
+          element.datadisplay,
+          { kompetisi: element.kompetisi.name },
+          { kabupaten: element.regency ? element.regency.name : "" }
+        );
+        datas.push(row);
+      });
+
+      return datas;
+    }
+
+    if (payload.user.authent == "team-pengkaji-4") {
+      const model = await this.Model.query()
+        .preload("kompetisi")
+        .preload("regency")
+        .where("category_uuid", payload.category.id)
+        .whereIn("status", ["1", "3", "4", "5", "6"])
+        .orderBy("created_at", "desc");
+
+      const datas: {}[] = [];
+
+      model.forEach((element) => {
+        const row = {};
+        Object.assign(
+          row,
+          element.datadisplay,
+          { kompetisi: element.kompetisi.name },
+          { kabupaten: element.regency ? element.regency.name : "" }
+        );
+        datas.push(row);
+      });
+
+      return datas;
+    }
+
+    if (payload.user.authent == "team-pengkaji-5") {
       const model = await this.Model.query()
         .preload("kompetisi")
         .preload("regency")
