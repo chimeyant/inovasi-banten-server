@@ -670,40 +670,40 @@ export default class AppsController {
             },
           ],
         },
+        // {
+        //   title: "PERMOHONAN",
+        //   icon: "settings",
+        //   route: "/",
+        //   type: "subMenu",
+        //   submenus: [
+        //     {
+        //       title: "Profil Pemda",
+        //       icon: "mdi-account-box-outline",
+        //       route: "/auth/permohonan-profile",
+        //       type: "item",
+        //     },
+        //     {
+        //       title: "IGA | IID",
+        //       icon: "mdi-clover",
+        //       route: "/auth/permohonan-opd-iga",
+        //       type: "item",
+        //     },
+        //     {
+        //       title: "SINOVIC",
+        //       icon: "mdi-gamepad-circle",
+        //       route: "/auth/permohonan-opd-sinovic",
+        //       type: "item",
+        //     },
+        //     {
+        //       title: "Klinik Konsultasi",
+        //       icon: "mdi-face-agent",
+        //       route: "/auth/permohonan-message",
+        //       type: "item",
+        //     },
+        //   ],
+        // },
         {
-          title: "PERMOHONAN",
-          icon: "settings",
-          route: "/",
-          type: "subMenu",
-          submenus: [
-            {
-              title: "Profil Pemda",
-              icon: "mdi-account-box-outline",
-              route: "/auth/permohonan-profile",
-              type: "item",
-            },
-            {
-              title: "IGA | IID",
-              icon: "mdi-clover",
-              route: "/auth/permohonan-opd-iga",
-              type: "item",
-            },
-            {
-              title: "SINOVIC",
-              icon: "mdi-gamepad-circle",
-              route: "/auth/permohonan-opd-sinovic",
-              type: "item",
-            },
-            {
-              title: "Klinik Konsultasi",
-              icon: "mdi-face-agent",
-              route: "/auth/permohonan-message",
-              type: "item",
-            },
-          ],
-        },
-        {
-          title: "VERIFIKASI",
+          title: "INOVASI",
           icon: "settings",
           route: "/",
           type: "subMenu",
