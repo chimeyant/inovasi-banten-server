@@ -400,6 +400,250 @@ export default class AppsController {
       return menus;
     }
 
+    if (authent == "team-pengkaji-2") {
+      menus = [
+        {
+          title: "Dashboard",
+          type: "item",
+          icon: "mdi-view-dashboard",
+          route: "/auth/dashboard",
+        },
+        {
+          title: "",
+          type: "divider",
+        },
+        {
+          title: "VERIFIKASI & PENILAIAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus: [
+            {
+              title: "IGA",
+              icon: "mdi-clover",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
+            {
+              title: "SINOVIC",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/verifikator-sinovic",
+              type: "item",
+            },
+            {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikator-kompetisi",
+              type: "item",
+            },
+          ],
+        },
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
+      return menus;
+    }
+
+    if (authent == "team-pengkaji-3") {
+      menus = [
+        {
+          title: "Dashboard",
+          type: "item",
+          icon: "mdi-view-dashboard",
+          route: "/auth/dashboard",
+        },
+        {
+          title: "",
+          type: "divider",
+        },
+        {
+          title: "VERIFIKASI & PENILAIAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus: [
+            {
+              title: "IGA",
+              icon: "mdi-clover",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
+            {
+              title: "SINOVIC",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/verifikator-sinovic",
+              type: "item",
+            },
+            {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikator-kompetisi",
+              type: "item",
+            },
+          ],
+        },
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
+      return menus;
+    }
+
+    if (authent == "team-pengkaji-4") {
+      menus = [
+        {
+          title: "Dashboard",
+          type: "item",
+          icon: "mdi-view-dashboard",
+          route: "/auth/dashboard",
+        },
+        {
+          title: "",
+          type: "divider",
+        },
+        {
+          title: "VERIFIKASI & PENILAIAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus: [
+            {
+              title: "IGA",
+              icon: "mdi-clover",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
+            {
+              title: "SINOVIC",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/verifikator-sinovic",
+              type: "item",
+            },
+            {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikator-kompetisi",
+              type: "item",
+            },
+          ],
+        },
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
+      return menus;
+    }
+
+    if (authent == "team-pengkaji-5") {
+      menus = [
+        {
+          title: "Dashboard",
+          type: "item",
+          icon: "mdi-view-dashboard",
+          route: "/auth/dashboard",
+        },
+        {
+          title: "",
+          type: "divider",
+        },
+        {
+          title: "VERIFIKASI & PENILAIAN",
+          icon: "settings",
+          route: "/",
+          type: "subMenu",
+          submenus: [
+            {
+              title: "IGA",
+              icon: "mdi-clover",
+              route: "/auth/page-under-construction",
+              type: "item",
+            },
+            {
+              title: "SINOVIC",
+              icon: "mdi-gamepad-circle",
+              route: "/auth/verifikator-sinovic",
+              type: "item",
+            },
+            {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikator-kompetisi",
+              type: "item",
+            },
+          ],
+        },
+        {
+          title: "UTILITAS",
+          type: "subMenu",
+          route: "/",
+          submenus: [
+            {
+              title: "Profil Pengguna",
+              icon: "accessibility",
+              route: "/auth/profil-akun",
+              type: "item",
+            },
+            {
+              title: "Ganti Kata Sandi",
+              icon: "vpn_key",
+              route: "/auth/chngpwd",
+              type: "item",
+            },
+          ],
+        },
+      ];
+      return menus;
+    }
+
     if (authent == "provinsi") {
       menus = [
         {

@@ -500,7 +500,7 @@ class InovationService {
       const model = await this.Model.findBy("uuid", id);
       model?.merge({
         noreg: register,
-        status: "1",
+        status: "4",
       });
 
       await model?.save();
