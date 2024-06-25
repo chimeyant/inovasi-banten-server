@@ -159,6 +159,15 @@ class InovationService {
         .withAggregate("score1", (query) => {
           query.sum("score2").as("jumlah_score2");
         })
+        .withAggregate("score1", (query) => {
+          query.sum("score3").as("jumlah_score3");
+        })
+        .withAggregate("score1", (query) => {
+          query.sum("score4").as("jumlah_score4");
+        })
+        .withAggregate("score1", (query) => {
+          query.sum("score5").as("jumlah_score5");
+        })
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
@@ -176,6 +185,15 @@ class InovationService {
           {
             score1: element.$extras.jumlah_score1 ?? 0,
             score2: element.$extras.jumlah_score2 ?? 0,
+            score3: element.$extras.jumlah_score3 ?? 0,
+            score4: element.$extras.jumlah_score4 ?? 0,
+            score5: element.$extras.jumlah_score5 ?? 0,
+            score:
+              Number(element.$extras.jumlah_score1 ?? 0) +
+              Number(element.$extras.jumlah_score2 ?? 0) +
+              Number(element.$extras.jumlah_score3 ?? 0) +
+              Number(element.$extras.jumlah_score4 ?? 0) +
+              Number(element.$extras.jumlah_score5 ?? 0),
           }
         );
         datas.push(row);
