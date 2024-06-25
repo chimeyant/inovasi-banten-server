@@ -152,23 +152,31 @@ class InovationService {
     if (payload.user.authent == "provinsi") {
       const model = await this.Model.query()
         .preload("kompetisi")
-        .preload("indicators")
         .preload("regency")
+        .withAggregate("score1", (query) => {
+          query.sum("score1").as("jumlah_score1");
+        })
+        .withAggregate("score1", (query) => {
+          query.sum("score2").as("jumlah_score2");
+        })
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
 
       const datas: {}[] = [];
 
-
       model.forEach((element) => {
         const row = {};
+
         Object.assign(
           row,
           element.datadisplay,
           { kompetisi: element.kompetisi.name },
-          { kabupaten: element.regency ? element.regency.name : "" }
-          { indicators: element.indicators ? element.indicators:[]}
+          { kabupaten: element.regency ? element.regency.name : "" },
+          {
+            score1: element.$extras.jumlah_score1 ?? 0,
+            score2: element.$extras.jumlah_score2 ?? 0,
+          }
         );
         datas.push(row);
       });
@@ -192,7 +200,9 @@ class InovationService {
           row,
           element.datadisplay,
           { kompetisi: element.kompetisi.name },
-          { kabupaten: element.regency ? element.regency.name : "" }
+          {
+            kabupaten: element.regency ? element.regency.name : "",
+          }
         );
         datas.push(row);
       });

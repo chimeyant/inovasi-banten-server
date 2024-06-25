@@ -71,6 +71,12 @@ export default class InovationIndicator extends compose(
     return {
       id: this.uuid,
       name: this.indikatorName,
+      score:
+        Number(this.score1) +
+        Number(this.score2) +
+        Number(this.score3) +
+        Number(this.score4) +
+        Number(this.score5),
     };
   }
 

@@ -212,6 +212,12 @@ export default class Inovation extends compose(BaseModel, SoftDeletes) {
   })
   public indicators: HasMany<typeof InovationIndicator>;
 
+  @hasMany(() => InovationIndicator, {
+    foreignKey: "inovationUuid",
+    localKey: "uuid",
+  })
+  public score1: HasMany<typeof InovationIndicator>;
+
   @computed()
   public get datadisplay() {
     return {
