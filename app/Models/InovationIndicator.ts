@@ -47,6 +47,21 @@ export default class InovationIndicator extends compose(
   public score5: number;
 
   @column()
+  public bobot1: number;
+
+  @column()
+  public bobot2: number;
+
+  @column()
+  public bobot3: number;
+
+  @column()
+  public bobot4: number;
+
+  @column()
+  public bobot5: number;
+
+  @column()
   public userUuid1: string;
 
   @column()

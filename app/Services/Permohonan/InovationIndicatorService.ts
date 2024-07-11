@@ -7,6 +7,7 @@ import {
   MSG_UPDATE_NILAI,
   MSG_UPDATE_SUCCESS,
 } from "App/Helpers/Lang";
+import Indikator from "App/Models/Indikator";
 
 export type InovationIndicatorType = {
   inovation_uuid: string;
@@ -31,62 +32,62 @@ class InovationIndicatorService {
           const row = {};
           Object.assign(row, element.datadisplay, {
             score: {
-              nilai: element.score1,
+              nilai: Number(element.score1),
               id: element.uuid,
             },
           });
           datas.push(row);
         });
         break;
-			case "team-pengkaji-2":
-				model.forEach((element) => {
+      case "team-pengkaji-2":
+        model.forEach((element) => {
           const row = {};
           Object.assign(row, element.datadisplay, {
             score: {
-              nilai: element.score2,
+              nilai: Number(element.score2),
               id: element.uuid,
             },
           });
           datas.push(row);
         });
         break;
-			case "team-pengkaji-3":
-				model.forEach((element) => {
+      case "team-pengkaji-3":
+        model.forEach((element) => {
           const row = {};
           Object.assign(row, element.datadisplay, {
             score: {
-              nilai: element.score3,
-              id: element.uuid,
-            },
-          });
-          datas.push(row);
-        });
-				break;
-			case "team-pengkaji-4":
-				model.forEach((element) => {
-          const row = {};
-          Object.assign(row, element.datadisplay, {
-            score: {
-              nilai: element.score4,
+              nilai: Number(element.score3),
               id: element.uuid,
             },
           });
           datas.push(row);
         });
         break;
-			case "team-pengkaji-5":
-				model.forEach((element) => {
+      case "team-pengkaji-4":
+        model.forEach((element) => {
           const row = {};
           Object.assign(row, element.datadisplay, {
             score: {
-              nilai: element.score5,
+              nilai: Number(element.score4),
               id: element.uuid,
             },
           });
           datas.push(row);
         });
         break;
-      
+      case "team-pengkaji-5":
+        model.forEach((element) => {
+          const row = {};
+          Object.assign(row, element.datadisplay, {
+            score: {
+              nilai: Number(element.score5),
+              id: element.uuid,
+            },
+          });
+          datas.push(row);
+        });
+        break;
+
       default:
         break;
     }
@@ -169,29 +170,40 @@ class InovationIndicatorService {
     try {
       const model = await this.Model.findBy("uuid", id);
 
+      const indikator = await Indikator.findBy("uuid", model?.indikatorUuid);
+      console.log(indikator?.skor);
+
       switch (user.authent) {
         case "team-pengkaji-2":
           model?.merge({
             score2: nilai,
+            bobot2: nilai * Number(indikator?.skor),
           });
           break;
         case "team-pengkaji-3":
           model?.merge({
             score3: nilai,
+            bobot3: nilai * Number(indikator?.skor),
           });
           break;
         case "team-pengkaji-4":
           model?.merge({
             score4: nilai,
+            bobot4: nilai * Number(indikator?.skor),
           });
           break;
         case "team-pengkaji-5":
           model?.merge({
             score5: nilai,
+            bobot5: nilai * Number(indikator?.skor),
           });
+
           break;
         default:
-          model?.merge({ score1: nilai });
+          model?.merge({
+            score1: nilai,
+            bobot1: nilai * Number(indikator?.skor),
+          });
           break;
       }
 
