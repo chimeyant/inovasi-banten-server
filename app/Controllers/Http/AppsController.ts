@@ -870,6 +870,12 @@ export default class AppsController {
               route: "/auth/permohonan-inovasi-opd",
               type: "item",
             },
+             {
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikasi-provinsi-kompetisi",
+              type: "item",
+            },
             {
               title: "Klinik Konsultasi",
               icon: "mdi-face-agent",
