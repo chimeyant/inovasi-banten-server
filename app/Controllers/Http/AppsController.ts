@@ -867,7 +867,7 @@ export default class AppsController {
             {
               title: "KOMPETISI",
               icon: "mdi-trophy",
-              route: "/auth/verifikasi-provinsi-kompetisi",
+              route: "/auth/kabkota-kompetisi",
               type: "item",
             },
           ],
