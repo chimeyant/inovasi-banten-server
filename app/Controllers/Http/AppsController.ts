@@ -847,70 +847,64 @@ export default class AppsController {
           ],
         },
         {
-          title: "PERMOHONAN",
+          title: "INOVASI",
           icon: "settings",
           route: "/",
           type: "subMenu",
           submenus: [
             {
-              title: "Profil Pemda",
-              icon: "mdi-account-box-outline",
-              route: "/auth/permohonan-profile",
-              type: "item",
-            },
-            {
               title: "IGA",
               icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
+              route: "/auth/page-under-construction",
               type: "item",
             },
             {
               title: "SINOVIC",
               icon: "mdi-gamepad-circle",
-              route: "/auth/permohonan-inovasi-opd",
+              route: "/auth/verifikasi-provinsi-sinovic",
               type: "item",
             },
             {
-              title: "Klinik Konsultasi",
-              icon: "mdi-face-agent",
-              route: "/auth/permohonan-message",
+              title: "KOMPETISI",
+              icon: "mdi-trophy",
+              route: "/auth/verifikasi-provinsi-kompetisi",
               type: "item",
             },
           ],
         },
 
-        {
-          title: "VERIFIKASI",
-          icon: "settings",
-          route: "/",
-          type: "subMenu",
-          submenus: [
-            {
-              title: "IGA",
-              icon: "mdi-clover",
-              route: "/auth/permohonan-inovasi-opd",
-              type: "item",
-            },
-            {
-              title: "SINOVIC",
-              icon: "mdi-gamepad-circle",
-              route: "/auth/verifikasi-kabkota-sinovic",
-              type: "item",
-            },
-            // {
-            //   title: "Seluruh Inovasi Daerah",
-            //   icon: "mdi-book-open-variant",
-            //   route: "/auth/permohonan-inovasi-admin",
-            //   type: "item",
-            // },
-            {
-              title: "Klinik Konsultasi",
-              icon: "mdi-face-agent",
-              route: "/auth/permohonan-message",
-              type: "item",
-            },
-          ],
-        },
+        // {
+        //   title: "VERIFIKASI",
+        //   icon: "settings",
+        //   route: "/",
+        //   type: "subMenu",
+        //   submenus: [
+        //     {
+        //       title: "IGA",
+        //       icon: "mdi-clover",
+        //       route: "/auth/permohonan-inovasi-opd",
+        //       type: "item",
+        //     },
+        //     {
+        //       title: "SINOVIC",
+        //       icon: "mdi-gamepad-circle",
+        //       route: "/auth/verifikasi-kabkota-sinovic",
+        //       type: "item",
+        //     },
+        //     // {
+        //     //   title: "Seluruh Inovasi Daerah",
+        //     //   icon: "mdi-book-open-variant",
+        //     //   route: "/auth/permohonan-inovasi-admin",
+        //     //   type: "item",
+        //     // },
+        //     {
+        //       title: "Klinik Konsultasi",
+        //       icon: "mdi-face-agent",
+        //       route: "/auth/permohonan-message",
+        //       type: "item",
+        //     },
+        //   ],
+        // },
         {
           title: "UTILITAS",
           type: "subMenu",
