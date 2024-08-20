@@ -68,6 +68,8 @@ export type SinovicType = {
   lng: string;
   temp_score: number;
   finnaly_score: number;
+  komentar: string;
+  kategori: string;
   status: string;
 };
 
@@ -617,7 +619,8 @@ class InovationService {
       model.tempScore = payload.temp_score;
       model.finnalyScore = payload.finnaly_score;
       model.status = payload.status;
-
+      model.komentar = payload.komentar;
+      model.kategori = payload.kategori;
       await model.save();
 
       return {
@@ -747,6 +750,8 @@ class InovationService {
         lng: payload.lng,
         tempScore: payload.temp_score,
         finnalyScore: payload.finnaly_score,
+        komentar: payload.komentar,
+        kategori: payload.kategori,
         status: payload.status,
       });
 

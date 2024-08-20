@@ -166,6 +166,12 @@ export default class Inovation extends compose(BaseModel, SoftDeletes) {
   public villageCode: string;
 
   @column()
+  public kategori: string;
+
+  @column()
+  public komentar: string;
+
+  @column()
   public address: string;
 
   @column()
