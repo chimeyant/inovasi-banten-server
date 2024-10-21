@@ -727,6 +727,8 @@ class InovationService {
         latarBelakangAtt: payload.latar_belakang_att,
         kebaruan: payload.kebaruan,
         kebaruanAtt: payload.kebaruan_att,
+        implementasi: payload.implementasi,
+        implementasiAtt: payload.implementasi_att,
         signifikansi: payload.signifikansi,
         signifikansiAtt: payload.signifikansi_att,
         adaptabilitas: payload.adaptabilitas,
