@@ -11,7 +11,15 @@ export default class UserSeeder extends BaseSeeder {
         authent: "superadmin",
         password:"!!Ants2023!!",
         tingkat:"0",
+      },
+      {
+        name:"Fadel",
+        email:"fadelmuhammad06@gmail.com",
+        authent: "superadmin",
+        password:"abcdefg",
+        tingkat:"0",
       }
+
     ])
   }
 }
