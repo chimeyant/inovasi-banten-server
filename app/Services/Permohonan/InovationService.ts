@@ -278,6 +278,7 @@ class InovationService {
         .withAggregate("score1", (query) => {
           query.sum("bobot5").as("jumlah_score5");
         })
+        .where("created_at::text like ?", "%2024%")
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
@@ -326,6 +327,7 @@ class InovationService {
         .withAggregate("score1", (query) => {
           query.sum("bobot5").as("jumlah_score5");
         })
+        .where("created_at::text like ?", "%2024%")
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
@@ -374,6 +376,7 @@ class InovationService {
         .withAggregate("score1", (query) => {
           query.sum("bobot5").as("jumlah_score5");
         })
+        .where("created_at::text like ?", "%2024%")
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
@@ -422,6 +425,7 @@ class InovationService {
         .withAggregate("score1", (query) => {
           query.sum("bobot5").as("jumlah_score5");
         })
+        .where("created_at::text like ?", "%2024%")
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
@@ -470,6 +474,7 @@ class InovationService {
         .withAggregate("score1", (query) => {
           query.sum("bobot5").as("jumlah_score5");
         })
+        .where("created_at::text like ?", "%2024%")
         .where("category_uuid", payload.category.id)
         .whereIn("status", ["1", "3", "4", "5", "6"])
         .orderBy("created_at", "desc");
