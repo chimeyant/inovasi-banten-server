@@ -93,6 +93,7 @@ class InovationService {
         row["inovator"] = element.inovatorNama;
         row["kabupaten"] = element.regency ? element.regency.name : "-";
         row["jenis"] = "Kompetisi";
+
         row["status"] =
           element.status == "0"
             ? { color: "grey", text: "DRAFT" }

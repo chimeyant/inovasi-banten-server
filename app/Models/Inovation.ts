@@ -307,6 +307,7 @@ export default class Inovation extends compose(BaseModel, SoftDeletes) {
       temp_score: this.tempScore,
       finnaly_score: this.finnalyScore,
       status: this.status,
+      komentar: this.komentar,
     };
   }
 }

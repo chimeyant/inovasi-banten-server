@@ -166,12 +166,18 @@ class InovationIndicatorService {
     }
   }
 
-  public async updateScore(id: any, nilai: any, user: any) {
+  public async updateScore(id: any, nilai: any, catatan: string, user: any) {
     try {
       const model = await this.Model.findBy("uuid", id);
 
       const indikator = await Indikator.findBy("uuid", model?.indikatorUuid);
-      console.log(indikator?.skor);
+
+      const inovation = await Inovation.findBy("uuid", model?.inovationUuid);
+      inovation?.merge({
+        komentar: catatan,
+      });
+
+      await inovation?.save();
 
       switch (user.authent) {
         case "team-pengkaji-2":

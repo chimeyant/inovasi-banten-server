@@ -58,11 +58,11 @@ export default class InovationIndicatorsController {
     auth,
   }: HttpContextContract) {
     const { id } = params;
-    const { nilai } = request.all();
+    const { nilai, catatan } = request.all();
 
     const user = auth.user;
 
-    const result = await this.Service.updateScore(id, nilai, user);
+    const result = await this.Service.updateScore(id, nilai, catatan, user);
 
     return response.status(result.code).send(result);
   }
