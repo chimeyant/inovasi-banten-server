@@ -1218,6 +1218,7 @@ class InovationService {
 
   public async printPenilaian() {
     const model = await this.Model.query()
+      .whereRaw("created_at::text like ?", ["2024%"])
       .whereIn("status", [1, 2, 3, 4, 5])
       .orderBy("finnaly_score", "asc");
 
