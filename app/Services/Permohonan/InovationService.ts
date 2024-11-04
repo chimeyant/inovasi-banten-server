@@ -181,6 +181,14 @@ class InovationService {
       model.forEach((element) => {
         const row = {};
 
+        const averageScore =
+          (Number(element.$extras.jumlah_score1 ?? 0) +
+            Number(element.$extras.jumlah_score2 ?? 0) +
+            Number(element.$extras.jumlah_score3 ?? 0) +
+            Number(element.$extras.jumlah_score4 ?? 0) +
+            Number(element.$extras.jumlah_score5 ?? 0)) /
+          2;
+
         //hotung
         Object.assign(
           row,
@@ -193,18 +201,15 @@ class InovationService {
             score3: element.$extras.jumlah_score3 ?? 0,
             score4: element.$extras.jumlah_score4 ?? 0,
             score5: element.$extras.jumlah_score5 ?? 0,
-            score:
-              (Number(element.$extras.jumlah_score1 ?? 0) +
-                Number(element.$extras.jumlah_score2 ?? 0) +
-                Number(element.$extras.jumlah_score3 ?? 0) +
-                Number(element.$extras.jumlah_score4 ?? 0) +
-                Number(element.$extras.jumlah_score5 ?? 0)) /
-              2,
+            score: averageScore.toFixed(3),
           }
         );
         datas.push(row);
       });
 
+      datas.sort((a, b) => {
+        return parseFloat(b.score) - parseFloat(a.score);
+      });
       return datas;
     }
 
@@ -1244,18 +1249,24 @@ class InovationService {
 
     model.forEach((element) => {
       const row = {};
-      row["num"] = num++;
-      row["noreg"] = element.noreg;
-      row["name"] = element.name;
-      row["inovator"] = element.inovatorNama;
-      (row["skor"] =
+      const averageScore =
         (Number(element.$extras.jumlah_score1 ?? 0) +
           Number(element.$extras.jumlah_score2 ?? 0) +
           Number(element.$extras.jumlah_score3 ?? 0) +
           Number(element.$extras.jumlah_score4 ?? 0) +
           Number(element.$extras.jumlah_score5 ?? 0)) /
-        2),
+        2;
+      row["num"] = num++;
+      row["noreg"] = element.noreg;
+      row["name"] = element.name;
+      row["inovator"] = element.inovatorNama;
+      (row["skor"] =
+        averageScore.toFixed(3)),
         datas.push(row);
+    });
+
+    datas.sort((a, b) => {
+      return parseFloat(b['skor']) - parseFloat(a['skor']);
     });
 
     return datas;
