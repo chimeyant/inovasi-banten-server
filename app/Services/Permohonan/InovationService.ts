@@ -198,7 +198,7 @@ class InovationService {
                 Number(element.$extras.jumlah_score3 ?? 0) +
                 Number(element.$extras.jumlah_score4 ?? 0) +
                 Number(element.$extras.jumlah_score5 ?? 0)) /
-              4,
+              2,
           }
         );
         datas.push(row);
