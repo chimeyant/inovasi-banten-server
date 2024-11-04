@@ -193,11 +193,12 @@ class InovationService {
             score4: element.$extras.jumlah_score4 ?? 0,
             score5: element.$extras.jumlah_score5 ?? 0,
             score:
-              Number(element.$extras.jumlah_score1 ?? 0) +
-              Number(element.$extras.jumlah_score2 ?? 0) +
-              Number(element.$extras.jumlah_score3 ?? 0) +
-              Number(element.$extras.jumlah_score4 ?? 0) +
-              Number(element.$extras.jumlah_score5 ?? 0),
+              (Number(element.$extras.jumlah_score1 ?? 0) +
+                Number(element.$extras.jumlah_score2 ?? 0) +
+                Number(element.$extras.jumlah_score3 ?? 0) +
+                Number(element.$extras.jumlah_score4 ?? 0) +
+                Number(element.$extras.jumlah_score5 ?? 0)) /
+              4,
           }
         );
         datas.push(row);
@@ -1218,9 +1219,23 @@ class InovationService {
 
   public async printPenilaian() {
     const model = await this.Model.query()
+      .withAggregate("score1", (query) => {
+        query.sum("bobot1").as("jumlah_score1");
+      })
+      .withAggregate("score1", (query) => {
+        query.sum("bobot2").as("jumlah_score2");
+      })
+      .withAggregate("score1", (query) => {
+        query.sum("bobot3").as("jumlah_score3");
+      })
+      .withAggregate("score1", (query) => {
+        query.sum("bobot4").as("jumlah_score4");
+      })
+      .withAggregate("score1", (query) => {
+        query.sum("bobot5").as("jumlah_score5");
+      })
       .whereRaw("created_at::text like ?", ["2024%"])
-      .whereIn("status", [1, 2, 3, 4, 5])
-      .orderBy("finnaly_score", "asc");
+      .whereIn("status", [1, 2, 3, 4, 5]);
 
     const datas: {}[] = [];
 
@@ -1232,8 +1247,14 @@ class InovationService {
       row["noreg"] = element.noreg;
       row["name"] = element.name;
       row["inovator"] = element.inovatorNama;
-      row["skor"] = element.finnalyScore ? element.finnalyScore : "-";
-      datas.push(row);
+      (row["skor"] =
+        (Number(element.$extras.jumlah_score1 ?? 0) +
+          Number(element.$extras.jumlah_score2 ?? 0) +
+          Number(element.$extras.jumlah_score3 ?? 0) +
+          Number(element.$extras.jumlah_score4 ?? 0) +
+          Number(element.$extras.jumlah_score5 ?? 0)) /
+        4),
+        datas.push(row);
     });
 
     return datas;
