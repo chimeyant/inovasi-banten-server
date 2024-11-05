@@ -1268,7 +1268,7 @@ class InovationService {
     datas.sort((a, b) => {
       return parseFloat(b['skor']) - parseFloat(a['skor']);
     });
-
+    //
     return datas;
   }
 }
