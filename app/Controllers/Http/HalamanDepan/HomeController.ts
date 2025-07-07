@@ -10,8 +10,6 @@ import Drive from "@ioc:Adonis/Core/Drive"
 export default class HomeController {
   public async index({response}: HttpContextContract) {
 
-
-
     //cari group data
     try{
       const statistik = await GroupDatum.findBy("id",1)
