@@ -10,7 +10,7 @@
   ],
   "compilerOptions": {
     "outDir": "build",
-    "rootDir": "./auth",
+    "rootDir": "./",
     "sourceMap": true,
     "paths": {
       "App/*": [
