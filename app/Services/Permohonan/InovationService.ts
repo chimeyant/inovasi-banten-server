@@ -82,6 +82,7 @@ class InovationService {
         .preload("kompetisi")
         .preload("regency")
         .whereIn("status", ["1", "3", "4", "5", "6"])
+        .where("noreg", "like", "%" + payload.tahun + "%")
         .orderBy("created_at", "desc");
 
       const datas: {}[] = [];
@@ -120,6 +121,7 @@ class InovationService {
         .preload("regency")
         .preload("indicators")
         .whereIn("status", ["1", "3", "4", "5", "6"])
+      
         .orderBy("created_at", "desc");
 
       const datas: {}[] = [];

@@ -149,7 +149,7 @@ Route.group(() => {
     }).prefix("admin");
 
     Route.group(() => {
-      Route.resource("inovasi", "Permohonan/Admin/InovasisController").as(
+      Route.resource("inovasi/:tahun?", "Permohonan/Admin/InovasisController").as(
         "administrator.inovasi"
       );
     }).prefix("administrator");

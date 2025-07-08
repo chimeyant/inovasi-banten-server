@@ -6,14 +6,17 @@ export default class InovasisController {
   protected Service = InovationService
   protected SinovicSvc = SinovicService
 
-  public async index({auth}: HttpContextContract) {
+  public async index({auth, params}: HttpContextContract) {
+    const tahun = params.tahun || '2025'
     const user = auth.user
+
 
     const datas =[]
 
     const payload ={
       user:user,
-      category:{}
+      category:{},
+      tahun:tahun
     }
 
     const result = await this.Service.lists(payload)
