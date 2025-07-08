@@ -121,7 +121,7 @@ class InovationService {
         .preload("regency")
         .preload("indicators")
         .whereIn("status", ["1", "3", "4", "5", "6"])
-      
+        .where("noreg", "like", "%" + payload.tahun + "%")
         .orderBy("created_at", "desc");
 
       const datas: {}[] = [];

@@ -25,7 +25,7 @@ export default class InovasisController {
 
     const final_result = result?.concat(result2)
 
-    return final_result
+    return result
   }
 
   public async create({}: HttpContextContract) {}
