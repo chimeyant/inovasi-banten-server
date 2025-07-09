@@ -815,11 +815,11 @@ class InovationService {
 
   public async send(id: string, user: any) {
     try {
-      return {
-        code: 500,
-        success: false,
-        message: "Pendaftar Telah ditutup",
-      };
+      // return {
+      //   code: 500,
+      //   success: false,
+      //   message: "Pendaftar Telah ditutup",
+      // };
 
       const currdate = new Date();
       const register =

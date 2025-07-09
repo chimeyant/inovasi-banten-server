@@ -270,9 +270,6 @@ export default class InovationsController {
     const user = auth.user;
     const result = await this.Service.send(params.id, user);
 
-    console.log("Send Inovation Result:", result);
-
-
     return response.status(result.code).send(result);
   }
 
