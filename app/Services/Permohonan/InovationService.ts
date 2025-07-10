@@ -582,6 +582,11 @@ class InovationService {
 
   public async store(payload: SinovicType) {
     try {
+      // return {
+      //   code: 500,
+      //   success: false,
+      //   message: "Pendaftar KIPP 2025 belum dibuka",
+      // };
       const model = new this.Model();
       model.categoryUuid = payload.category_uuid;
       model.userUuid = payload.user_uuid;
@@ -815,11 +820,12 @@ class InovationService {
 
   public async send(id: string, user: any) {
     try {
-      // return {
-      //   code: 500,
-      //   success: false,
-      //   message: "Pendaftar Telah ditutup",
-      // };
+      return {
+        code: 500,
+        success: false,
+        // message: "Pendaftar Telah ditutup",
+        message: "Pendaftar Belum Dibuka",
+      };
 
       const currdate = new Date();
       const register =
